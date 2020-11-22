@@ -25,14 +25,14 @@ namespace BMB
         public BMB()
         {
             InitializeComponent();
-            this.Width = 800;
-            this.Height = 800;
+            this.Width = 770;
+            this.Height = 790;
         }
 
         private void BMB_Load(object sender, EventArgs e)
         {
             input = new BMB_Input();
-            game_BMB = new BMB_Main(750, 750, input);
+            game_BMB = new BMB_Main(750, 750, input, 25, 25);
 
             fG = CreateGraphics();
             graphicsThread = new Thread(game);

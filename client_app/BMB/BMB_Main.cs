@@ -14,50 +14,76 @@ namespace BMB
         private Graphics gReady;
         private Bitmap btm;
         public Bitmap btmReady;
+        private RectangleF area;
+        private Pen pen;
 
         public int drawingId = 0;
         private int toDrawId = 0;
         public bool drawing = true;
         public bool processing = true;
 
-        private int height = 750;
-        private int width = 750;
+        private int height;
+        private int width;
         private Thread drawingThread;
         private Thread processingThread;
 
         public BMB_Input input;
 
-        //Lista obiektów generująca bitmapy do narysowania
-        private Example_Orbiting exampleObjectWithSomethingToDraw;
+        public int mapSizeX;
+        public int mapSizeY;
+        private float fieldSizeX;
+        private float fieldSizeY;
+        public byte[,] map;
 
 
-        public bool pressE = false;
-
-
-        public BMB_Main(int height, int width, BMB_Input pointerToInput)
+        public BMB_Main(int width, int height, BMB_Input pointerToInput)
         {
             this.height = height;
             this.width = width;
 
             this.input = pointerToInput;
 
-            this.btm = new Bitmap(height, width);
-            this.btmReady = new Bitmap(height, width);
+            this.btm = new Bitmap(width, height);
+            this.btmReady = new Bitmap(width, height);
             this.g = Graphics.FromImage(btm);
             this.gReady = Graphics.FromImage(btmReady);
+            this.pen = new Pen(Color.White, 1.0f);
 
             drawingThread = new Thread(this.draw);
             drawingThread.IsBackground = true;
             drawingThread.Start();
 
-            processingThread = new Thread(this.process);
+            /*processingThread = new Thread(this.process);
             processingThread.IsBackground = true;
-            processingThread.Start();
+            processingThread.Start();*/
 
-
-            exampleObjectWithSomethingToDraw = new Example_Orbiting();
 
         }
+
+        public BMB_Main(int height, int width, BMB_Input pointerToInput, int mapSizeX, int mapSizeY) : this(height, width, pointerToInput)
+        {
+            this.mapSizeX = mapSizeX;
+            this.mapSizeY = mapSizeY;
+
+            this.fieldSizeX = (float)this.width / (float)this.mapSizeX; 
+            this.fieldSizeY = (float)this.height / (float)this.mapSizeY;
+
+
+            this.area = new RectangleF(0, 0, (int)this.fieldSizeX, (int)this.fieldSizeY);
+
+            this.map = new byte[mapSizeX, mapSizeY];
+
+
+            //TEST
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    map[j, i] = 0;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Metoda rysująca wszystkie obiekty na bitmapie [btm]. 
@@ -76,8 +102,8 @@ namespace BMB
 
 
 
-            RectangleF areaToSytuatePictureOnBitmap;
-            areaToSytuatePictureOnBitmap = new RectangleF(0, 0, this.height, this.width);
+            RectangleF areaTocopy;
+            areaTocopy = new RectangleF(0, 0, this.height, this.width);
 
 
             while (this.drawing)
@@ -92,9 +118,11 @@ namespace BMB
 
                 this.g.Clear(Color.Black);
 
-                this.g.DrawImage(exampleObjectWithSomethingToDraw.generate(), areaToSytuatePictureOnBitmap);
+                this.generateMap();
+                //this.generateTest();
 
-                this.gReady.DrawImage(this.btm, areaToSytuatePictureOnBitmap);
+                this.gReady.DrawImage(this.btm, areaTocopy);
+
                 this.nextDrawing();
 
 
@@ -127,11 +155,31 @@ namespace BMB
         private void process()
         {
             Thread.Sleep(500);
+
             while (processing == true)
             {
-                exampleObjectWithSomethingToDraw.process(this.input);
 
             }
+        }
+
+
+        private void generateMap()
+        {
+
+            for(int i = 0; i < this.mapSizeY; i++)
+            {
+                this.area.Y = i*this.fieldSizeY;
+
+                for (int j = 0; j < this.mapSizeX; j++)
+                {
+                    this.area.X = j * this.fieldSizeX;
+
+                    this.g.DrawEllipse(this.pen, this.area);
+                }
+            }
+
+
+
         }
     }
 }
