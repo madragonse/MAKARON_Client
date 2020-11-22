@@ -46,28 +46,14 @@ namespace BMB
             PointF img = new PointF(0, 0);
             int drawId = -1;
 
-
             while (workign)
             {
-
-
-                if (drawId == game_BMB.drawingId)
-                {
-
-                    continue;
-                }
-                drawId = game_BMB.drawingId;
-
                 game_BMB.nextToDraw();
 
-                //Thread.Sleep(1000);
+                SolidBrush sb = new SolidBrush(Color.Green);
+                fG.FillRectangle(sb, 20, 20, 50, 50);
                 fG.DrawImage(game_BMB.btmReady, img);
-
-
             }
-
-
-
         }
 
         private void BMB_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
