@@ -5,93 +5,155 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace client_lib
 {
-    class Communication_Package
-    {/*
-            PING,
-            CHOOSE,
-            LOGIN,
-            LOGIN_CONFIRM,
-            LOGIN_REFUSE,
-            SIGNUP,
-            SIGNUP_CONFIRM,
-            SIGNUP_REFUSE,
-            GLOBAL_MESSAGE,
-            QUIT_SERVER,
-            QUIT_LOBBY,
-            QUIT_GAME*/
-
+    public class Communication_Package
+    {
         public String dataString;
         public byte[] data;
+        public String packageType;
+        public List<String> arguments;
 
         #region constructors
         public Communication_Package(byte[] data)
         {
-           this.data = data;
-           this.dataString = BitConverter.ToString(this.data);
+            this.data = data;
+            this.dataString = BitConverter.ToString(this.data);
+            arguments = new List<String>();
         }
+
+        public Communication_Package() { }
+
         #endregion
         #region noargs
         public void SetTypePING()
         {
-            this.dataString = "<type>PING</type>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>PING</type>";
+            this.dataString += "</PACKAGE>";
         }
+
 
         public void SetTypeQUIT_SERVER()
         {
-            this.dataString = "<type>QUIT_SERVER</type>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>QUIT_SERVER</type>";
+            this.dataString += "</PACKAGE>";
         }
 
         public void SetTypeQUIT_LOBBY()
         {
-            this.dataString = "<type>QUIT_LOBBY</type>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>QUIT_LOBBY</type>";
+            this.dataString += "</PACKAGE>";
         }
 
         public void SetTypeQUIT_GAME()
         {
-            this.dataString = "<type>QUIT_GAME</type>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>QUIT_GAME</type>";
+            this.dataString += "</PACKAGE>";
         }
         #endregion
         #region multipleargs
         public void SetTypeCHOOSE(int id)
         {
-            this.dataString = "<type>CHOOSE</type><arg1>"+ id.ToString() +"</arg1>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>CHOOSE</type><arg1>" + id.ToString() + "</arg1>";
+            this.dataString += "</PACKAGE>";
         }
 
         public void SetTypeLOGIN(String username, String password)
         {
-            this.dataString = "<type>LOGIN</type><arg1>" + username + "</arg1><arg2>" + password + "</arg2>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>LOGIN</type><arg1>" + username + "</arg1><arg2>" + password + "</arg2>";
+            this.dataString += "</PACKAGE>";
         }
 
         public void SetTypeLOGIN_CONFIRM(String username)
         {
-            this.dataString = "<type>LOGIN_CONFIRM</type><arg1>"+ username +"</arg1>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>LOGIN_CONFIRM</type><arg1>" + username + "</arg1>";
+            this.dataString += "</PACKAGE>";
         }
 
         public void SetTypeLOGIN_REFUSE(String username, String reason)
         {
-            this.dataString = "<type>LOGIN_REFUSE</type><arg1>"+ username +"</arg1><arg2>"+ reason +"</arg2>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>LOGIN_REFUSE</type><arg1>" + username + "</arg1><arg2>" + reason + "</arg2>";
+            this.dataString += "</PACKAGE>";
         }
 
-        public void SetTypeSIGNUP(String username, String password)
+        public void SetTypeSIGNUP(String username, String password, String confirmPassword)
         {
-            this.dataString = "<type>SIGNUP</type><arg1>"+ username + "</arg1><arg2>"+ password +"</arg2>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>SIGNUP</type><arg1>" + username + "</arg1><arg2>" + password + "</arg2><arg3>" + confirmPassword + "</arg3>";
+            this.dataString += "</PACKAGE>";
         }
 
         public void SetTypeSIGNUP_CONFIRM(String username)
         {
-            this.dataString = "<type>SIGNUP_CONFIRM</type><arg1>"+ username +"</arg1>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>SIGNUP_CONFIRM</type><arg1>" + username + "</arg1>";
+            this.dataString += "</PACKAGE>";
         }
         public void SetTypeSIGNUP_REFUSE(String username, String reason)
         {
-            this.dataString = "<type>SIGNUP_REFUSE</type><arg1>"+ username +"</arg1><arg2>"+ reason +"</arg2>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>SIGNUP_REFUSE</type><arg1>" + username + "</arg1><arg2>" + reason + "</arg2>";
+            this.dataString += "</PACKAGE>";
         }
         public void SetTypeGLOBAL_MESSAGE(int senderId, String senderUsername, String message)
         {
-            this.dataString = "<type>GLOBAL_MESSAGE</type><arg1>"+ senderId.ToString() + "</arg1><arg2>" + senderUsername + "</arg2><arg3>" + message + "</arg3>";
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>GLOBAL_MESSAGE</type><arg1>" + senderId.ToString() + "</arg1><arg2>" + senderUsername + "</arg2><arg3>" + message + "</arg3>";
+            this.dataString += "</PACKAGE>";
+        }
+        public void SetTypeLOGIN_REQUEST()
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>LOGIN_REQUEST</type>";
+            this.dataString = "</PACKAGE>";
+        }
+        public void SetTypeSIGNUP_REQUEST()
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>SIGNUP_REQUEST</type>";
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeERROR(String message)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>ERROR</type><arg1>" + message + "</arg1>";
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeCHOICE_REQUEST(String whatIsRequested)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>CHOICE_REQUEST</type><arg1>" + whatIsRequested + "</arg1>";
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeLIST(List<String> list)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>LIST</type>";
+            int i = 1;
+            foreach (String s in list)
+            {
+                this.dataString += "<arg" + i + ">" + s + "</arg" + i + ">";
+            }
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeBack()
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>BACK</type>";
+            this.dataString += "</PACKAGE>";
         }
         #endregion
         public byte[] ToByteArray()
@@ -106,33 +168,27 @@ namespace client_lib
             String result = BitConverter.ToString(data);
             return result;
         }
-        public static void interpet(byte[] data)
+
+        public void Interpet()
         {
-            String stringData = Encoding.UTF8.GetString(data, 0, data.Length);
-            String packageType = "";
-            List<String> arguments = new List<String>();
-
-            //parse into datatable
-            DataTable dataTable = parseXMLIntoDataTable(stringData);
-            foreach (DataRow dataRow in dataTable.Rows)
+            if (data != null)
             {
-                foreach (var item in dataRow.ItemArray)
+                this.dataString = Encoding.UTF8.GetString(data, 0, data.Length);
+                List<String> arguments = new List<String>();
+                //parse into datatable
+                DataTable dataTable = parseXMLIntoDataTable(dataString);
+                foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    arguments.Add((string)item);
+                    foreach (var item in dataRow.ItemArray)
+                    {
+                        arguments.Add((string)item);
+                    }
                 }
+                this.packageType = arguments[0];
+                //delete type from arguments list
+                arguments.RemoveAt(0);
+                this.arguments = arguments;
             }
-            packageType = arguments[0];
-            //delete type from arguments table
-            arguments.RemoveAt(0);
-
-            switch (packageType)
-            {
-                case "":
-                    break;
-                default:
-                    break;
-            }
-
         }
 
         private static DataTable parseXMLIntoDataTable(String dataString)
@@ -142,6 +198,13 @@ namespace client_lib
             dataSet.ReadXml(xmlStream);
 
             return dataSet.Tables[0];
+        }
+
+        
+
+        public void refreshByteArray()
+        {
+            this.data = Encoding.ASCII.GetBytes(this.dataString);
         }
     }
 }
