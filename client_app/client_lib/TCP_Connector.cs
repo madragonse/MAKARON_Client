@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace client_lib
 {
-    class TCP_Connector
+    public class TCP_Connector
     {
         #region fields
         public static int DEFAULT_PORT = 9000;

@@ -47,6 +47,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Game_Bomberman.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TCP_Connector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
