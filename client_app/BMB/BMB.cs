@@ -47,22 +47,13 @@ namespace BMB
 
         public void MainLoop()
         {
-            
-
-
             while (true)
             {
-
                 //TODO - menu
-
                 this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ 750, 750, 25, 25);
 
                 while (true)
                 {
-
-
-
-
                     //TODO - 
 
                     //Serwer->recive()
@@ -70,19 +61,8 @@ namespace BMB
                     //Server->send(Game->getPackets())
                     this.game.update(this.input.buttons, 10/*TODO - deltaTime*/);
                     window.DrawImage(this.game.bitmap, cornerPoint);
-
-
-
-                    
-
-
                 }
             }
-
-            
-
-
-
         }
 
         private void BMB_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -106,7 +86,6 @@ namespace BMB
             {
                 input.buttons["D"] = true;
             }
-
             //TODO - dodać inne przyciski
         }
 
@@ -131,8 +110,6 @@ namespace BMB
             {
                 input.buttons["D"] = false;
             }
-
-
         }
     }
 }

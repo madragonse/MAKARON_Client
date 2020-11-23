@@ -13,12 +13,12 @@ namespace client_lib
     /// </summary>
     public class Game_Bomberman : Game
     {
-        
-
         /// <summary>
         /// wybieranie pola na mapie
         /// </summary>
         private RectangleF field;
+
+        private PointF playerPosition = new PointF(0, 0);
 
         /// <summary>
         /// Wymiary w pixelach
@@ -48,7 +48,6 @@ namespace client_lib
 
             //TEST
 
-
             for (int i = 0; i < mapSizeY; i++)
             {
                 for (int j = 0; j < mapSizeX; j++)
@@ -68,17 +67,11 @@ namespace client_lib
             this.fieldWidth = (float)this.width / (float)this.mapSizeX;
             this.fieldHeight = (float)this.height / (float)this.mapSizeY;
 
-
             this.field = new RectangleF(0, 0, (int)this.fieldWidth, (int)this.fieldHeight);
 
             this.map = new byte[mapSizeX, mapSizeY];
 
             //TEST
-
-            
-
-            
-
         }
 
         /// <summary>
@@ -91,12 +84,29 @@ namespace client_lib
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
-                    this.map[j, i] = (byte)(rand.Next() % 3);
+                    if ((i + j)%2 == 0) map[j, i] = 2;
+                    else map[j, i] = 1;
                 }
             }
 
-            this.generateBitmap();
+            if(buttons["W"] == true)
+            {
+                this.playerPosition.Y -= 0.01f*deltatime;
+            }
+            if (buttons["S"] == true)
+            {
+                this.playerPosition.Y += 0.01f * deltatime;
+            }
+            if (buttons["A"] == true)
+            {
+                this.playerPosition.X -= 0.01f * deltatime;
+            }
+            if (buttons["D"] == true)
+            {
+                this.playerPosition.X += 0.01f * deltatime;
+            }
 
+            this.generateBitmap();
         }
 
 
@@ -121,34 +131,29 @@ namespace client_lib
                 {
                     this.field.X = j * this.fieldWidth;
 
-
-                    if (this.map[j, i] == 0)
+                    switch(map[j,i])
                     {
-                        this.brush.Color = Color.Yellow;
-
-                    }
-                    else if (this.map[j, i] == 1)
-                    {
-
-                        this.brush.Color = Color.White;
-
-                    }
-                    else if (this.map[j, i] == 2)
-                    {
-
-                        this.brush.Color = Color.Red;
-
+                        case 0:
+                            this.brush.Color = Color.Yellow;
+                            break;
+                        case 1:
+                            this.brush.Color = Color.White;
+                            break;
+                        case 2:
+                            this.brush.Color = Color.Red;
+                            break;
+                        default:
+                            this.brush.Color = Color.Yellow;
+                            break;
                     }
 
-
-
-
-                    this.grafika.FillRectangle(this.brush, this.field);
-
-
+                    this.grafika.FillRectangle(this.brush, this.field);                    
                 }
             }
-
+            this.brush.Color = Color.Black;
+            this.field.X = playerPosition.X * this.fieldWidth;
+            this.field.Y = playerPosition.Y * this.fieldHeight;
+            this.grafika.FillRectangle(this.brush, this.field);
         }
 
     }
