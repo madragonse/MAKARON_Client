@@ -14,12 +14,12 @@ namespace BMB
 {
     public partial class BMB : Form
     {
-        Thread graphicsThread;
-        Graphics fG;
-        bool workign = true;
+        private Thread mainLoopThread;
+        private Graphics window;
+        private PointF cornerPoint;
 
-        BMB_Main game_BMB;
-        BMB_Input input;
+        private Game game;
+        private BMB_Input input;
 
 
         public BMB()
@@ -31,40 +31,50 @@ namespace BMB
 
         private void BMB_Load(object sender, EventArgs e)
         {
-            input = new BMB_Input();
-            game_BMB = new BMB_Main(750, 750, input, 25, 25);
+            this.input = new BMB_Input();
+            this.cornerPoint = new PointF(0, 0);
 
-            fG = CreateGraphics();
-            graphicsThread = new Thread(game);
-            graphicsThread.IsBackground = true;
-            graphicsThread.Start();
+            this.window = CreateGraphics();
+            this.mainLoopThread = new Thread(MainLoop);
+            this.mainLoopThread.IsBackground = true;
+            this.mainLoopThread.Start();
         }
 
-        public void game()
+
+        public void MainLoop()
         {
-
-            PointF img = new PointF(0, 0);
-            int drawId = -1;
+            
 
 
-            while (workign)
+            while (true)
             {
 
+                //menu
 
-                if (drawId == game_BMB.drawingId)
+                this.game = new Game_Bomberman(/*TODO - stream*/, 750, 750, 25, 25);
+
+                while (true)
                 {
 
-                    continue;
+
+
+                    
+                    //TODO -
+                    //Serwer->recive()
+                    //Game->process(dataPacket)
+                    //Server->send(Game->getPackets())
+                    //Game->update(deltaTime)
+                    window.DrawImage(game.bitmap, cornerPoint);
+
+
+
+                    
+
+
                 }
-                drawId = game_BMB.drawingId;
-
-                game_BMB.nextToDraw();
-
-                //Thread.Sleep(1000);
-                fG.DrawImage(game_BMB.btmReady, img);
-
-
             }
+
+            
 
 
 

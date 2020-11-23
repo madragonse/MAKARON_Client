@@ -55,8 +55,6 @@
       <DependentUpon>BMB.cs</DependentUpon>
     </Compile>
     <Compile Include="BMB_Input.cs" />
-    <Compile Include="BMB_Main.cs" />
-    <Compile Include="Example_Orbiting.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BMB.resx">
