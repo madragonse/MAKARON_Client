@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace client_lib
 {
-    abstract class Game
+    public abstract class Game
     {
         public Bitmap bitmap;
         protected Graphics grafika;
@@ -32,7 +32,8 @@ namespace client_lib
         }
 
         private NetworkStream stream;
-        public abstract void update(Dictionary<string, bool> buttons);
+        public abstract void update(Dictionary<string, bool> buttons, float deltatime);
+        public abstract void process();
 
 
     }

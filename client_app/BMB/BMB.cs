@@ -9,9 +9,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using client_lib;
 
 namespace BMB
 {
+
+
     public partial class BMB : Form
     {
         private Thread mainLoopThread;
@@ -49,7 +52,7 @@ namespace BMB
             while (true)
             {
 
-                //menu
+                //TODO - menu
 
                 this.game = new Game_Bomberman(/*TODO - stream*/, 750, 750, 25, 25);
 
@@ -58,12 +61,13 @@ namespace BMB
 
 
 
-                    
+
                     //TODO -
+
                     //Serwer->recive()
-                    //Game->process(dataPacket)
+                    this.game.process();/*TODO*/
                     //Server->send(Game->getPackets())
-                    //Game->update(deltaTime)
+                    this.game.update(this.input.buttons, 10/*TODO - deltaTime*/);
                     window.DrawImage(game.bitmap, cornerPoint);
 
 
@@ -102,7 +106,7 @@ namespace BMB
                 input.buttons["D"] = true;
             }
 
-
+            //TODO - dodać inne przyciski
         }
 
         private void BMB_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)

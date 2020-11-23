@@ -10,7 +10,7 @@ namespace client_lib
     /// dodać nowe id
     /// 
     /// </summary>
-    class Game_Bomberman : Game
+    public class Game_Bomberman : Game
     {
         
 
@@ -48,9 +48,9 @@ namespace client_lib
         }
 
         /// <summary>
-        /// przyjmuje inputy
+        /// przyjmuje inputy i aktualizuje działanie gry
         /// </summary>
-        public override void update(Dictionary<string, bool> buttons)
+        public override void update(Dictionary<string, bool> buttons, float deltatime)
         {
             this.generateBitmap();
 
@@ -58,15 +58,15 @@ namespace client_lib
 
 
         /// <summary>
-        /// działanie gry
+        /// przetwarza pakiety z serwera
         /// </summary>
-        private void process(//TODO - stream)
+        public override void process()
         { 
             
         }
 
         /// <summary>
-        /// Generowanie bitmapy
+        /// Generowanie bitmapy na podstawie mapy gry [map]
         /// </summary>
         private void generateBitmap()
         {
