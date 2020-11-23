@@ -110,51 +110,6 @@ namespace client_lib
             this.dataString += "<type>GLOBAL_MESSAGE</type><arg1>" + senderId.ToString() + "</arg1><arg2>" + senderUsername + "</arg2><arg3>" + message + "</arg3>";
             this.dataString += "</PACKAGE>";
         }
-        public void SetTypeLOGIN_REQUEST()
-        {
-            this.dataString = "<PACKAGE>";
-            this.dataString += "<type>LOGIN_REQUEST</type>";
-            this.dataString = "</PACKAGE>";
-        }
-        public void SetTypeSIGNUP_REQUEST()
-        {
-            this.dataString = "<PACKAGE>";
-            this.dataString += "<type>SIGNUP_REQUEST</type>";
-            this.dataString += "</PACKAGE>";
-        }
-
-        public void SetTypeERROR(String message)
-        {
-            this.dataString = "<PACKAGE>";
-            this.dataString += "<type>ERROR</type><arg1>" + message + "</arg1>";
-            this.dataString += "</PACKAGE>";
-        }
-
-        public void SetTypeCHOICE_REQUEST(String whatIsRequested)
-        {
-            this.dataString = "<PACKAGE>";
-            this.dataString += "<type>CHOICE_REQUEST</type><arg1>" + whatIsRequested + "</arg1>";
-            this.dataString += "</PACKAGE>";
-        }
-
-        public void SetTypeLIST(List<String> list)
-        {
-            this.dataString = "<PACKAGE>";
-            this.dataString += "<type>LIST</type>";
-            int i = 1;
-            foreach (String s in list)
-            {
-                this.dataString += "<arg" + i + ">" + s + "</arg" + i + ">";
-            }
-            this.dataString += "</PACKAGE>";
-        }
-
-        public void SetTypeBack()
-        {
-            this.dataString = "<PACKAGE>";
-            this.dataString += "<type>BACK</type>";
-            this.dataString += "</PACKAGE>";
-        }
         #endregion
         public byte[] ToByteArray()
         {
@@ -200,11 +155,69 @@ namespace client_lib
             return dataSet.Tables[0];
         }
 
-        
+        public void SetTypeLOGIN_REQUEST()
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>LOGIN_REQUEST</type>";
+            this.dataString = "</PACKAGE>";
+        }
+        public void SetTypeSIGNUP_REQUEST()
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>SIGNUP_REQUEST</type>";
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeERROR(String message)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>ERROR</type><arg1>" + message + "</arg1>";
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeCHOICE_REQUEST(String whatIsRequested)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>CHOICE_REQUEST</type><arg1>" + whatIsRequested + "</arg1>";
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeLIST(List<String> list)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>LIST</type>";
+            int i = 1;
+            foreach (String s in list)
+            {
+                this.dataString += "<arg" + i + ">" + s + "</arg" + i + ">";
+            }
+            this.dataString += "</PACKAGE>";
+        }
+
+        public void SetTypeBack()
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>BACK</type>";
+            this.dataString += "</PACKAGE>";
+        }
+        public void SetTypeCREATE_LOBBY(String gameType, String lobbyName)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>CREATE_GAME</type>";
+            this.dataString += "<arg1>" + gameType + "</arg1>";
+            this.dataString += "<arg2>" + lobbyName + "</arg2>";
+            this.dataString += "</PACKAGE>";
+        }
+        public void SetTypeJOIN_LOBBY(String lobbyId)
+        {
+            this.dataString = "<PACKAGE>";
+            this.dataString += "<type>JOIN_LOBBY</type>";
+            this.dataString += "<arg1>" + lobbyId + "</arg1>";
+            this.dataString += "</PACKAGE>";
+        }
 
         public void refreshByteArray()
         {
             this.data = Encoding.ASCII.GetBytes(this.dataString);
         }
     }
-}
