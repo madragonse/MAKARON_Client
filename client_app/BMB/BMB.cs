@@ -25,33 +25,49 @@ namespace BMB
         private Game game;
         private BMB_Input input;
 
+        private String adresIPWpisany;
 
         public BMB()
         {
             InitializeComponent();
-            this.Width = 770;
-            this.Height = 790;
+            /*this.Width = 1200;
+            this.Height = 900;*/
+
         }
 
         private void BMB_Load(object sender, EventArgs e)
         {
+            panelGry.Paint += new PaintEventHandler(panel1_Paint);
             this.input = new BMB_Input();
             this.cornerPoint = new PointF(0, 0);
 
-            this.window = CreateGraphics();
+            //this.window = CreateGraphics();
+
             this.mainLoopThread = new Thread(MainLoop);
             this.mainLoopThread.IsBackground = true;
             this.mainLoopThread.Start();
+
+
+
+            
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            /*panelGry.Width = 750;
+            panelGry.Height = 750;*/
+            this.window = panelGry.CreateGraphics();
+
+        }
 
         public void MainLoop()
         {
+            panelGry.Paint += new PaintEventHandler(panel1_Paint);
             while (true)
             {
                 //TODO - menu
-                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ 750, 750, 25, 25);
-
+                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ 600, 600, 25, 25);
+                Thread.Sleep(1000);
                 while (true)
                 {
                     //TODO - 
@@ -59,14 +75,16 @@ namespace BMB
                     //Serwer->recive()
                     this.game.process();/*TODO*/
                     //Server->send(Game->getPackets())
-                    this.game.update(this.input.buttons, 10/*TODO - deltaTime*/);
+                    this.game.update(this.input.buttons, 10f/*TODO - deltaTime*/);
                     window.DrawImage(this.game.bitmap, cornerPoint);
+                    
                 }
             }
         }
 
         private void BMB_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
+            
             if (Keyboard.IsKeyDown(Key.W))
             {
                 input.buttons["W"] = true;
@@ -110,6 +128,18 @@ namespace BMB
             {
                 input.buttons["D"] = false;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void connectButton_Click(object sender, EventArgs e)
+        {
+            this.adresIPWpisany = textBoxAdresIPWpisany.Text;
+            label1.Text = "To wpisałeś: \"" + adresIPWpisany + "\"";
+
         }
     }
 }

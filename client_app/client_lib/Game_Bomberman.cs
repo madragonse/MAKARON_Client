@@ -18,7 +18,7 @@ namespace client_lib
         /// </summary>
         private RectangleF field;
 
-        private PointF playerPosition = new PointF(0, 0);
+        private PointF playerPosition = new PointF(10f, 10f);
 
         /// <summary>
         /// Wymiary w pixelach
