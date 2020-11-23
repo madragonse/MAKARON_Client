@@ -30,8 +30,8 @@ namespace BMB
         public BMB()
         {
             InitializeComponent();
-            /*this.Width = 1200;
-            this.Height = 900;*/
+            this.Width = 1100;
+            this.Height = 850;
 
         }
 
@@ -66,7 +66,10 @@ namespace BMB
             while (true)
             {
                 //TODO - menu
-                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ 600, 600, 25, 25);
+
+
+
+                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ panelGry.Width, panelGry.Height, 25, 25); ;
                 Thread.Sleep(1000);
                 while (true)
                 {
@@ -130,14 +133,10 @@ namespace BMB
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void connectButton_Click(object sender, EventArgs e)
         {
             this.adresIPWpisany = textBoxAdresIPWpisany.Text;
+
             label1.Text = "To wpisałeś: \"" + adresIPWpisany + "\"";
 
         }

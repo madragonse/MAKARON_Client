@@ -40,7 +40,7 @@ namespace BMB
             this.panelGry.Location = new System.Drawing.Point(0, 0);
             this.panelGry.Margin = new System.Windows.Forms.Padding(0);
             this.panelGry.Name = "panelGry";
-            this.panelGry.Size = new System.Drawing.Size(800, 800);
+            this.panelGry.Size = new System.Drawing.Size(977, 977);
             this.panelGry.TabIndex = 0;
             // 
             // connectButton
@@ -71,7 +71,6 @@ namespace BMB
             this.label1.Size = new System.Drawing.Size(280, 31);
             this.label1.TabIndex = 3;
             this.label1.Text = "Wpisz Adres IP serwera";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // BMB
             // 
