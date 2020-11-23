@@ -13,6 +13,7 @@ namespace client_lib
         public Bitmap bitmap;
         protected Graphics grafika;
         protected Pen pen;
+        protected SolidBrush brush;
 
 
         /// <summary>
@@ -29,6 +30,23 @@ namespace client_lib
             this.height = height;
 
             this.pen = new Pen(Color.White, 1.0f);
+            this.brush = new SolidBrush(Color.White);
+
+            this.bitmap = new Bitmap(this.width, this.height);
+            this.grafika = Graphics.FromImage(bitmap);
+        }
+    //TEST
+        public Game(int width, int height)
+        {
+
+            this.width = width;
+            this.height = height;
+
+            this.pen = new Pen(Color.White, 1.0f);
+            this.brush = new SolidBrush(Color.White);
+
+            this.bitmap = new Bitmap(this.width, this.height);
+            this.grafika = Graphics.FromImage(bitmap);
         }
 
         private NetworkStream stream;

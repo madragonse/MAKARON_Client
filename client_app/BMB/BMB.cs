@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace BMB
 
                 //TODO - menu
 
-                this.game = new Game_Bomberman(/*TODO - stream*/, 750, 750, 25, 25);
+                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ 750, 750, 25, 25);
 
                 while (true)
                 {
@@ -62,13 +63,13 @@ namespace BMB
 
 
 
-                    //TODO -
+                    //TODO - 
 
                     //Serwer->recive()
                     this.game.process();/*TODO*/
                     //Server->send(Game->getPackets())
                     this.game.update(this.input.buttons, 10/*TODO - deltaTime*/);
-                    window.DrawImage(game.bitmap, cornerPoint);
+                    window.DrawImage(this.game.bitmap, cornerPoint);
 
 
 

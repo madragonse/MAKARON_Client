@@ -1,4 +1,5 @@
 ﻿using client_lib;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Sockets;
@@ -45,6 +46,39 @@ namespace client_lib
 
             this.map = new byte[mapSizeX, mapSizeY];
 
+            //TEST
+
+
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    this.map[j, i] = 0;
+                }
+            }
+
+        }
+
+        //TEST
+        public Game_Bomberman(int width, int height, int mapSizeX, int mapSizeY) : base(width, height)
+        {
+            this.mapSizeX = mapSizeX;
+            this.mapSizeY = mapSizeY;
+
+            this.fieldWidth = (float)this.width / (float)this.mapSizeX;
+            this.fieldHeight = (float)this.height / (float)this.mapSizeY;
+
+
+            this.field = new RectangleF(0, 0, (int)this.fieldWidth, (int)this.fieldHeight);
+
+            this.map = new byte[mapSizeX, mapSizeY];
+
+            //TEST
+
+            
+
+            
+
         }
 
         /// <summary>
@@ -52,6 +86,15 @@ namespace client_lib
         /// </summary>
         public override void update(Dictionary<string, bool> buttons, float deltatime)
         {
+            Random rand = new Random();
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    this.map[j, i] = (byte)(rand.Next() % 3);
+                }
+            }
+
             this.generateBitmap();
 
         }
@@ -81,23 +124,26 @@ namespace client_lib
 
                     if (this.map[j, i] == 0)
                     {
-                        this.pen.Color = Color.Yellow;
+                        this.brush.Color = Color.Yellow;
 
                     }
-                    else if(this.map[j, i] == 1)
+                    else if (this.map[j, i] == 1)
                     {
 
-                        this.pen.Color = Color.White;
+                        this.brush.Color = Color.White;
 
                     }
                     else if (this.map[j, i] == 2)
                     {
 
-                        this.pen.Color = Color.Red;
+                        this.brush.Color = Color.Red;
 
                     }
 
-                    this.g.DrawEllipse(this.pen, this.field);
+
+
+
+                    this.grafika.FillRectangle(this.brush, this.field);
 
 
                 }
