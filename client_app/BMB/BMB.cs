@@ -30,13 +30,17 @@ namespace BMB
         public BMB()
         {
             InitializeComponent();
-            this.Width = 1100;
-            this.Height = 850;
+            /*this.Width = 1100;
+            this.Height = 850;*/
 
         }
 
         private void BMB_Load(object sender, EventArgs e)
         {
+            
+
+
+
             panelGry.Paint += new PaintEventHandler(panel1_Paint);
             this.input = new BMB_Input();
             this.cornerPoint = new PointF(0, 0);
@@ -69,7 +73,7 @@ namespace BMB
 
 
 
-                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ panelGry.Width, panelGry.Height, 25, 25); ;
+                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ panelGry.Width-1, panelGry.Height-1, 25, 25); ;
                 Thread.Sleep(1000);
                 while (true)
                 {
