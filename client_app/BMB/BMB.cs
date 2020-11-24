@@ -29,8 +29,7 @@ namespace BMB
         private int serverPort;
         private IPAddress serverIP;
         private TCP_Connector connector;
-        private byte[] reciveBuffer;
-        private byte[] sendBuffer;
+        private Communication_Package package;
 
         public BMB()
         {
@@ -48,8 +47,8 @@ namespace BMB
 
             //this.window = CreateGraphics();
 
-            this.reciveBuffer = new byte[2048];
-            this.sendBuffer = new byte[2048];
+            this.connector = new TCP_Connector();
+            this.package = new Communication_Package();
 
 
 
@@ -152,11 +151,13 @@ namespace BMB
             addressIP[3] = (byte)short.Parse(this.textBoxIPI1.Text);
             this.serverPort = int.Parse(this.textBoxPortI.Text);
             this.serverIP = new IPAddress(addressIP);
+
             this.connectToServer();
 
-
+            
             this.panelConnected.Visible = true;
             this.panelLogin.Visible = true;
+
 
         }
 
@@ -169,8 +170,15 @@ namespace BMB
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void buttonLogin_Click(object sender, EventArgs e)
         {
+            String login = this.textBoxLogin.Text;
+            String password = this.textBoxPassword.Text;
+
+            this.package.SetTypeLOGIN(login, password);
+            this.connector.Buffer = this.package.ToByteArray();
+            this.connector.sendToServer();
+
 
         }
     }

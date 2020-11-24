@@ -26,6 +26,7 @@ namespace client_lib
         public Communication_Package() { }
 
         #endregion
+
         #region noargs
         public void SetTypePING()
         {
@@ -56,6 +57,7 @@ namespace client_lib
             this.dataString += "</PACKAGE>";
         }
         #endregion
+
         #region multipleargs
         public void SetTypeCHOOSE(int id)
         {
@@ -111,6 +113,7 @@ namespace client_lib
             this.dataString += "</PACKAGE>";
         }
         #endregion
+
         public byte[] ToByteArray()
         {
             byte[] result = Encoding.ASCII.GetBytes(dataString);
@@ -159,7 +162,7 @@ namespace client_lib
         {
             this.dataString = "<PACKAGE>";
             this.dataString += "<type>LOGIN_REQUEST</type>";
-            this.dataString = "</PACKAGE>";
+            this.dataString += "</PACKAGE>";
         }
         public void SetTypeSIGNUP_REQUEST()
         {
