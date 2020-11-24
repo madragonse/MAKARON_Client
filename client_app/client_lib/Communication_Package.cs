@@ -221,3 +221,4 @@ namespace client_lib
             this.data = Encoding.ASCII.GetBytes(this.dataString);
         }
     }
+}

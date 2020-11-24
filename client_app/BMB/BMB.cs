@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -25,7 +26,11 @@ namespace BMB
         private Game game;
         private BMB_Input input;
 
-        private String adresIPWpisany;
+        private int serverPort;
+        private IPAddress serverIP;
+        private TCP_Connector connector;
+        private byte[] reciveBuffer;
+        private byte[] sendBuffer;
 
         public BMB()
         {
@@ -38,14 +43,15 @@ namespace BMB
         private void BMB_Load(object sender, EventArgs e)
         {
             
-
-
-
-            panelGry.Paint += new PaintEventHandler(panel1_Paint);
             this.input = new BMB_Input();
             this.cornerPoint = new PointF(0, 0);
 
             //this.window = CreateGraphics();
+
+            this.reciveBuffer = new byte[2048];
+            this.sendBuffer = new byte[2048];
+
+
 
             this.mainLoopThread = new Thread(MainLoop);
             this.mainLoopThread.IsBackground = true;
@@ -139,9 +145,32 @@ namespace BMB
 
         private void connectButton_Click(object sender, EventArgs e)
         {
-            this.adresIPWpisany = textBoxAdresIPWpisany.Text;
+            byte[] addressIP = new byte[4];
+            addressIP[0] = (byte)short.Parse(this.textBoxIPI1.Text);
+            addressIP[1] = (byte)short.Parse(this.textBoxIPI1.Text);
+            addressIP[2] = (byte)short.Parse(this.textBoxIPI1.Text);
+            addressIP[3] = (byte)short.Parse(this.textBoxIPI1.Text);
+            this.serverPort = int.Parse(this.textBoxPortI.Text);
+            this.serverIP = new IPAddress(addressIP);
+            this.connectToServer();
 
-            label1.Text = "To wpisałeś: \"" + adresIPWpisany + "\"";
+
+            this.panelConnected.Visible = true;
+            this.panelLogin.Visible = true;
+
+        }
+
+        private void connectToServer()
+        {
+            this.connector = new TCP_Connector(this.serverPort, this.serverIP);
+            this.connector.Connect();
+
+            
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
 
         }
     }
