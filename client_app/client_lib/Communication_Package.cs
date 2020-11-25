@@ -8,23 +8,12 @@ using System.Threading.Tasks;
 
 namespace client_lib
 {
-    public class Communication_Package
+    public class Communication_Package : Package
     {
-        public String XML;
-        public byte[] data;
-        public String packageType;
-        public List<String> arguments;
-
-        #region constructors
-        public Communication_Package(byte[] data)
-        {
-            this.data = data;
-            this.XML = BitConverter.ToString(this.data);
-            arguments = new List<String>();
-        }
+        #region ctors
+        public Communication_Package(byte[] data) : base(data) { }
 
         public Communication_Package() { }
-
         #endregion
 
         #region noargs
@@ -114,41 +103,6 @@ namespace client_lib
         }
         #endregion
 
-        public byte[] ToByteArray()
-        {
-            byte[] result = Encoding.ASCII.GetBytes(XML);
-            this.data = result;
-            return result;
-        }
-
-        public String toString()
-        {
-            String result = BitConverter.ToString(data);
-            return result;
-        }
-
-        public void Interpet()
-        {
-            if (data != null)
-            {
-                this.XML = Encoding.UTF8.GetString(data, 0, data.Length);
-                List<String> arguments = new List<String>();
-                //parse into datatable
-                DataTable dataTable = parseXMLIntoDataTable(XML);
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    foreach (var item in dataRow.ItemArray)
-                    {
-                        arguments.Add((string)item);
-                    }
-                }
-                this.packageType = arguments[0];
-                //delete type from arguments list
-                arguments.RemoveAt(0);
-                this.arguments = arguments;
-            }
-        }
-
         private static DataTable parseXMLIntoDataTable(String dataString)
         {
             StringReader xmlStream = new StringReader(dataString);
@@ -217,11 +171,6 @@ namespace client_lib
             this.XML += "<type>JOIN_LOBBY</type>";
             this.XML += "<arg1>" + lobbyId + "</arg1>";
             this.XML += "</PACKAGE>";
-        }
-
-        public void refreshByteArray()
-        {
-            this.data = Encoding.ASCII.GetBytes(this.XML);
         }
     }
 }

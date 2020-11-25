@@ -100,14 +100,13 @@ namespace client_lib
         {
             Stream.Read(Buffer, 0, Buffer.Length);
             Communication_Package package = new Communication_Package(Buffer);
-            package.Interpet();
             return package;
         }
 
         public void Send(Communication_Package package)
         {
-            package.refreshByteArray();
-            Stream.Write(package.data, 0, package.data.Length);
+            byte[] data = package.ToByteArray();
+            Stream.Write(data, 0, data.Length);
         }
     }
 }
