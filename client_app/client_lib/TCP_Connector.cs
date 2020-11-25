@@ -101,8 +101,12 @@ namespace client_lib
 
         public void Send(Communication_Package package)
         {
-            byte[] data = package.ToByteArray();
-            Stream.Write(data, 0, data.Length);
+            if (this.Stream != null)
+            {
+                byte[] data = package.ToByteArray();
+                Stream.Write(data, 0, data.Length);
+            }
+            
         }
     }
 }

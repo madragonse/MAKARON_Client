@@ -10,12 +10,12 @@ namespace client_lib
 {
     public abstract class Package
     {
-        public String XML;
+        public String XML=null;
 
         #region ctors
         public Package(byte[] data)
         {
-            this.XML = BitConverter.ToString(data);
+            this.XML = Encoding.ASCII.GetString(data, 0, data.Length);
         }
 
         public Package() { }

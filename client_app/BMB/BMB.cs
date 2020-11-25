@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -78,7 +79,6 @@ namespace BMB
                 //TODO - menu
 
 
-
                 this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ panelGry.Width-1, panelGry.Height-1, 25, 25); ;
                 Thread.Sleep(1000);
                 while (true)
@@ -147,42 +147,37 @@ namespace BMB
         {
             byte[] addressIP = new byte[4];
             addressIP[0] = (byte)short.Parse(this.textBoxIPI1.Text);
-            addressIP[1] = (byte)short.Parse(this.textBoxIPI1.Text);
-            addressIP[2] = (byte)short.Parse(this.textBoxIPI1.Text);
-            addressIP[3] = (byte)short.Parse(this.textBoxIPI1.Text);
+            addressIP[1] = (byte)short.Parse(this.textBoxIPI2.Text);
+            addressIP[2] = (byte)short.Parse(this.textBoxIPI3.Text);
+            addressIP[3] = (byte)short.Parse(this.textBoxIPI4.Text);
             this.serverPort = int.Parse(this.textBoxPortI.Text);
             this.serverIP = new IPAddress(addressIP);
 
-            this.connectToServer();
-
-            
-            this.panelConnected.Visible = true;
-            this.panelLogin.Visible = true;
-
-
-        }
-
-        private void connectToServer()
-        {
             try
             {
-                this.connector = new TCP_Connector(this.serverPort, this.serverIP);
-                this.connector.Connect();
-            }
+                this.connectToServer();
+                this.panelConnected.Visible = true;
+                this.panelLogin.Visible = true;
+            }     
             catch (Exception)
             {
                 //TO DO notify of failure to connect
             }
         }
 
+        private void connectToServer()
+        {
+            this.connector = new TCP_Connector(this.serverPort, this.serverIP);
+            this.connector.Connect();
+        }
+
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             String login = this.textBoxLogin.Text;
-            String password = this.textBoxPassword.Text;
+            String password = ComputeSha256Hash(this.textBoxPassword.Text);
 
             this.package.SetTypeLOGIN(login, password);
-            this.connector.Buffer = this.package.ToByteArray();
             this.connector.Send(this.package);
 
             //handle response 
@@ -207,8 +202,20 @@ namespace BMB
             String password="";
             String confpassword="";
 
-            this.package.SetTypeSIGNUP(login, password,confpassword);
-            this.connector.Buffer = this.package.ToByteArray();
+            if (password != confpassword) {
+                //TO DO DISPLAY passwords don't match
+                return;
+            }
+
+            //TO DO DISPLAY why password is wrong
+            String illegalPassword= checkForIllegalPassword(password);
+            if (illegalPassword != "")
+            {
+                //TO DO display failed login, illegalPassword holds reason
+                return;
+            }
+
+            this.package.SetTypeSIGNUP(login, ComputeSha256Hash(password));
             this.connector.Send(this.package);
 
             //handle response 
@@ -222,13 +229,33 @@ namespace BMB
             }
             if (packageArguments[0] == "SIGNUP_REFUSE")
             {
-                //TO DO display failed login message packageArguments[1] holds string with reason
+                //TO DO display failed sigup, packageArguments[1] holds string with reason
             }
+        }
+
+        private String checkForIllegalPassword(String pass)
+        {
+            bool upperLetterFlag = false;
+            bool numberFlag = false;
+            //contains at least one number and at least one uppercase letter
+            foreach (char c in pass)
+            {
+                if (c > 64 && c < 91) { upperLetterFlag = true; }
+                if (c > 47 && c < 57) { numberFlag = true; }
+            }
+
+            if (!upperLetterFlag) { return "Pasword must contain at least one upper case letter"; }
+            if (!numberFlag) { return "Pasword must contain at least one number"; }
+            return "";
         }
 
         //TO DO
         private void populateGameMenu()
         {
+            //request list of available games
+            this.package.SetTypeREQUEST_GAME_LIST();
+            this.connector.Send(this.package);
+
             //server sends list package with all the avaiable games
             this.package = this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
@@ -238,6 +265,31 @@ namespace BMB
                 {
                     //DISPLAY THEM SOMEHOW
                 }
+            }
+        }
+
+        /// <summary>
+        /// Hashes a given string.
+        /// Returns a hashed string.
+        /// Taken from: https://www.c-sharpcorner.com/article/compute-sha256-hash-in-c-sharp/
+        /// </summary>
+        /// <param data to be encoded="rawData"></param>
+        /// <returns>Returns a hashed string</returns>
+        private static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
 
