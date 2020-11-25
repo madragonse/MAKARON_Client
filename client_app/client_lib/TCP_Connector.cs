@@ -95,5 +95,19 @@ namespace client_lib
             int messageLength = this.Stream.Read(Buffer, 0, Buffer.Length);
             return Encoding.UTF8.GetString(Buffer, 0, messageLength); ;
         }
+
+        public Communication_Package ReceivePackage()
+        {
+            Stream.Read(Buffer, 0, Buffer.Length);
+            Communication_Package package = new Communication_Package(Buffer);
+            package.Interpet();
+            return package;
+        }
+
+        public void Send(Communication_Package package)
+        {
+            package.refreshByteArray();
+            Stream.Write(package.data, 0, package.data.Length);
+        }
     }
 }

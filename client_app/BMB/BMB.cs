@@ -177,9 +177,7 @@ namespace BMB
 
             this.package.SetTypeLOGIN(login, password);
             this.connector.Buffer = this.package.ToByteArray();
-            this.connector.sendToServer();
-
-
+            this.connector.Send(this.package);
         }
     }
 }
