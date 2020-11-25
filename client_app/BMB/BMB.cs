@@ -30,6 +30,7 @@ namespace BMB
         private IPAddress serverIP;
         private TCP_Connector connector;
         private Communication_Package package;
+        private List<String> packageArguments;
 
         public BMB()
         {
@@ -163,8 +164,15 @@ namespace BMB
 
         private void connectToServer()
         {
-            this.connector = new TCP_Connector(this.serverPort, this.serverIP);
-            this.connector.Connect();
+            try
+            {
+                this.connector = new TCP_Connector(this.serverPort, this.serverIP);
+                this.connector.Connect();
+            }
+            catch (Exception)
+            {
+                //TO DO notify of failure to connect
+            }
         }
 
 
@@ -179,17 +187,59 @@ namespace BMB
 
             //handle response 
             this.package=this.connector.ReceivePackage();
-            List<String> packageArguments = this.package.getArguments();
+            this.packageArguments = this.package.getArguments();
 
             //if login successfull
             if (packageArguments[0] == "LOGIN_CONFIRM")
             {
-                //launch game menu
+                populateGameMenu();
             }
             if(packageArguments[0] == "LOGIN_REFUSE")
             {
-                //display failed login message packageArguments[1] holds string with reason
+                //TO DO display failed login message packageArguments[1] holds string with reason
             }
         }
+
+        private void buttonSignUp_Click(object sender, EventArgs e)
+        {
+            //TO DO-> get field values
+            String login="";
+            String password="";
+            String confpassword="";
+
+            this.package.SetTypeSIGNUP(login, password,confpassword);
+            this.connector.Buffer = this.package.ToByteArray();
+            this.connector.Send(this.package);
+
+            //handle response 
+            this.package = this.connector.ReceivePackage();
+            this.packageArguments = this.package.getArguments();
+
+            //if login successfull
+            if (packageArguments[0] == "SIGNUP_CONFIRM")
+            {
+                //TO DOlaunch sign in box
+            }
+            if (packageArguments[0] == "SIGNUP_REFUSE")
+            {
+                //TO DO display failed login message packageArguments[1] holds string with reason
+            }
+        }
+
+        //TO DO
+        private void populateGameMenu()
+        {
+            //server sends list package with all the avaiable games
+            this.package = this.connector.ReceivePackage();
+            this.packageArguments = this.package.getArguments();
+            if (packageArguments[0] == "LIST")
+            {
+                for(int i = 1; i < packageArguments.Count; i++)
+                {
+                    //DISPLAY THEM SOMEHOW
+                }
+            }
+        }
+
     }
 }
