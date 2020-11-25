@@ -187,9 +187,14 @@ namespace BMB
             //if login successfull
             if (packageArguments[0] == "LOGIN_CONFIRM")
             {
-                populateGameMenu();
+                //populateGameMenu();
+                this.panelConnected.Visible = false;
+                this.panelLogin.Visible = false;
+
+                //TO DO DISPLAY GAME MENU
+
             }
-            if(packageArguments[0] == "LOGIN_REFUSE")
+            if (packageArguments[0] == "LOGIN_REFUSE")
             {
                 //TO DO display failed login message packageArguments[1] holds string with reason
             }
