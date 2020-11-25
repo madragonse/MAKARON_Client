@@ -134,7 +134,7 @@ namespace client_lib
                 this.XML = Encoding.UTF8.GetString(data, 0, data.Length);
                 List<String> arguments = new List<String>();
                 //parse into datatable
-                DataTable dataTable = parseXMLIntoDataTable(dataString);
+                DataTable dataTable = parseXMLIntoDataTable(XML);
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
                     foreach (var item in dataRow.ItemArray)
