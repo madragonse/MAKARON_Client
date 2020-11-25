@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,10 +50,13 @@ namespace client_lib
             }
             else return new List<String>();
         }
-
-        private DataTable parseXMLIntoDataTable(string xML)
+        private static DataTable parseXMLIntoDataTable(String dataString)
         {
-            throw new NotImplementedException();
+            StringReader xmlStream = new StringReader(dataString);
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(xmlStream);
+
+            return dataSet.Tables[0];
         }
     }
 }

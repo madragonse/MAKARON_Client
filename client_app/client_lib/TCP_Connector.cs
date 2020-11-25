@@ -79,8 +79,11 @@ namespace client_lib
 
         private void sendToServer(String m)
         {
-            byte[] message = Encoding.ASCII.GetBytes(m);
-            this.Stream.Write(message, 0, message.Length);
+            if (stream != null)
+            {
+                byte[] message = Encoding.ASCII.GetBytes(m);
+                this.Stream.Write(message, 0, message.Length);
+            }
         }
 
         private String getServerResponse()

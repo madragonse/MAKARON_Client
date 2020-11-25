@@ -103,27 +103,8 @@ namespace client_lib
         }
         #endregion
 
-        private static DataTable parseXMLIntoDataTable(String dataString)
-        {
-            StringReader xmlStream = new StringReader(dataString);
-            DataSet dataSet = new DataSet();
-            dataSet.ReadXml(xmlStream);
+   
 
-            return dataSet.Tables[0];
-        }
-
-        public void SetTypeLOGIN_REQUEST()
-        {
-            this.XML = "<PACKAGE>";
-            this.XML += "<type>LOGIN_REQUEST</type>";
-            this.XML += "</PACKAGE>";
-        }
-        public void SetTypeSIGNUP_REQUEST()
-        {
-            this.XML = "<PACKAGE>";
-            this.XML += "<type>SIGNUP_REQUEST</type>";
-            this.XML += "</PACKAGE>";
-        }
 
         public void SetTypeERROR(String message)
         {

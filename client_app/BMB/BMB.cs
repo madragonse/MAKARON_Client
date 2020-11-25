@@ -165,10 +165,8 @@ namespace BMB
         {
             this.connector = new TCP_Connector(this.serverPort, this.serverIP);
             this.connector.Connect();
-
-            
-
         }
+
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -178,6 +176,20 @@ namespace BMB
             this.package.SetTypeLOGIN(login, password);
             this.connector.Buffer = this.package.ToByteArray();
             this.connector.Send(this.package);
+
+            //handle response 
+            this.package=this.connector.ReceivePackage();
+            List<String> packageArguments = this.package.getArguments();
+
+            //if login successfull
+            if (packageArguments[0] == "LOGIN_CONFIRM")
+            {
+                //launch game menu
+            }
+            if(packageArguments[0] == "LOGIN_REFUSE")
+            {
+                //display failed login message packageArguments[1] holds string with reason
+            }
         }
     }
 }
