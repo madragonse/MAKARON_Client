@@ -65,17 +65,10 @@ namespace client_lib
             this.Buffer = new byte[BUFFER_SIZE];
         }
 
-        public void Connect()
+        public void Connect() 
         {
-            try
-            {
-                this.TCPClient = new TcpClient(this.IPAddress.ToString(),this.Port);
-                this.Stream = this.TCPClient.GetStream();
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
+            this.TCPClient = new TcpClient(this.IPAddress.ToString(),this.Port);
+            this.Stream = this.TCPClient.GetStream();
         }
 
         public void Disconnect()
@@ -98,16 +91,24 @@ namespace client_lib
 
         public Communication_Package ReceivePackage()
         {
-            Stream.Read(Buffer, 0, Buffer.Length);
-            Communication_Package package = new Communication_Package(Buffer);
-            package.Interpet();
-            return package;
+            if (this.stream != null)
+            {
+                Stream.Read(Buffer, 0, Buffer.Length);
+                Communication_Package package = new Communication_Package(Buffer);
+                package.Interpet();
+                return package;
+            }
+            return null;
+           
         }
 
         public void Send(Communication_Package package)
         {
-            package.refreshByteArray();
-            Stream.Write(package.data, 0, package.data.Length);
+            if (this.stream != null)
+            {
+                package.refreshByteArray();
+                Stream.Write(package.data, 0, package.data.Length);
+            }
         }
     }
 }
