@@ -65,17 +65,10 @@ namespace client_lib
             this.Buffer = new byte[BUFFER_SIZE];
         }
 
-        public void Connect()
+        public void Connect() 
         {
-            try
-            {
-                this.TCPClient = new TcpClient(this.IPAddress.ToString(),this.Port);
-                this.Stream = this.TCPClient.GetStream();
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
+            this.TCPClient = new TcpClient(this.IPAddress.ToString(),this.Port);
+            this.Stream = this.TCPClient.GetStream();
         }
 
         public void Disconnect()
