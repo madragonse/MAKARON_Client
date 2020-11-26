@@ -108,9 +108,10 @@ namespace BMB
 
 
                 }
-                Thread.Sleep(3);
 
-                screenSaver.generateBmp(5);
+                screenSaver.generateBmp(sw.ElapsedMilliseconds/4);
+                sw.Restart();
+                sw.Start();
                 this.window.DrawImage(screenSaver.bitmap, cornerPoint);
 
 
