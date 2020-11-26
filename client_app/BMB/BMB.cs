@@ -265,9 +265,6 @@ namespace BMB
                 this.labelSUError.Visible = true;
             }
 
-            if (!upperLetterFlag) { return "Pasword must contain at least one upper case letter"; }
-            if (!numberFlag) { return "Pasword must contain at least one number"; }
-            return "";
         }
 
         //TO DO
@@ -312,6 +309,47 @@ namespace BMB
         {
             this.panelLogin.Visible = false;
             this.panelSignUp.Visible = true;
+        }
+
+        /// <summary>
+        /// Hashes a given string.
+        /// Returns a hashed string.
+        /// Taken from: https://www.c-sharpcorner.com/article/compute-sha256-hash-in-c-sharp/
+        /// </summary>
+        /// <param data to be encoded="rawData"></param>
+        /// <returns>Returns a hashed string</returns>
+        private static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
+        private String checkForIllegalPassword(String pass)
+        {
+            bool upperLetterFlag = false;
+            bool numberFlag = false;
+            //contains at least one number and at least one uppercase letter
+            foreach (char c in pass)
+            {
+                if (c > 64 && c < 91) { upperLetterFlag = true; }
+                if (c > 47 && c < 57) { numberFlag = true; }
+            }
+
+            if (!upperLetterFlag) { return "Pasword must contain at least one upper case letter"; }
+            if (!numberFlag) { return "Pasword must contain at least one number"; }
+            return "";
         }
     }
 }
