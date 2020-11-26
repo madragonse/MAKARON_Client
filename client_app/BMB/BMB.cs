@@ -221,7 +221,7 @@ namespace BMB
             if (packageArguments[0] == "LOGIN_REFUSE")
             {
                 this.labelLoginError.Visible = true;
-                this.labelLoginError.Text = "Błąd logowania: " + this.packageArguments[1]; 
+                this.labelLoginError.Text = "Błąd logowania: " + this.packageArguments[2]; 
             }
         }
 
@@ -233,7 +233,8 @@ namespace BMB
             String confpassword = this.textBoxPasswordAInSU.Text;
 
             if (password != confpassword) {
-                //TO DO DISPLAY passwords don't match
+                this.labelSUError.Text = "Hasła nie zgadzają się!";
+                this.labelSUError.Visible = true;
                 return;
             }
 
@@ -241,7 +242,8 @@ namespace BMB
             String illegalPassword= checkForIllegalPassword(password);
             if (illegalPassword != "")
             {
-                //TO DO display failed login, illegalPassword holds reason
+                this.labelSUError.Text = "Niedozwolone hasło: " + illegalPassword;
+                this.labelSUError.Visible = true;
                 return;
             }
 
@@ -261,7 +263,7 @@ namespace BMB
             if (packageArguments[0] == "SIGNUP_REFUSE")
             {
                 //TO DO display failed login message packageArguments[1] holds string with reason
-                this.labelSUError.Text = "Coś nie tak: " + this.packageArguments[1];
+                this.labelSUError.Text = "Coś nie tak: " + this.packageArguments[2];
                 this.labelSUError.Visible = true;
             }
 

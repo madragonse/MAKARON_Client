@@ -42,7 +42,7 @@ namespace client_lib
                 {
                     foreach (var item in dataRow.ItemArray)
                     {
-                        arguments.Add((string)item);
+                        arguments.Add((String)item);
                     }
                 }
                 //delete type from arguments list
