@@ -32,6 +32,8 @@ namespace BMB
         private Communication_Package package;
         private List<String> packageArguments;
 
+        private int choosenGame;
+
         public BMB()
         {
             InitializeComponent();
@@ -51,13 +53,11 @@ namespace BMB
             this.connector = new TCP_Connector();
             this.package = new Communication_Package();
 
-
+            this.choosenGame = 0;
 
             this.mainLoopThread = new Thread(MainLoop);
             this.mainLoopThread.IsBackground = true;
             this.mainLoopThread.Start();
-
-
 
             
         }
@@ -72,16 +72,35 @@ namespace BMB
 
         public void MainLoop()
         {
+            bool playing = false;
             panelGry.Paint += new PaintEventHandler(panel1_Paint);
             while (true)
             {
-                //TODO - menu
+                //TEST
+                playing = true;
+                this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);
+                if (this.choosenGame != 0)
+                {
+                    playing = true;
+
+                    switch (this.choosenGame)
+                    {
+                        case 1:
+                            //TODO stream do gry
+                            this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);
+                            break;
+
+                        default:
+                            playing = false;
+                            break;
+                            
+                    }
 
 
+                }
 
-                this.game = new Game_Bomberman(/*TODO - stream*//*new NetworkStream(new Socket(new SocketType(), new ProtocolType())),*/ panelGry.Width-1, panelGry.Height-1, 25, 25); ;
-                Thread.Sleep(1000);
-                while (true)
+                Thread.Sleep(100);
+                while (playing)
                 {
                     //TODO - 
 
@@ -141,37 +160,41 @@ namespace BMB
             {
                 input.buttons["D"] = false;
             }
+            //TODO - dodać inne przyciski
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
+
             byte[] addressIP = new byte[4];
             addressIP[0] = (byte)short.Parse(this.textBoxIPI1.Text);
-            addressIP[1] = (byte)short.Parse(this.textBoxIPI1.Text);
-            addressIP[2] = (byte)short.Parse(this.textBoxIPI1.Text);
-            addressIP[3] = (byte)short.Parse(this.textBoxIPI1.Text);
+            addressIP[1] = (byte)short.Parse(this.textBoxIPI2.Text);
+            addressIP[2] = (byte)short.Parse(this.textBoxIPI3.Text);
+            addressIP[3] = (byte)short.Parse(this.textBoxIPI4.Text);
             this.serverPort = int.Parse(this.textBoxPortI.Text);
             this.serverIP = new IPAddress(addressIP);
 
             this.connectToServer();
 
-            
-            this.panelConnected.Visible = true;
-            this.panelLogin.Visible = true;
 
 
         }
 
         private void connectToServer()
         {
+            
             try
             {
                 this.connector = new TCP_Connector(this.serverPort, this.serverIP);
                 this.connector.Connect();
+                this.panelConnected.Visible = true;
+                this.panelConnect.Visible = false;
+                this.panelLOrSU.Visible = true;
+
             }
             catch (Exception)
             {
-                //TO DO notify of failure to connect
+                this.labelConnectingError.Visible = true;
             }
         }
 
@@ -192,20 +215,22 @@ namespace BMB
             //if login successfull
             if (packageArguments[0] == "LOGIN_CONFIRM")
             {
-                populateGameMenu();
+                this.panelSetUp.Visible = false;
+                this.populateGameMenu();
             }
             if(packageArguments[0] == "LOGIN_REFUSE")
             {
-                //TO DO display failed login message packageArguments[1] holds string with reason
+                this.labelLoginError.Visible = true;
+                this.labelLoginError.Text = "Błąd logowania: " + this.packageArguments[1]; 
             }
         }
 
         private void buttonSignUp_Click(object sender, EventArgs e)
         {
             //TO DO-> get field values
-            String login="";
-            String password="";
-            String confpassword="";
+            String login = this.textBoxLoginInSU.Text;
+            String password = this.textBoxPasswordInSU.Text;
+            String confpassword = this.textBoxPasswordAInSU.Text;
 
             this.package.SetTypeSIGNUP(login, password,confpassword);
             this.connector.Buffer = this.package.ToByteArray();
@@ -218,11 +243,14 @@ namespace BMB
             //if login successfull
             if (packageArguments[0] == "SIGNUP_CONFIRM")
             {
-                //TO DOlaunch sign in box
+                //TODO launch sign in box
+                this.panelSetUp.Visible = false;
             }
             if (packageArguments[0] == "SIGNUP_REFUSE")
             {
                 //TO DO display failed login message packageArguments[1] holds string with reason
+                this.labelSUError.Text = "Coś nie tak: " + this.packageArguments[1];
+                this.labelSUError.Visible = true;
             }
         }
 
@@ -232,14 +260,38 @@ namespace BMB
             //server sends list package with all the avaiable games
             this.package = this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
+            this.panelGames.Visible = true;
             if (packageArguments[0] == "LIST")
             {
                 for(int i = 1; i < packageArguments.Count; i++)
                 {
                     //DISPLAY THEM SOMEHOW
+                    this.listBoxGames.Items.Add(packageArguments[i]);
                 }
             }
         }
 
+        private void listBoxGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            if (this.listBoxGames.SelectedItem.ToString().Equals("Bomberman"))
+            {
+                this.choosenGame = 1;
+            }
+
+
+        }
+
+        private void buttonLIChoose_Click(object sender, EventArgs e)
+        {
+            this.panelSignUp.Visible = false;
+            this.panelLogin.Visible = true;
+        }
+
+        private void buttonSUChoose_Click(object sender, EventArgs e)
+        {
+            this.panelLogin.Visible = false;
+            this.panelSignUp.Visible = true;
+        }
     }
 }

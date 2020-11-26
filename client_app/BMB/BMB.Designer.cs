@@ -31,38 +31,143 @@ namespace BMB
         {
             this.components = new System.ComponentModel.Container();
             this.panelGry = new System.Windows.Forms.Panel();
+            this.panelGames = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.listBoxGames = new System.Windows.Forms.ListBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panelSide = new System.Windows.Forms.Panel();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panelConnect = new System.Windows.Forms.Panel();
             this.connectButton = new System.Windows.Forms.Button();
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.labelGetIP = new System.Windows.Forms.Label();
             this.textBoxIPI2 = new System.Windows.Forms.TextBox();
-            this.textBoxIPI4 = new System.Windows.Forms.TextBox();
             this.textBoxIPI3 = new System.Windows.Forms.TextBox();
+            this.textBoxIPI4 = new System.Windows.Forms.TextBox();
             this.labelPortSeparator = new System.Windows.Forms.Label();
             this.textBoxPortI = new System.Windows.Forms.TextBox();
-            this.textBoxLogin = new System.Windows.Forms.TextBox();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.labelLogin = new System.Windows.Forms.Label();
-            this.labelPassword = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.panelSide = new System.Windows.Forms.Panel();
+            this.labelConnectingError = new System.Windows.Forms.Label();
             this.panelConnected = new System.Windows.Forms.Panel();
             this.labelConnected = new System.Windows.Forms.Label();
-            this.panelConnect = new System.Windows.Forms.Panel();
             this.panelLogin = new System.Windows.Forms.Panel();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.labelPassword = new System.Windows.Forms.Label();
+            this.textBoxLogin = new System.Windows.Forms.TextBox();
+            this.labelLogin = new System.Windows.Forms.Label();
             this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelLoginError = new System.Windows.Forms.Label();
+            this.panelLOrSU = new System.Windows.Forms.Panel();
+            this.buttonSUChoose = new System.Windows.Forms.Button();
+            this.buttonLIChoose = new System.Windows.Forms.Button();
+            this.panelSignUp = new System.Windows.Forms.Panel();
+            this.textBoxPasswordInSU = new System.Windows.Forms.TextBox();
+            this.labelPasswordInSU = new System.Windows.Forms.Label();
+            this.textBoxLoginInSU = new System.Windows.Forms.TextBox();
+            this.labelLoginInSU = new System.Windows.Forms.Label();
+            this.buttonSUInSU = new System.Windows.Forms.Button();
+            this.textBoxPasswordAInSU = new System.Windows.Forms.TextBox();
+            this.labelPasswordAInSU = new System.Windows.Forms.Label();
+            this.panelSetUp = new System.Windows.Forms.Panel();
+            this.labelSUError = new System.Windows.Forms.Label();
+            this.panelGry.SuspendLayout();
+            this.panelGames.SuspendLayout();
             this.panelSide.SuspendLayout();
-            this.panelConnected.SuspendLayout();
             this.panelConnect.SuspendLayout();
+            this.panelConnected.SuspendLayout();
             this.panelLogin.SuspendLayout();
+            this.panelLOrSU.SuspendLayout();
+            this.panelSignUp.SuspendLayout();
+            this.panelSetUp.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelGry
             // 
+            this.panelGry.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelGry.BackColor = System.Drawing.SystemColors.Info;
+            this.panelGry.Controls.Add(this.panelGames);
             this.panelGry.Location = new System.Drawing.Point(0, 0);
             this.panelGry.Margin = new System.Windows.Forms.Padding(0);
             this.panelGry.Name = "panelGry";
             this.panelGry.Size = new System.Drawing.Size(977, 977);
             this.panelGry.TabIndex = 0;
+            // 
+            // panelGames
+            // 
+            this.panelGames.Controls.Add(this.label1);
+            this.panelGames.Controls.Add(this.listBoxGames);
+            this.panelGames.Location = new System.Drawing.Point(318, 34);
+            this.panelGames.Name = "panelGames";
+            this.panelGames.Size = new System.Drawing.Size(401, 434);
+            this.panelGames.TabIndex = 2;
+            this.panelGames.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(119, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(146, 31);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "LISTA GIER";
+            // 
+            // listBoxGames
+            // 
+            this.listBoxGames.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listBoxGames.FormattingEnabled = true;
+            this.listBoxGames.HorizontalScrollbar = true;
+            this.listBoxGames.IntegralHeight = false;
+            this.listBoxGames.ItemHeight = 30;
+            this.listBoxGames.Location = new System.Drawing.Point(22, 79);
+            this.listBoxGames.Name = "listBoxGames";
+            this.listBoxGames.Size = new System.Drawing.Size(353, 329);
+            this.listBoxGames.TabIndex = 1;
+            this.listBoxGames.SelectedIndexChanged += new System.EventHandler(this.listBoxGames_SelectedIndexChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.contextMenuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip1.Text = "test";
+            // 
+            // panelSide
+            // 
+            this.panelSide.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelSide.Controls.Add(this.panelSetUp);
+            this.panelSide.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelSide.Location = new System.Drawing.Point(980, 0);
+            this.panelSide.Name = "panelSide";
+            this.panelSide.Size = new System.Drawing.Size(456, 960);
+            this.panelSide.TabIndex = 14;
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            // 
+            // panelConnect
+            // 
+            this.panelConnect.Controls.Add(this.panelConnected);
+            this.panelConnect.Controls.Add(this.labelConnectingError);
+            this.panelConnect.Controls.Add(this.textBoxPortI);
+            this.panelConnect.Controls.Add(this.labelPortSeparator);
+            this.panelConnect.Controls.Add(this.textBoxIPI4);
+            this.panelConnect.Controls.Add(this.textBoxIPI3);
+            this.panelConnect.Controls.Add(this.textBoxIPI2);
+            this.panelConnect.Controls.Add(this.labelGetIP);
+            this.panelConnect.Controls.Add(this.textBoxIPI1);
+            this.panelConnect.Controls.Add(this.connectButton);
+            this.panelConnect.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelConnect.Location = new System.Drawing.Point(0, 0);
+            this.panelConnect.Name = "panelConnect";
+            this.panelConnect.Size = new System.Drawing.Size(456, 202);
+            this.panelConnect.TabIndex = 14;
             // 
             // connectButton
             // 
@@ -101,14 +206,6 @@ namespace BMB
             this.textBoxIPI2.Size = new System.Drawing.Size(60, 37);
             this.textBoxIPI2.TabIndex = 4;
             // 
-            // textBoxIPI4
-            // 
-            this.textBoxIPI4.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBoxIPI4.Location = new System.Drawing.Point(220, 45);
-            this.textBoxIPI4.Name = "textBoxIPI4";
-            this.textBoxIPI4.Size = new System.Drawing.Size(60, 37);
-            this.textBoxIPI4.TabIndex = 6;
-            // 
             // textBoxIPI3
             // 
             this.textBoxIPI3.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -116,6 +213,14 @@ namespace BMB
             this.textBoxIPI3.Name = "textBoxIPI3";
             this.textBoxIPI3.Size = new System.Drawing.Size(60, 37);
             this.textBoxIPI3.TabIndex = 5;
+            // 
+            // textBoxIPI4
+            // 
+            this.textBoxIPI4.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxIPI4.Location = new System.Drawing.Point(220, 45);
+            this.textBoxIPI4.Name = "textBoxIPI4";
+            this.textBoxIPI4.Size = new System.Drawing.Size(60, 37);
+            this.textBoxIPI4.TabIndex = 6;
             // 
             // labelPortSeparator
             // 
@@ -135,65 +240,25 @@ namespace BMB
             this.textBoxPortI.Size = new System.Drawing.Size(65, 37);
             this.textBoxPortI.TabIndex = 8;
             // 
-            // textBoxLogin
+            // labelConnectingError
             // 
-            this.textBoxLogin.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBoxLogin.Location = new System.Drawing.Point(24, 43);
-            this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(350, 37);
-            this.textBoxLogin.TabIndex = 9;
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBoxPassword.Location = new System.Drawing.Point(24, 137);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(350, 37);
-            this.textBoxPassword.TabIndex = 10;
-            // 
-            // labelLogin
-            // 
-            this.labelLogin.AutoSize = true;
-            this.labelLogin.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelLogin.Location = new System.Drawing.Point(18, 9);
-            this.labelLogin.Name = "labelLogin";
-            this.labelLogin.Size = new System.Drawing.Size(83, 31);
-            this.labelLogin.TabIndex = 11;
-            this.labelLogin.Text = "Login:";
-            // 
-            // labelPassword
-            // 
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelPassword.Location = new System.Drawing.Point(21, 103);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(84, 31);
-            this.labelPassword.TabIndex = 12;
-            this.labelPassword.Text = "Hasło:";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // panelSide
-            // 
-            this.panelSide.Controls.Add(this.panelConnect);
-            this.panelSide.Controls.Add(this.panelLogin);
-            this.panelSide.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelSide.Location = new System.Drawing.Point(980, 0);
-            this.panelSide.Name = "panelSide";
-            this.panelSide.Size = new System.Drawing.Size(456, 960);
-            this.panelSide.TabIndex = 14;
+            this.labelConnectingError.AutoSize = true;
+            this.labelConnectingError.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelConnectingError.ForeColor = System.Drawing.Color.Red;
+            this.labelConnectingError.Location = new System.Drawing.Point(21, 168);
+            this.labelConnectingError.Name = "labelConnectingError";
+            this.labelConnectingError.Size = new System.Drawing.Size(182, 23);
+            this.labelConnectingError.TabIndex = 15;
+            this.labelConnectingError.Text = "Błąd przy połączeniu.";
+            this.labelConnectingError.Visible = false;
             // 
             // panelConnected
             // 
             this.panelConnected.Controls.Add(this.labelConnected);
+            this.panelConnected.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelConnected.Location = new System.Drawing.Point(0, 0);
             this.panelConnected.Name = "panelConnected";
-            this.panelConnected.Size = new System.Drawing.Size(426, 209);
+            this.panelConnected.Size = new System.Drawing.Size(456, 202);
             this.panelConnected.TabIndex = 0;
             this.panelConnected.Visible = false;
             // 
@@ -207,45 +272,219 @@ namespace BMB
             this.labelConnected.TabIndex = 0;
             this.labelConnected.Text = "Połączono";
             // 
-            // panelConnect
-            // 
-            this.panelConnect.Controls.Add(this.panelConnected);
-            this.panelConnect.Controls.Add(this.textBoxPortI);
-            this.panelConnect.Controls.Add(this.labelPortSeparator);
-            this.panelConnect.Controls.Add(this.textBoxIPI4);
-            this.panelConnect.Controls.Add(this.textBoxIPI3);
-            this.panelConnect.Controls.Add(this.textBoxIPI2);
-            this.panelConnect.Controls.Add(this.labelGetIP);
-            this.panelConnect.Controls.Add(this.textBoxIPI1);
-            this.panelConnect.Controls.Add(this.connectButton);
-            this.panelConnect.Location = new System.Drawing.Point(18, 10);
-            this.panelConnect.Name = "panelConnect";
-            this.panelConnect.Size = new System.Drawing.Size(426, 202);
-            this.panelConnect.TabIndex = 14;
-            // 
             // panelLogin
             // 
+            this.panelLogin.Controls.Add(this.labelLoginError);
             this.panelLogin.Controls.Add(this.buttonLogin);
             this.panelLogin.Controls.Add(this.labelLogin);
             this.panelLogin.Controls.Add(this.textBoxLogin);
             this.panelLogin.Controls.Add(this.labelPassword);
             this.panelLogin.Controls.Add(this.textBoxPassword);
-            this.panelLogin.Location = new System.Drawing.Point(18, 237);
+            this.panelLogin.Location = new System.Drawing.Point(0, 284);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(426, 293);
+            this.panelLogin.Size = new System.Drawing.Size(453, 291);
             this.panelLogin.TabIndex = 13;
             this.panelLogin.Visible = false;
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxPassword.Location = new System.Drawing.Point(22, 123);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.Size = new System.Drawing.Size(350, 37);
+            this.textBoxPassword.TabIndex = 10;
+            // 
+            // labelPassword
+            // 
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelPassword.Location = new System.Drawing.Point(19, 89);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(84, 31);
+            this.labelPassword.TabIndex = 12;
+            this.labelPassword.Text = "Hasło:";
+            // 
+            // textBoxLogin
+            // 
+            this.textBoxLogin.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxLogin.Location = new System.Drawing.Point(24, 43);
+            this.textBoxLogin.Name = "textBoxLogin";
+            this.textBoxLogin.Size = new System.Drawing.Size(350, 37);
+            this.textBoxLogin.TabIndex = 9;
+            // 
+            // labelLogin
+            // 
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLogin.Location = new System.Drawing.Point(18, 9);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(83, 31);
+            this.labelLogin.TabIndex = 11;
+            this.labelLogin.Text = "Login:";
             // 
             // buttonLogin
             // 
             this.buttonLogin.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonLogin.Location = new System.Drawing.Point(27, 196);
+            this.buttonLogin.Location = new System.Drawing.Point(24, 185);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(344, 63);
             this.buttonLogin.TabIndex = 13;
-            this.buttonLogin.Text = "Log In";
+            this.buttonLogin.Text = "LOG IN";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            // 
+            // labelLoginError
+            // 
+            this.labelLoginError.AutoSize = true;
+            this.labelLoginError.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLoginError.ForeColor = System.Drawing.Color.Red;
+            this.labelLoginError.Location = new System.Drawing.Point(21, 251);
+            this.labelLoginError.Name = "labelLoginError";
+            this.labelLoginError.Size = new System.Drawing.Size(179, 23);
+            this.labelLoginError.TabIndex = 14;
+            this.labelLoginError.Text = "Błąd przy logowaniu:";
+            this.labelLoginError.Visible = false;
+            // 
+            // panelLOrSU
+            // 
+            this.panelLOrSU.Controls.Add(this.buttonLIChoose);
+            this.panelLOrSU.Controls.Add(this.buttonSUChoose);
+            this.panelLOrSU.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLOrSU.Location = new System.Drawing.Point(0, 202);
+            this.panelLOrSU.Name = "panelLOrSU";
+            this.panelLOrSU.Size = new System.Drawing.Size(456, 76);
+            this.panelLOrSU.TabIndex = 17;
+            this.panelLOrSU.Visible = false;
+            // 
+            // buttonSUChoose
+            // 
+            this.buttonSUChoose.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSUChoose.Location = new System.Drawing.Point(268, 6);
+            this.buttonSUChoose.Name = "buttonSUChoose";
+            this.buttonSUChoose.Size = new System.Drawing.Size(183, 59);
+            this.buttonSUChoose.TabIndex = 16;
+            this.buttonSUChoose.Text = "SIGN UP";
+            this.buttonSUChoose.UseVisualStyleBackColor = true;
+            this.buttonSUChoose.Click += new System.EventHandler(this.buttonSUChoose_Click);
+            // 
+            // buttonLIChoose
+            // 
+            this.buttonLIChoose.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonLIChoose.Location = new System.Drawing.Point(3, 6);
+            this.buttonLIChoose.Name = "buttonLIChoose";
+            this.buttonLIChoose.Size = new System.Drawing.Size(260, 59);
+            this.buttonLIChoose.TabIndex = 15;
+            this.buttonLIChoose.Text = "LOGIN";
+            this.buttonLIChoose.UseVisualStyleBackColor = true;
+            this.buttonLIChoose.Click += new System.EventHandler(this.buttonLIChoose_Click);
+            // 
+            // panelSignUp
+            // 
+            this.panelSignUp.Controls.Add(this.labelSUError);
+            this.panelSignUp.Controls.Add(this.labelPasswordAInSU);
+            this.panelSignUp.Controls.Add(this.textBoxPasswordAInSU);
+            this.panelSignUp.Controls.Add(this.buttonSUInSU);
+            this.panelSignUp.Controls.Add(this.labelLoginInSU);
+            this.panelSignUp.Controls.Add(this.textBoxLoginInSU);
+            this.panelSignUp.Controls.Add(this.labelPasswordInSU);
+            this.panelSignUp.Controls.Add(this.textBoxPasswordInSU);
+            this.panelSignUp.Location = new System.Drawing.Point(0, 284);
+            this.panelSignUp.Name = "panelSignUp";
+            this.panelSignUp.Size = new System.Drawing.Size(453, 377);
+            this.panelSignUp.TabIndex = 15;
+            this.panelSignUp.Visible = false;
+            // 
+            // textBoxPasswordInSU
+            // 
+            this.textBoxPasswordInSU.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxPasswordInSU.Location = new System.Drawing.Point(24, 121);
+            this.textBoxPasswordInSU.Name = "textBoxPasswordInSU";
+            this.textBoxPasswordInSU.PasswordChar = '*';
+            this.textBoxPasswordInSU.Size = new System.Drawing.Size(350, 37);
+            this.textBoxPasswordInSU.TabIndex = 10;
+            // 
+            // labelPasswordInSU
+            // 
+            this.labelPasswordInSU.AutoSize = true;
+            this.labelPasswordInSU.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelPasswordInSU.Location = new System.Drawing.Point(21, 87);
+            this.labelPasswordInSU.Name = "labelPasswordInSU";
+            this.labelPasswordInSU.Size = new System.Drawing.Size(84, 31);
+            this.labelPasswordInSU.TabIndex = 12;
+            this.labelPasswordInSU.Text = "Hasło:";
+            // 
+            // textBoxLoginInSU
+            // 
+            this.textBoxLoginInSU.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxLoginInSU.Location = new System.Drawing.Point(24, 43);
+            this.textBoxLoginInSU.Name = "textBoxLoginInSU";
+            this.textBoxLoginInSU.Size = new System.Drawing.Size(350, 37);
+            this.textBoxLoginInSU.TabIndex = 9;
+            // 
+            // labelLoginInSU
+            // 
+            this.labelLoginInSU.AutoSize = true;
+            this.labelLoginInSU.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLoginInSU.Location = new System.Drawing.Point(18, 9);
+            this.labelLoginInSU.Name = "labelLoginInSU";
+            this.labelLoginInSU.Size = new System.Drawing.Size(83, 31);
+            this.labelLoginInSU.TabIndex = 11;
+            this.labelLoginInSU.Text = "Login:";
+            // 
+            // buttonSUInSU
+            // 
+            this.buttonSUInSU.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSUInSU.Location = new System.Drawing.Point(25, 265);
+            this.buttonSUInSU.Name = "buttonSUInSU";
+            this.buttonSUInSU.Size = new System.Drawing.Size(344, 63);
+            this.buttonSUInSU.TabIndex = 13;
+            this.buttonSUInSU.Text = "SIGN UP";
+            this.buttonSUInSU.UseVisualStyleBackColor = true;
+            this.buttonSUInSU.Click += new System.EventHandler(this.buttonSignUp_Click);
+            // 
+            // textBoxPasswordAInSU
+            // 
+            this.textBoxPasswordAInSU.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxPasswordAInSU.Location = new System.Drawing.Point(25, 199);
+            this.textBoxPasswordAInSU.Name = "textBoxPasswordAInSU";
+            this.textBoxPasswordAInSU.PasswordChar = '*';
+            this.textBoxPasswordAInSU.Size = new System.Drawing.Size(350, 37);
+            this.textBoxPasswordAInSU.TabIndex = 14;
+            // 
+            // labelPasswordAInSU
+            // 
+            this.labelPasswordAInSU.AutoSize = true;
+            this.labelPasswordAInSU.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelPasswordAInSU.Location = new System.Drawing.Point(22, 165);
+            this.labelPasswordAInSU.Name = "labelPasswordAInSU";
+            this.labelPasswordAInSU.Size = new System.Drawing.Size(213, 31);
+            this.labelPasswordAInSU.TabIndex = 15;
+            this.labelPasswordAInSU.Text = "Hasło jeszcze raz:";
+            // 
+            // panelSetUp
+            // 
+            this.panelSetUp.Controls.Add(this.panelSignUp);
+            this.panelSetUp.Controls.Add(this.panelLOrSU);
+            this.panelSetUp.Controls.Add(this.panelLogin);
+            this.panelSetUp.Controls.Add(this.panelConnect);
+            this.panelSetUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSetUp.Location = new System.Drawing.Point(0, 0);
+            this.panelSetUp.Name = "panelSetUp";
+            this.panelSetUp.Size = new System.Drawing.Size(456, 960);
+            this.panelSetUp.TabIndex = 0;
+            // 
+            // labelSUError
+            // 
+            this.labelSUError.AutoSize = true;
+            this.labelSUError.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSUError.ForeColor = System.Drawing.Color.Red;
+            this.labelSUError.Location = new System.Drawing.Point(32, 336);
+            this.labelSUError.Name = "labelSUError";
+            this.labelSUError.Size = new System.Drawing.Size(108, 23);
+            this.labelSUError.TabIndex = 16;
+            this.labelSUError.Text = "Coś nie tak: ";
+            this.labelSUError.Visible = false;
             // 
             // BMB
             // 
@@ -261,13 +500,20 @@ namespace BMB
             this.Load += new System.EventHandler(this.BMB_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyUp);
+            this.panelGry.ResumeLayout(false);
+            this.panelGames.ResumeLayout(false);
+            this.panelGames.PerformLayout();
             this.panelSide.ResumeLayout(false);
-            this.panelConnected.ResumeLayout(false);
-            this.panelConnected.PerformLayout();
             this.panelConnect.ResumeLayout(false);
             this.panelConnect.PerformLayout();
+            this.panelConnected.ResumeLayout(false);
+            this.panelConnected.PerformLayout();
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
+            this.panelLOrSU.ResumeLayout(false);
+            this.panelSignUp.ResumeLayout(false);
+            this.panelSignUp.PerformLayout();
+            this.panelSetUp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -275,25 +521,44 @@ namespace BMB
         #endregion
 
         private System.Windows.Forms.Panel panelGry;
-        private System.Windows.Forms.Button connectButton;
-        private System.Windows.Forms.TextBox textBoxIPI1;
-        private System.Windows.Forms.Label labelGetIP;
-        private System.Windows.Forms.TextBox textBoxIPI2;
-        private System.Windows.Forms.TextBox textBoxIPI4;
-        private System.Windows.Forms.TextBox textBoxIPI3;
-        private System.Windows.Forms.Label labelPortSeparator;
-        private System.Windows.Forms.TextBox textBoxPortI;
-        private System.Windows.Forms.TextBox textBoxLogin;
-        private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.Label labelLogin;
-        private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Panel panelSide;
+        private System.Windows.Forms.ListBox listBoxGames;
+        private System.Windows.Forms.Panel panelGames;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.Panel panelSetUp;
+        private System.Windows.Forms.Panel panelSignUp;
+        private System.Windows.Forms.Label labelPasswordAInSU;
+        private System.Windows.Forms.TextBox textBoxPasswordAInSU;
+        private System.Windows.Forms.Button buttonSUInSU;
+        private System.Windows.Forms.Label labelLoginInSU;
+        private System.Windows.Forms.TextBox textBoxLoginInSU;
+        private System.Windows.Forms.Label labelPasswordInSU;
+        private System.Windows.Forms.TextBox textBoxPasswordInSU;
+        private System.Windows.Forms.Panel panelLOrSU;
+        private System.Windows.Forms.Button buttonLIChoose;
+        private System.Windows.Forms.Button buttonSUChoose;
         private System.Windows.Forms.Panel panelLogin;
+        private System.Windows.Forms.Label labelLoginError;
+        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Label labelLogin;
+        private System.Windows.Forms.TextBox textBoxLogin;
+        private System.Windows.Forms.Label labelPassword;
+        private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.Panel panelConnect;
         private System.Windows.Forms.Panel panelConnected;
         private System.Windows.Forms.Label labelConnected;
-        private System.Windows.Forms.Panel panelConnect;
-        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Label labelConnectingError;
+        private System.Windows.Forms.TextBox textBoxPortI;
+        private System.Windows.Forms.Label labelPortSeparator;
+        private System.Windows.Forms.TextBox textBoxIPI4;
+        private System.Windows.Forms.TextBox textBoxIPI3;
+        private System.Windows.Forms.TextBox textBoxIPI2;
+        private System.Windows.Forms.Label labelGetIP;
+        private System.Windows.Forms.TextBox textBoxIPI1;
+        private System.Windows.Forms.Button connectButton;
+        private System.Windows.Forms.Label labelSUError;
     }
 }
 
