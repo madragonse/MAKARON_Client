@@ -57,6 +57,7 @@
     <Compile Include="BMB_Input.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenSaver.cs" />
     <EmbeddedResource Include="BMB.resx">
       <DependentUpon>BMB.cs</DependentUpon>
     </EmbeddedResource>

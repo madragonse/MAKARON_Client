@@ -31,7 +31,7 @@ namespace BMB
         {
             this.components = new System.ComponentModel.Container();
             this.panelGry = new System.Windows.Forms.Panel();
-            this.panelGames = new System.Windows.Forms.Panel();
+            this.panelGamesList = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxGames = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -69,8 +69,11 @@ namespace BMB
             this.labelPasswordAInSU = new System.Windows.Forms.Label();
             this.panelSetUp = new System.Windows.Forms.Panel();
             this.labelSUError = new System.Windows.Forms.Label();
+            this.panelLobbysList = new System.Windows.Forms.Panel();
+            this.labelLobbyList = new System.Windows.Forms.Label();
+            this.listBoxLobbys = new System.Windows.Forms.ListBox();
             this.panelGry.SuspendLayout();
-            this.panelGames.SuspendLayout();
+            this.panelGamesList.SuspendLayout();
             this.panelSide.SuspendLayout();
             this.panelConnect.SuspendLayout();
             this.panelConnected.SuspendLayout();
@@ -78,6 +81,7 @@ namespace BMB
             this.panelLOrSU.SuspendLayout();
             this.panelSignUp.SuspendLayout();
             this.panelSetUp.SuspendLayout();
+            this.panelLobbysList.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelGry
@@ -86,22 +90,24 @@ namespace BMB
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelGry.BackColor = System.Drawing.SystemColors.Info;
-            this.panelGry.Controls.Add(this.panelGames);
+            this.panelGry.Controls.Add(this.panelGamesList);
             this.panelGry.Location = new System.Drawing.Point(0, 0);
             this.panelGry.Margin = new System.Windows.Forms.Padding(0);
             this.panelGry.Name = "panelGry";
             this.panelGry.Size = new System.Drawing.Size(977, 977);
             this.panelGry.TabIndex = 0;
             // 
-            // panelGames
+            // panelGamesList
             // 
-            this.panelGames.Controls.Add(this.label1);
-            this.panelGames.Controls.Add(this.listBoxGames);
-            this.panelGames.Location = new System.Drawing.Point(318, 34);
-            this.panelGames.Name = "panelGames";
-            this.panelGames.Size = new System.Drawing.Size(401, 434);
-            this.panelGames.TabIndex = 2;
-            this.panelGames.Visible = false;
+            this.panelGamesList.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelGamesList.Controls.Add(this.panelLobbysList);
+            this.panelGamesList.Controls.Add(this.label1);
+            this.panelGamesList.Controls.Add(this.listBoxGames);
+            this.panelGamesList.Location = new System.Drawing.Point(273, 103);
+            this.panelGamesList.Name = "panelGamesList";
+            this.panelGamesList.Size = new System.Drawing.Size(401, 434);
+            this.panelGamesList.TabIndex = 2;
+            this.panelGamesList.Visible = false;
             // 
             // label1
             // 
@@ -486,6 +492,39 @@ namespace BMB
             this.labelSUError.Text = "Coś nie tak: ";
             this.labelSUError.Visible = false;
             // 
+            // panelLobbysList
+            // 
+            this.panelLobbysList.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelLobbysList.Controls.Add(this.labelLobbyList);
+            this.panelLobbysList.Controls.Add(this.listBoxLobbys);
+            this.panelLobbysList.Location = new System.Drawing.Point(0, 0);
+            this.panelLobbysList.Name = "panelLobbysList";
+            this.panelLobbysList.Size = new System.Drawing.Size(401, 434);
+            this.panelLobbysList.TabIndex = 3;
+            this.panelLobbysList.Visible = false;
+            // 
+            // labelLobbyList
+            // 
+            this.labelLobbyList.AutoSize = true;
+            this.labelLobbyList.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLobbyList.Location = new System.Drawing.Point(119, 23);
+            this.labelLobbyList.Name = "labelLobbyList";
+            this.labelLobbyList.Size = new System.Drawing.Size(154, 31);
+            this.labelLobbyList.TabIndex = 2;
+            this.labelLobbyList.Text = "LISTA LOBB";
+            // 
+            // listBoxLobbys
+            // 
+            this.listBoxLobbys.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listBoxLobbys.FormattingEnabled = true;
+            this.listBoxLobbys.HorizontalScrollbar = true;
+            this.listBoxLobbys.IntegralHeight = false;
+            this.listBoxLobbys.ItemHeight = 30;
+            this.listBoxLobbys.Location = new System.Drawing.Point(22, 79);
+            this.listBoxLobbys.Name = "listBoxLobbys";
+            this.listBoxLobbys.Size = new System.Drawing.Size(353, 329);
+            this.listBoxLobbys.TabIndex = 1;
+            // 
             // BMB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -501,8 +540,8 @@ namespace BMB
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyUp);
             this.panelGry.ResumeLayout(false);
-            this.panelGames.ResumeLayout(false);
-            this.panelGames.PerformLayout();
+            this.panelGamesList.ResumeLayout(false);
+            this.panelGamesList.PerformLayout();
             this.panelSide.ResumeLayout(false);
             this.panelConnect.ResumeLayout(false);
             this.panelConnect.PerformLayout();
@@ -514,6 +553,8 @@ namespace BMB
             this.panelSignUp.ResumeLayout(false);
             this.panelSignUp.PerformLayout();
             this.panelSetUp.ResumeLayout(false);
+            this.panelLobbysList.ResumeLayout(false);
+            this.panelLobbysList.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -524,7 +565,7 @@ namespace BMB
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Panel panelSide;
         private System.Windows.Forms.ListBox listBoxGames;
-        private System.Windows.Forms.Panel panelGames;
+        private System.Windows.Forms.Panel panelGamesList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.Panel panelSetUp;
@@ -559,6 +600,9 @@ namespace BMB
         private System.Windows.Forms.TextBox textBoxIPI1;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Label labelSUError;
+        private System.Windows.Forms.Panel panelLobbysList;
+        private System.Windows.Forms.Label labelLobbyList;
+        private System.Windows.Forms.ListBox listBoxLobbys;
     }
 }
 

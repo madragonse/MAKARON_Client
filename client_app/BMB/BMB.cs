@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -73,13 +74,21 @@ namespace BMB
 
         public void MainLoop()
         {
-            bool playing = false;
             panelGry.Paint += new PaintEventHandler(panel1_Paint);
+            Thread.Sleep(100);
+
+            Stopwatch sw = Stopwatch.StartNew();
+            bool playing = false;
+            
+
+            ScreenSaver screenSaver = new ScreenSaver(this.panelGry.Width, this.panelGry.Height, 25, 25);
+
             while (true)
             {
                 //TEST
-                playing = true;
-                this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);
+                /*playing = true;
+                this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);*/
+
                 if (this.choosenGame != 0)
                 {
                     playing = true;
@@ -99,8 +108,13 @@ namespace BMB
 
 
                 }
+                Thread.Sleep(3);
 
-                Thread.Sleep(100);
+                screenSaver.generateBmp(5);
+                this.window.DrawImage(screenSaver.bitmap, cornerPoint);
+
+
+
                 while (playing)
                 {
                     //TODO - 
@@ -108,9 +122,13 @@ namespace BMB
                     //Serwer->recive()
                     this.game.process();/*TODO*/
                     //Server->send(Game->getPackets())
-                    this.game.update(this.input.buttons, 10f/*TODO - deltaTime*/);
-                    window.DrawImage(this.game.bitmap, cornerPoint);
+                    sw.Stop();
+                    this.game.update(this.input.buttons, sw.ElapsedMilliseconds/*TODO - deltaTime*/);
+                    sw.Restart();
+                    sw.Start();
+                    this.window.DrawImage(this.game.bitmap, cornerPoint);
                     
+
                 }
             }
         }
@@ -262,7 +280,6 @@ namespace BMB
             }
             if (packageArguments[0] == "SIGNUP_REFUSE")
             {
-                //TO DO display failed login message packageArguments[1] holds string with reason
                 this.labelSUError.Text = "Coś nie tak: " + this.packageArguments[2];
                 this.labelSUError.Visible = true;
             }
@@ -279,7 +296,7 @@ namespace BMB
             //server sends list package with all the avaiable games
             this.package = this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
-            this.panelGames.Visible = true;
+            this.panelGamesList.Visible = true;
             if (packageArguments[0] == "LIST")
             {
                 for(int i = 1; i < packageArguments.Count; i++)
@@ -292,12 +309,32 @@ namespace BMB
 
         private void listBoxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-            if (this.listBoxGames.SelectedItem.ToString().Equals("Bomberman"))
+
+            this.panelGamesList.Visible = true;
+            if (this.listBoxGames.SelectedItem.ToString().Equals("BOMBERMAN"))
             {
                 this.choosenGame = 1;
+                this.populateLobbyMenu("BOMBERMAN");
             }
 
+
+
+
+        }
+
+        private void populateLobbyMenu(String game)
+        {
+            this.panelGamesList.Visible = false;
+            this.panelLobbysList.Visible = true;
+
+            if (packageArguments[0] == "LIST")
+            {
+                for (int i = 1; i < packageArguments.Count; i++)
+                {
+                    this.listBoxLobbys.Items.Add(packageArguments[i]);
+
+                }
+            }
 
         }
 
