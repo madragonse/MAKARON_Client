@@ -11,7 +11,8 @@ namespace client_lib
     public class Communication_Package : Package
     {
         #region ctors
-        public Communication_Package(byte[] data) : base(data) { }
+        public Communication_Package(byte[] data) : base(data)
+        {  }
 
         public Communication_Package() { }
         #endregion
@@ -45,6 +46,12 @@ namespace client_lib
             this.XML += "<type>QUIT_GAME</type>";
             this.XML += "</PACKAGE>";
         }
+        public void SetTypeREQUEST_GAME_LIST()
+        {
+            this.XML = "<PACKAGE>";
+            this.XML += "<type>REQUEST_GAME_LIST</type>";
+            this.XML += "</PACKAGE>";
+        }
         #endregion
 
         #region multipleargs
@@ -76,10 +83,10 @@ namespace client_lib
             this.XML += "</PACKAGE>";
         }
 
-        public void SetTypeSIGNUP(String username, String password, String confirmPassword)
+        public void SetTypeSIGNUP(String username, String password)
         {
             this.XML = "<PACKAGE>";
-            this.XML += "<type>SIGNUP</type><arg1>" + username + "</arg1><arg2>" + password + "</arg2><arg3>" + confirmPassword + "</arg3>";
+            this.XML += "<type>SIGNUP</type><arg1>" + username + "</arg1><arg2>" + password + "</arg2>";
             this.XML += "</PACKAGE>";
         }
 

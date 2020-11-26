@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -202,10 +203,9 @@ namespace BMB
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             String login = this.textBoxLogin.Text;
-            String password = this.textBoxPassword.Text;
+            String password = ComputeSha256Hash(this.textBoxPassword.Text);
 
             this.package.SetTypeLOGIN(login, password);
-            this.connector.Buffer = this.package.ToByteArray();
             this.connector.Send(this.package);
 
             //handle response 
@@ -218,7 +218,7 @@ namespace BMB
                 this.panelSetUp.Visible = false;
                 this.populateGameMenu();
             }
-            if(packageArguments[0] == "LOGIN_REFUSE")
+            if (packageArguments[0] == "LOGIN_REFUSE")
             {
                 this.labelLoginError.Visible = true;
                 this.labelLoginError.Text = "Błąd logowania: " + this.packageArguments[1]; 
@@ -232,8 +232,20 @@ namespace BMB
             String password = this.textBoxPasswordInSU.Text;
             String confpassword = this.textBoxPasswordAInSU.Text;
 
-            this.package.SetTypeSIGNUP(login, password,confpassword);
-            this.connector.Buffer = this.package.ToByteArray();
+            if (password != confpassword) {
+                //TO DO DISPLAY passwords don't match
+                return;
+            }
+
+            //TO DO DISPLAY why password is wrong
+            String illegalPassword= checkForIllegalPassword(password);
+            if (illegalPassword != "")
+            {
+                //TO DO display failed login, illegalPassword holds reason
+                return;
+            }
+
+            this.package.SetTypeSIGNUP(login, ComputeSha256Hash(password));
             this.connector.Send(this.package);
 
             //handle response 
@@ -252,11 +264,19 @@ namespace BMB
                 this.labelSUError.Text = "Coś nie tak: " + this.packageArguments[1];
                 this.labelSUError.Visible = true;
             }
+
+            if (!upperLetterFlag) { return "Pasword must contain at least one upper case letter"; }
+            if (!numberFlag) { return "Pasword must contain at least one number"; }
+            return "";
         }
 
         //TO DO
         private void populateGameMenu()
         {
+            //request list of available games
+            this.package.SetTypeREQUEST_GAME_LIST();
+            this.connector.Send(this.package);
+
             //server sends list package with all the avaiable games
             this.package = this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();

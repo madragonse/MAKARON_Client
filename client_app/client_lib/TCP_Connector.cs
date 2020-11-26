@@ -88,12 +88,15 @@ namespace client_lib
 
         private String getServerResponse()
         {
+            Array.Clear(Buffer, 0, Buffer.Length);
             int messageLength = this.Stream.Read(Buffer, 0, Buffer.Length);
             return Encoding.UTF8.GetString(Buffer, 0, messageLength); ;
         }
 
         public Communication_Package ReceivePackage()
         {
+            Array.Clear(Buffer, 0, Buffer.Length);
+
             Stream.Read(Buffer, 0, Buffer.Length);
             Communication_Package package = new Communication_Package(Buffer);
             return package;
@@ -101,8 +104,12 @@ namespace client_lib
 
         public void Send(Communication_Package package)
         {
-            byte[] data = package.ToByteArray();
-            Stream.Write(data, 0, data.Length);
+            if (this.Stream != null)
+            {
+                byte[] data = package.ToByteArray();
+                Stream.Write(data, 0, data.Length);
+            }
+            
         }
     }
 }
