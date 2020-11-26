@@ -207,6 +207,7 @@ namespace BMB
             {
                 this.connector = new TCP_Connector(this.serverPort, this.serverIP);
                 this.connector.Connect();
+                this.KeepConnectionAlive();
                 this.panelConnected.Visible = true;
                 this.panelConnect.Visible = false;
                 this.panelLOrSU.Visible = true;
@@ -216,6 +217,20 @@ namespace BMB
             {
                 this.labelConnectingError.Visible = true;
             }
+        }
+
+        private void KeepConnectionAlive()
+        {
+            new Thread(() =>
+            {
+                while (true)
+                {
+                    this.package.SetTypePING();
+                    this.connector.Send(this.package);
+                    Thread.Sleep(4500);
+                }
+
+            }).Start();
         }
 
 
