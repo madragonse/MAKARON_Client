@@ -53,6 +53,9 @@ namespace client_lib
         public abstract void update(Dictionary<string, bool> buttons, float deltatime);
         public abstract void process();
 
+        //skaluje rozmiar generowanej bitmapy do nowego rozmiaty 
+        public abstract void scale(int x, int y);
+
 
     }
 }

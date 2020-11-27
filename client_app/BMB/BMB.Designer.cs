@@ -72,6 +72,7 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.labelTest = new System.Windows.Forms.Label();
             this.panelGry.SuspendLayout();
             this.panelGamesList.SuspendLayout();
             this.panelLobbysList.SuspendLayout();
@@ -91,11 +92,12 @@ namespace BMB
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelGry.BackColor = System.Drawing.SystemColors.Info;
             this.panelGry.Controls.Add(this.panelGamesList);
-            this.panelGry.Location = new System.Drawing.Point(0, 0);
+            this.panelGry.Location = new System.Drawing.Point(0, 3);
             this.panelGry.Margin = new System.Windows.Forms.Padding(0);
             this.panelGry.Name = "panelGry";
-            this.panelGry.Size = new System.Drawing.Size(977, 1072);
+            this.panelGry.Size = new System.Drawing.Size(977, 1031);
             this.panelGry.TabIndex = 0;
+            this.panelGry.Resize += new System.EventHandler(this.panelGry_Resize);
             // 
             // panelGamesList
             // 
@@ -103,7 +105,7 @@ namespace BMB
             this.panelGamesList.Controls.Add(this.panelLobbysList);
             this.panelGamesList.Controls.Add(this.label1);
             this.panelGamesList.Controls.Add(this.listBoxGames);
-            this.panelGamesList.Location = new System.Drawing.Point(273, 151);
+            this.panelGamesList.Location = new System.Drawing.Point(273, 130);
             this.panelGamesList.Name = "panelGamesList";
             this.panelGamesList.Size = new System.Drawing.Size(401, 434);
             this.panelGamesList.TabIndex = 2;
@@ -186,6 +188,7 @@ namespace BMB
             // 
             // panelSetUp
             // 
+            this.panelSetUp.Controls.Add(this.labelTest);
             this.panelSetUp.Controls.Add(this.panelSignUp);
             this.panelSetUp.Controls.Add(this.panelLOrSU);
             this.panelSetUp.Controls.Add(this.panelLogin);
@@ -525,6 +528,16 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
+            // labelTest
+            // 
+            this.labelTest.AutoSize = true;
+            this.labelTest.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelTest.Location = new System.Drawing.Point(33, 691);
+            this.labelTest.Name = "labelTest";
+            this.labelTest.Size = new System.Drawing.Size(69, 27);
+            this.labelTest.TabIndex = 18;
+            this.labelTest.Text = "label2";
+            // 
             // BMB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -546,6 +559,7 @@ namespace BMB
             this.panelLobbysList.PerformLayout();
             this.panelSide.ResumeLayout(false);
             this.panelSetUp.ResumeLayout(false);
+            this.panelSetUp.PerformLayout();
             this.panelSignUp.ResumeLayout(false);
             this.panelSignUp.PerformLayout();
             this.panelLOrSU.ResumeLayout(false);
@@ -603,6 +617,7 @@ namespace BMB
         private System.Windows.Forms.Panel panelLobbysList;
         private System.Windows.Forms.Label labelLobbyList;
         private System.Windows.Forms.ListBox listBoxLobbys;
+        private System.Windows.Forms.Label labelTest;
     }
 }
 

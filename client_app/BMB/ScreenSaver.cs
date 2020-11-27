@@ -102,6 +102,27 @@ namespace BMB
 
         }
 
+        public void scale(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+
+            this.bitmap = new Bitmap(this.width, this.height);
+            try {
+                this.grafika = Graphics.FromImage(bitmap);
+            }
+            catch (System.InvalidOperationException) { 
+                
+            }
+            
+
+            this.fieldWidth = (float)this.width / (float)this.mapSizeX;
+            this.fieldHeight = (float)this.height / (float)this.mapSizeY;
+
+            this.field = new RectangleF(0, 0, (int)this.fieldWidth, (int)this.fieldHeight);
+
+        }
+
 
 
     }

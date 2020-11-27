@@ -35,6 +35,7 @@ namespace BMB
         private List<String> packageArguments;
 
         private int choosenGame;
+        ScreenSaver screenSaver;
 
         public BMB()
         {
@@ -81,7 +82,7 @@ namespace BMB
             bool playing = false;
             
 
-            ScreenSaver screenSaver = new ScreenSaver(this.panelGry.Width, this.panelGry.Height, 25, 25);
+            screenSaver = new ScreenSaver(this.panelGry.Width, this.panelGry.Height, 25, 25);
 
             while (true)
             {
@@ -112,7 +113,15 @@ namespace BMB
                 screenSaver.generateBmp(sw.ElapsedMilliseconds/4);
                 sw.Restart();
                 sw.Start();
-                this.window.DrawImage(screenSaver.bitmap, cornerPoint);
+                try
+                {
+                    this.window.DrawImage(screenSaver.bitmap, cornerPoint);
+                }
+                catch(System.InvalidOperationException) { 
+                    
+                }
+
+                
 
 
 
@@ -187,6 +196,8 @@ namespace BMB
         {
 
             byte[] addressIP = new byte[4];
+            if (this.textBoxIPI1.Text.Equals(""))
+                return;
             addressIP[0] = (byte)short.Parse(this.textBoxIPI1.Text);
             addressIP[1] = (byte)short.Parse(this.textBoxIPI2.Text);
             addressIP[2] = (byte)short.Parse(this.textBoxIPI3.Text);
@@ -406,5 +417,31 @@ namespace BMB
             if (!numberFlag) { return "Pasword must contain at least one number"; }
             return "";
         }
+
+        private void panelGry_Resize(object sender, EventArgs e)
+        {
+            /*if (this.screenSaver != null)
+            {
+                if (this.panelGry.Width < this.panelGry.Height)
+                {
+                    this.screenSaver.scale((int)(this.panelGry.Width * 1.175), (int)(this.panelGry.Width * 1.175));
+                }
+                else
+                {
+                    this.screenSaver.scale((int)(this.panelGry.Height * 1.175), (int)(this.panelGry.Height * 1.175));
+                }
+            }*/
+
+            this.labelTest.Text = this.Height + " " + this.Width;
+
+            if (this.screenSaver != null)
+                this.screenSaver.scale((int)(this.Height*1.175), (int)(this.Height * 1.175));
+
+            if (this.game != null)
+                this.game.scale((int)(this.Height * 1.175), (int)(this.Height * 1.175));
+
+
+        }
     }
 }
+
