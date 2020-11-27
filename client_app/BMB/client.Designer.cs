@@ -31,8 +31,8 @@ namespace BMB
         {
             this.components = new System.ComponentModel.Container();
             this.panelGry = new System.Windows.Forms.Panel();
-            this.panelCover = new System.Windows.Forms.Panel();
             this.panelGnome = new System.Windows.Forms.Panel();
+            this.panelCover = new System.Windows.Forms.Panel();
             this.panelGamesList = new System.Windows.Forms.Panel();
             this.panelLobbysList = new System.Windows.Forms.Panel();
             this.labelLobbyList = new System.Windows.Forms.Label();
@@ -103,14 +103,6 @@ namespace BMB
             this.panelGry.TabIndex = 0;
             this.panelGry.Resize += new System.EventHandler(this.panelGry_Resize);
             // 
-            // panelCover
-            // 
-            this.panelCover.Location = new System.Drawing.Point(3, -14);
-            this.panelCover.Name = "panelCover";
-            this.panelCover.Size = new System.Drawing.Size(733, 983);
-            this.panelCover.TabIndex = 20;
-            this.panelCover.Visible = false;
-            // 
             // panelGnome
             // 
             this.panelGnome.BackgroundImage = global::BMB.Properties.Resources.noggin;
@@ -120,6 +112,14 @@ namespace BMB
             this.panelGnome.Size = new System.Drawing.Size(692, 972);
             this.panelGnome.TabIndex = 19;
             this.panelGnome.Visible = false;
+            // 
+            // panelCover
+            // 
+            this.panelCover.Location = new System.Drawing.Point(3, -14);
+            this.panelCover.Name = "panelCover";
+            this.panelCover.Size = new System.Drawing.Size(733, 983);
+            this.panelCover.TabIndex = 20;
+            this.panelCover.Visible = false;
             // 
             // panelGamesList
             // 
@@ -165,6 +165,7 @@ namespace BMB
             this.listBoxLobbys.Name = "listBoxLobbys";
             this.listBoxLobbys.Size = new System.Drawing.Size(353, 329);
             this.listBoxLobbys.TabIndex = 1;
+            this.listBoxLobbys.SelectedIndexChanged += new System.EventHandler(this.listBoxLobbys_SelectedIndexChanged);
             // 
             // label1
             // 

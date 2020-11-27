@@ -356,17 +356,25 @@ namespace BMB
                 this.populateLobbyMenu("BOMBERMAN");
             }
 
+        }
 
+        private void listBoxLobbys_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.package.SetTypeJOIN_LOBBY(this.listBoxLobbys.SelectedItem.ToString());
+            this.connector.Send(this.package);
 
 
         }
+
+
 
         private void populateLobbyMenu(String game)
         {
             this.panelGamesList.Visible = false;
             this.panelLobbysList.Visible = true;
 
-            this.package.REQUEST_LOBBY_LIST(game);
+            this.package.SetTypeREQUEST_LOBBY_LIST(game);
+            this.connector.Send(this.package);
 
             if (packageArguments[0] == "LIST")
             {
@@ -456,6 +464,8 @@ namespace BMB
 
 
         }
+
+        
     }
 }
 

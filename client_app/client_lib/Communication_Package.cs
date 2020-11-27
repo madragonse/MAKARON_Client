@@ -161,7 +161,7 @@ namespace client_lib
             this.XML += "</PACKAGE>";
         }
 
-        public void REQUEST_LOBBY_LIST(String gameId)
+        public void SetTypeREQUEST_LOBBY_LIST(String gameId)
         {
             this.XML = "<PACKAGE>";
             this.XML += "<type>REQUEST_LOBBY_LIST_ARG</type>";
@@ -169,7 +169,7 @@ namespace client_lib
             this.XML += "</PACKAGE>";
         }
 
-        public void REQUEST_LOBBY_LIST()
+        public void SetTypeREQUEST_LOBBY_LIST()
         {
             this.XML = "<PACKAGE>";
             this.XML += "<type>REQUEST_LOBBY_LIST</type>";
