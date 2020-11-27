@@ -160,5 +160,20 @@ namespace client_lib
             this.XML += "<arg1>" + lobbyId + "</arg1>";
             this.XML += "</PACKAGE>";
         }
+
+        public void REQUEST_LOBBY_LIST(String gameId)
+        {
+            this.XML = "<PACKAGE>";
+            this.XML += "<type>REQUEST_LOBBY_LIST_ARG</type>";
+            this.XML += "<arg1>" + gameId + "</arg1>";
+            this.XML += "</PACKAGE>";
+        }
+
+        public void REQUEST_LOBBY_LIST()
+        {
+            this.XML = "<PACKAGE>";
+            this.XML += "<type>REQUEST_LOBBY_LIST</type>";
+            this.XML += "</PACKAGE>";
+        }
     }
 }

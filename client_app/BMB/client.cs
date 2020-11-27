@@ -366,6 +366,8 @@ namespace BMB
             this.panelGamesList.Visible = false;
             this.panelLobbysList.Visible = true;
 
+            this.package.REQUEST_LOBBY_LIST(game);
+
             if (packageArguments[0] == "LIST")
             {
                 for (int i = 1; i < packageArguments.Count; i++)
