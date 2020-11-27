@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client_lib", "client_lib\client_lib.csproj", "{9584639F-5692-4A37-97EB-C122A973FC81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMB", "BMB\BMB.csproj", "{A6722006-0C92-4838-A905-083016DE496F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client", "BMB\client.csproj", "{A6722006-0C92-4838-A905-083016DE496F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

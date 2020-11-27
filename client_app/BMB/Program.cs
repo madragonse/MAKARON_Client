@@ -16,7 +16,7 @@ namespace BMB
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BMB());
+            Application.Run(new client());
         }
     }
 }

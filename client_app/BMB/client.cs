@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
@@ -19,7 +20,7 @@ namespace BMB
 {
 
 
-    public partial class BMB : Form
+    public partial class client : Form
     {
         private Thread mainLoopThread;
         private Graphics window;
@@ -27,6 +28,7 @@ namespace BMB
 
         private Game game;
         private BMB_Input input;
+        SoundPlayer audio;
 
         private int serverPort;
         private IPAddress serverIP;
@@ -37,7 +39,8 @@ namespace BMB
         private int choosenGame;
         ScreenSaver screenSaver;
 
-        public BMB()
+
+        public client()
         {
             InitializeComponent();
             /*this.Width = 1100;
@@ -62,7 +65,9 @@ namespace BMB
             this.mainLoopThread.IsBackground = true;
             this.mainLoopThread.Start();
 
-            
+            audio = new SoundPlayer(BMB.Properties.Resources.gnome);
+
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -120,10 +125,7 @@ namespace BMB
                 catch(System.InvalidOperationException) { 
                     
                 }
-
                 
-
-
 
                 while (playing)
                 {
@@ -164,6 +166,16 @@ namespace BMB
             if (Keyboard.IsKeyDown(Key.D))
             {
                 input.buttons["D"] = true;
+            }
+
+            if (Keyboard.IsKeyDown(Key.G))
+            {
+                this.audio.Play();
+                Thread.Sleep(600);
+                this.panelGnome.Visible = true;
+                Thread.Sleep(70);
+                this.panelGnome.Visible = false;
+
             }
             //TODO - dodać inne przyciski
         }

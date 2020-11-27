@@ -1,7 +1,7 @@
 ﻿
 namespace BMB
 {
-    partial class BMB
+    partial class client
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
@@ -31,6 +31,8 @@ namespace BMB
         {
             this.components = new System.ComponentModel.Container();
             this.panelGry = new System.Windows.Forms.Panel();
+            this.panelCover = new System.Windows.Forms.Panel();
+            this.panelGnome = new System.Windows.Forms.Panel();
             this.panelGamesList = new System.Windows.Forms.Panel();
             this.panelLobbysList = new System.Windows.Forms.Panel();
             this.labelLobbyList = new System.Windows.Forms.Label();
@@ -40,6 +42,7 @@ namespace BMB
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panelSide = new System.Windows.Forms.Panel();
             this.panelSetUp = new System.Windows.Forms.Panel();
+            this.labelTest = new System.Windows.Forms.Label();
             this.panelSignUp = new System.Windows.Forms.Panel();
             this.labelSUError = new System.Windows.Forms.Label();
             this.labelPasswordAInSU = new System.Windows.Forms.Label();
@@ -72,8 +75,8 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.labelTest = new System.Windows.Forms.Label();
             this.panelGry.SuspendLayout();
+            this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
             this.panelLobbysList.SuspendLayout();
             this.panelSide.SuspendLayout();
@@ -91,6 +94,7 @@ namespace BMB
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelGry.BackColor = System.Drawing.SystemColors.Info;
+            this.panelGry.Controls.Add(this.panelGnome);
             this.panelGry.Controls.Add(this.panelGamesList);
             this.panelGry.Location = new System.Drawing.Point(0, 3);
             this.panelGry.Margin = new System.Windows.Forms.Padding(0);
@@ -98,6 +102,24 @@ namespace BMB
             this.panelGry.Size = new System.Drawing.Size(977, 1031);
             this.panelGry.TabIndex = 0;
             this.panelGry.Resize += new System.EventHandler(this.panelGry_Resize);
+            // 
+            // panelCover
+            // 
+            this.panelCover.Location = new System.Drawing.Point(3, -14);
+            this.panelCover.Name = "panelCover";
+            this.panelCover.Size = new System.Drawing.Size(733, 983);
+            this.panelCover.TabIndex = 20;
+            this.panelCover.Visible = false;
+            // 
+            // panelGnome
+            // 
+            this.panelGnome.BackgroundImage = global::BMB.Properties.Resources.noggin;
+            this.panelGnome.Controls.Add(this.panelCover);
+            this.panelGnome.Location = new System.Drawing.Point(167, 56);
+            this.panelGnome.Name = "panelGnome";
+            this.panelGnome.Size = new System.Drawing.Size(692, 972);
+            this.panelGnome.TabIndex = 19;
+            this.panelGnome.Visible = false;
             // 
             // panelGamesList
             // 
@@ -198,6 +220,16 @@ namespace BMB
             this.panelSetUp.Name = "panelSetUp";
             this.panelSetUp.Size = new System.Drawing.Size(456, 1055);
             this.panelSetUp.TabIndex = 0;
+            // 
+            // labelTest
+            // 
+            this.labelTest.AutoSize = true;
+            this.labelTest.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelTest.Location = new System.Drawing.Point(33, 691);
+            this.labelTest.Name = "labelTest";
+            this.labelTest.Size = new System.Drawing.Size(69, 27);
+            this.labelTest.TabIndex = 18;
+            this.labelTest.Text = "label2";
             // 
             // panelSignUp
             // 
@@ -528,17 +560,7 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // labelTest
-            // 
-            this.labelTest.AutoSize = true;
-            this.labelTest.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelTest.Location = new System.Drawing.Point(33, 691);
-            this.labelTest.Name = "labelTest";
-            this.labelTest.Size = new System.Drawing.Size(69, 27);
-            this.labelTest.TabIndex = 18;
-            this.labelTest.Text = "label2";
-            // 
-            // BMB
+            // client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -546,13 +568,14 @@ namespace BMB
             this.Controls.Add(this.panelSide);
             this.Controls.Add(this.panelGry);
             this.KeyPreview = true;
-            this.Name = "BMB";
+            this.Name = "client";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "--";
             this.Load += new System.EventHandler(this.BMB_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyUp);
             this.panelGry.ResumeLayout(false);
+            this.panelGnome.ResumeLayout(false);
             this.panelGamesList.ResumeLayout(false);
             this.panelGamesList.PerformLayout();
             this.panelLobbysList.ResumeLayout(false);
@@ -618,6 +641,8 @@ namespace BMB
         private System.Windows.Forms.Label labelLobbyList;
         private System.Windows.Forms.ListBox listBoxLobbys;
         private System.Windows.Forms.Label labelTest;
+        private System.Windows.Forms.Panel panelGnome;
+        private System.Windows.Forms.Panel panelCover;
     }
 }
 
