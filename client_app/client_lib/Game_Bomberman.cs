@@ -17,8 +17,7 @@ namespace client_lib
         /// wybieranie pola na mapie
         /// </summary>
         private RectangleF field;
-
-        private PointF playerPosition = new PointF(10f, 10f);
+        //private PointF playerPosition = new PointF(10f, 10f);
 
         /// <summary>
         /// Wymiary w pixelach
@@ -31,6 +30,8 @@ namespace client_lib
         public int mapSizeY;
         
         public byte[,] map;
+
+        private Player_Bomberman player;
         
 
         public Game_Bomberman(NetworkStream stream, int width, int height, int mapSizeX, int mapSizeY) : base(stream, width, height)
@@ -71,6 +72,8 @@ namespace client_lib
 
             this.map = new byte[mapSizeX, mapSizeY];
 
+            this.player = new Player_Bomberman(10f, 10f);
+
             //TEST
         }
 
@@ -89,7 +92,11 @@ namespace client_lib
                 }
             }
 
-            if(buttons["W"] == true)
+            player.update(deltatime/1000, buttons);
+
+
+
+            /*if (buttons["W"] == true)
             {
                 this.playerPosition.Y -= 0.01f*deltatime;
             }
@@ -104,7 +111,7 @@ namespace client_lib
             if (buttons["D"] == true)
             {
                 this.playerPosition.X += 0.01f * deltatime;
-            }
+            }*/
 
             this.generateBitmap();
         }
@@ -166,10 +173,14 @@ namespace client_lib
                 }
             }
             this.brush.Color = Color.Black;
-            this.field.X = playerPosition.X * this.fieldWidth;
-            this.field.Y = playerPosition.Y * this.fieldHeight;
+            this.field.X = this.player.posX * this.fieldWidth;
+            this.field.Y = this.player.posY * this.fieldHeight;
             this.grafika.FillRectangle(this.brush, this.field);
         }
 
+        public override string ToString()
+        {
+            return "Player: " + this.player.ToString();
+        }
     }
 }

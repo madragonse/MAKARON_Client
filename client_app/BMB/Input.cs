@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BMB
 {
-    public class BMB_Input
+    public class Input
     {
 
         public Dictionary<string, bool> buttons = new Dictionary<string, bool>();
 
 
 
-        public BMB_Input()
+        public Input()
         {
             this.buttons.Add("W", false);
             this.buttons.Add("S", false);
@@ -24,7 +24,7 @@ namespace BMB
 
         }
 
-        public BMB_Input(BMB_Input toCopy)
+        public Input(Input toCopy)
         {
             foreach (var button in toCopy.buttons)
             {

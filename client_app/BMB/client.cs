@@ -27,7 +27,7 @@ namespace BMB
         private PointF cornerPoint;
 
         private Game game;
-        private BMB_Input input;
+        private Input input;
         SoundPlayer audio;
 
         private int serverPort;
@@ -51,7 +51,7 @@ namespace BMB
         private void BMB_Load(object sender, EventArgs e)
         {
             
-            this.input = new BMB_Input();
+            this.input = new Input();
             this.cornerPoint = new PointF(0, 0);
 
             //this.window = CreateGraphics();
@@ -94,7 +94,7 @@ namespace BMB
                 //TEST
                 /*playing = true;
                 this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);*/
-
+                //choosenGame = 1;
                 if (this.choosenGame != 0)
                 {
                     playing = true;
@@ -135,7 +135,7 @@ namespace BMB
                     this.game.process();/*TODO*/
                     //Server->send(Game->getPackets())
                     sw.Stop();
-                    this.game.update(this.input.buttons, sw.ElapsedMilliseconds/*TODO - deltaTime*/);
+                    this.game.update(this.input.buttons, sw.ElapsedMilliseconds);
                     sw.Restart();
                     sw.Start();
                     this.window.DrawImage(this.game.bitmap, cornerPoint);
