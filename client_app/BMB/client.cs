@@ -25,6 +25,8 @@ namespace BMB
         private Thread mainLoopThread;
         private Graphics window;
         private PointF cornerPoint;
+        public delegate void update();
+        public update updateFormDelegate;
 
         private Game game;
         private Input input;
@@ -38,6 +40,9 @@ namespace BMB
 
         private int choosenGame;
         ScreenSaver screenSaver;
+
+        //TEST
+        Stopwatch sww;
 
 
         public client()
@@ -68,6 +73,10 @@ namespace BMB
             audio = new SoundPlayer(BMB.Properties.Resources.gnome);
 
 
+            //TEST
+            sww = Stopwatch.StartNew();
+            this.updateFormDelegate = new update(updateForm);
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -94,7 +103,7 @@ namespace BMB
                 //TEST
                 /*playing = true;
                 this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);*/
-                //choosenGame = 1;
+                choosenGame = 1;
                 if (this.choosenGame != 0)
                 {
                     playing = true;
@@ -136,13 +145,23 @@ namespace BMB
                     //Server->send(Game->getPackets())
                     sw.Stop();
                     this.game.update(this.input.buttons, sw.ElapsedMilliseconds);
+                    
                     sw.Restart();
                     sw.Start();
                     this.window.DrawImage(this.game.bitmap, cornerPoint);
-                    
+                    this.Invoke(this.updateFormDelegate);
 
                 }
             }
+        }
+
+        public void updateForm()
+        {
+            sww.Stop();
+            this.labelTest.Text = "FPS: " + (float)(1000.0 / sww.ElapsedMilliseconds);
+
+            sww.Restart();
+            sww.Start();
         }
 
         private void BMB_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -177,7 +196,8 @@ namespace BMB
                 this.panelGnome.Visible = false;
 
             }
-            //TODO - dodać inne przyciski
+
+     
         }
 
         private void BMB_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -202,6 +222,8 @@ namespace BMB
                 input.buttons["D"] = false;
             }
             //TODO - dodać inne przyciski
+
+            
         }
 
         private void connectButton_Click(object sender, EventArgs e)
@@ -454,7 +476,7 @@ namespace BMB
                 }
             }*/
 
-            this.labelTest.Text = this.Height + " " + this.Width;
+            //this.labelTest.Text = this.Height + " " + this.Width;
 
             if (this.screenSaver != null)
                 this.screenSaver.scale((int)(this.Height*1.175), (int)(this.Height * 1.175));
@@ -465,7 +487,10 @@ namespace BMB
 
         }
 
-        
+        private void panelGry_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
     }
 }
 

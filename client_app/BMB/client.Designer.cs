@@ -101,6 +101,7 @@ namespace BMB
             this.panelGry.Name = "panelGry";
             this.panelGry.Size = new System.Drawing.Size(977, 1031);
             this.panelGry.TabIndex = 0;
+            this.panelGry.Paint += new System.Windows.Forms.PaintEventHandler(this.panelGry_Paint);
             this.panelGry.Resize += new System.EventHandler(this.panelGry_Resize);
             // 
             // panelGnome

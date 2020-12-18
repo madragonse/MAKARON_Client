@@ -29,8 +29,8 @@ namespace client_lib
             this.maxSpeed = 9;
             this.maxAcceleration = 100;
             this.maxForce = 100;
-            this.frictionX = 6f;
-            this.frictionY = 6f;
+            this.frictionX = 16f;
+            this.frictionY = 16f;
 
         }
 
@@ -64,8 +64,9 @@ namespace client_lib
             }
 
             this.update(deltaTime);
-            this.SetAcceleration(xDir*15, yDir*15);
 
+
+            this.SetAcceleration(xDir*25, yDir*25);
             //NOTE      odkomentuj to na dole aby ustawiać prędkość a nie przyspieszenie
             /*this.SetAcceleration(this.frictionX* xDir, this.frictionY* yDir);
             this.SetSpeed(2,xDir, yDir);*/
