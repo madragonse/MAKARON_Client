@@ -128,9 +128,11 @@ namespace client_lib
         public override void process(Queue q)
         {
             String packageType = "";
-            foreach (Package p in q)
+            while(q.Count >0)
             {
+                Bomberman_Package p = (Bomberman_Package)q.Dequeue();
                 List<String> args = p.getArguments();
+                if (args.Count == 0) continue;                    
                 packageType = args[0];
                 if (packageType == "START")
                 {
