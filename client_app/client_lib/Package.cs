@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace client_lib
+namespace packages
 {
-    public abstract class Package
+    public class Package
     {
-        public String XML=null;
+        public String XML = null;
 
         #region ctors
         public Package(byte[] data)
@@ -42,7 +42,7 @@ namespace client_lib
                 {
                     foreach (var item in dataRow.ItemArray)
                     {
-                        arguments.Add((String)item);
+                        arguments.Add((string)item);
                     }
                 }
                 //delete type from arguments list
@@ -60,3 +60,4 @@ namespace client_lib
         }
     }
 }
+

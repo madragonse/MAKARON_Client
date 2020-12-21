@@ -1,4 +1,5 @@
-﻿using System;
+﻿using packages;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -51,7 +52,9 @@ namespace client_lib
 
         private NetworkStream stream;
         public abstract void update(Dictionary<string, bool> buttons, float deltatime);
-        public abstract void process();
+        public abstract void process(List<Package> packages);
+
+        public abstract List<Package> getPackages();
 
         //skaluje rozmiar generowanej bitmapy do nowego rozmiaty 
         public abstract void scale(int x, int y);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace client_lib
+namespace packages
 {
     public class Bomberman_Package : Package
     {
@@ -49,7 +49,7 @@ namespace client_lib
         /// <param name="id">id gracza</param>
         /// <param name="x">pozycja x</param>
         /// <param name="y">pozycja y</param>
-        public void SetTypePLAYER_POSITION(int id, int x, int y)
+        public void SetTypePLAYER_POSITION(int id, float x, float y)
         {
             this.XML = "<PACKAGE>";
             this.XML += "<type>PLAYER_POSITION</type>";
@@ -59,18 +59,34 @@ namespace client_lib
             this.XML += "</PACKAGE>";
         }
         /// <summary>
-        /// Wysyłane przez serwer, informuje o postawieniu bomby z czasem detonacji ttl w milisekundach
+        /// Wysyłane przez klienta , informuje o postawieniu bomby
         /// </summary>
         /// <param name="x">pozycja x</param>
         /// <param name="y">pozycja y</param>
-        /// <param name="ttl">czas do detonacj z ms</param>
-        public void SetTypeBOMB_POSITION(int x, int y, int ttl)
+        /// <param name="ttl">czas do detonacji bomby w milisekundach</param>
+        public void SetTypePLACE_BOMB(int x, int y, int ttl)
         {
             this.XML = "<PACKAGE>";
-            this.XML += "<type>BOMB_POSITION</type>";
+            this.XML += "<type>PLACE_BOMB</type>";
             this.XML += "<arg1>" + x + "</arg1>";
             this.XML += "<arg2>" + y + "</arg2>";
             this.XML += "<arg3>" + ttl + "</arg3>";
+            this.XML += "</PACKAGE>";
+        }
+        /// <summary>
+        /// Wysyłane przez serwer , informuje o postawieniu bomby
+        /// </summary>
+        /// <param name="bomb_id">id bomby</param>
+        /// <param name="x">pozycja x</param>
+        /// <param name="y">pozycja y</param>
+
+        public void SetTypeBOMB_POSITION(int bomb_id, int x, int y)
+        {
+            this.XML = "<PACKAGE>";
+            this.XML += "<type>BOMB_POSITION</type>";
+            this.XML += "<arg1>" + bomb_id + "</arg1>";
+            this.XML += "<arg2>" + x + "</arg2>";
+            this.XML += "<arg3>" + y + "</arg3>";
             this.XML += "</PACKAGE>";
         }
         /// <summary>
@@ -128,7 +144,5 @@ namespace client_lib
             this.XML += "<arg1>" + id + "</arg1>";
             this.XML += "</PACKAGE>";
         }
-
-
     }
 }
