@@ -393,16 +393,35 @@ namespace BMB
         {
 
             this.panelGamesList.Visible = true;
-            String[] spl = this.listBoxGames.SelectedItem.ToString().Split(' ');
+            String[] spl = this.listBoxGames.SelectedItem.ToString().Split('\n');
+            String chosenGame = spl[2];
+            String chosenLobbyName = spl[1];
 
-            if(spl[1].Equals("Bomberman"))            
-            {
-                this.choosenGame = 1;
-                
-            }
-
-            this.package.SetTypeJOIN_LOBBY(spl[0]);
+            //try to join chosen lobby
+            this.package.SetTypeJOIN_LOBBY(spl[1]);
             this.connector.Send(this.package);
+
+            //handle response 
+            this.package = this.connector.ReceivePackage();
+            this.packageArguments = this.package.getArguments();
+
+            //if joined successfully
+            if (packageArguments[0] == "JOIN_LOBBY_CONFIRM")
+            {
+                this.panelGamesList.Visible = false;
+                //TODO SHOW LOBBY MENU
+                
+
+                if (chosenGame.Equals("BOMBERMAN"))
+                {
+                    this.choosenGame = 1;
+                }
+            }
+            if (packageArguments[0] == "JOIN_LOBBY_REFUSE")
+            {
+                //TODO SHOW ERROR JOINING LOBBY
+                populateLobbyMenu(); //refresh lobby list
+            }
 
         }
 
