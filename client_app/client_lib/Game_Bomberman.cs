@@ -1,6 +1,7 @@
 using client_lib;
 using packages;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Sockets;
@@ -124,10 +125,10 @@ namespace client_lib
         /// <summary>
         /// przetwarza pakiety z serwera
         /// </summary>
-        public override void process(List<Package> packages)
+        public override void process(Queue q)
         {
             String packageType = "";
-            foreach (Package p in packages)
+            foreach (Package p in q)
             {
                 List<String> args = p.getArguments();
                 packageType = args[0];
@@ -140,12 +141,22 @@ namespace client_lib
                     int mapId = Int32.Parse(args[1]);
                     //this.changeMap(id)
                 }
+                else if (packageType == "SET_PLAYER_ID")
+                {
+                    int id = Int32.Parse(args[1]);
+                    String name = args[2];
+                    this.players.Add(new Player_Bomberman(id,name));
+                }
+                else if (packageType == "ASSIGN_ID")
+                {
+                    players[0].id = Int32.Parse(args[1]);
+                }
                 else if (packageType == "PLAYER_POSITION")
                 {
                     int id = Int32.Parse(args[1]);
                     int x = Int32.Parse(args[2]);
                     int y = Int32.Parse(args[3]);
-                    //this.updatePlayerPosition(id,x,y)
+                    this.setPlayerPosition(id, x, y);
                 }
                 else if (packageType == "BOMB_POSITION")
                 {
@@ -175,6 +186,11 @@ namespace client_lib
             }
            
 
+        }
+
+        void setPlayerPosition(int id, float x, float y)
+        {
+            this.players.Find(player => player.id == id);
         }
 
         public override List<Package> getPackages()

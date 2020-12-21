@@ -8,6 +8,8 @@ namespace client_lib
 {
     class Player_Bomberman
     {
+        public String name="testPlayer";
+        public int id;
         public float posX, posY;
         private float speedX, speedY;
         private float accX, accY;
@@ -18,6 +20,26 @@ namespace client_lib
         {
             this.posX = posX;
             this.posY = posY;
+
+            this.speedX = 0;
+            this.speedY = 0;
+            this.accX = 0;
+            this.accY = 0;
+            this.acceleration = 0;
+            this.speed = 0;
+            this.mass = 1;
+            this.maxSpeed = 9;
+            this.maxAcceleration = 100;
+            this.maxForce = 100;
+            this.frictionX = 16f;
+            this.frictionY = 16f;
+
+        }
+
+        public Player_Bomberman(int id, String name)
+        {
+            this.id = id;
+            this.name = name;
 
             this.speedX = 0;
             this.speedY = 0;

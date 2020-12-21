@@ -1,5 +1,6 @@
 ﻿using packages;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace client_lib
 
         private NetworkStream stream;
         public abstract void update(Dictionary<string, bool> buttons, float deltatime);
-        public abstract void process(List<Package> packages);
+        public abstract void process(Queue q);
 
         public abstract List<Package> getPackages();
 

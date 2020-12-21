@@ -144,9 +144,9 @@ namespace BMB
                 {
                     //TODO - 
 
-                    //Serwer->recive()
-                    //this.game.process();/*TODO*/
-                    //Server->send(Game->getPackets())
+                    
+                    this.game.process(this.wrapperGamePackages);
+                    List<Package> packagesToSend = this.game.getPackages();
                     sw.Stop();
                     this.game.update(this.input.buttons, sw.ElapsedMilliseconds);
                     
