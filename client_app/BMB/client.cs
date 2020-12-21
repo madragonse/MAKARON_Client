@@ -19,6 +19,8 @@ using client_lib;
 
 namespace BMB
 {
+
+
     public partial class client : Form
     {
         private Thread mainLoopThread;

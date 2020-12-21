@@ -1,15 +1,18 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace packages
+namespace client_lib
 {
-
     public class Communication_Package : Package
     {
         #region ctors
         public Communication_Package(byte[] data) : base(data)
-        { }
+        {  }
 
         public Communication_Package() { }
         #endregion
@@ -49,7 +52,6 @@ namespace packages
             this.XML += "<type>REQUEST_GAME_LIST</type>";
             this.XML += "</PACKAGE>";
         }
-
         #endregion
 
         #region multipleargs
@@ -108,7 +110,7 @@ namespace packages
         }
         #endregion
 
-
+   
 
 
         public void SetTypeERROR(String message)
@@ -133,7 +135,6 @@ namespace packages
             foreach (String s in list)
             {
                 this.XML += "<arg" + i + ">" + s + "</arg" + i + ">";
-                i++;
             }
             this.XML += "</PACKAGE>";
         }
@@ -159,23 +160,22 @@ namespace packages
             this.XML += "<arg1>" + lobbyId + "</arg1>";
             this.XML += "</PACKAGE>";
         }
-        public void SetTypeJOIN_LOBBY_REFUSE(String reason)
+
+        public void SetTypeREQUEST_LOBBY_LIST(String gameId)
         {
             this.XML = "<PACKAGE>";
-            this.XML += "<type>JOIN_LOBBY_REFUSE</type>";
-            this.XML += "<arg1>" + reason + "</arg1>";
+            this.XML += "<type>REQUEST_LOBBY_LIST_ARG</type>";
+            this.XML += "<arg1>" + gameId + "</arg1>";
             this.XML += "</PACKAGE>";
         }
 
-        public void SetTypeCREATE_LOBBY_REFUSE(String reason)
+        public void SetTypeREQUEST_LOBBY_LIST()
         {
             this.XML = "<PACKAGE>";
-            this.XML += "<type>CREATE_LOBBY_REFUSE</type>";
-            this.XML += "<arg1>" + reason + "</arg1>";
+            this.XML += "<type>REQUEST_LOBBY_LIST</type>";
             this.XML += "</PACKAGE>";
         }
 
-<<<<<<< Updated upstream
         public void SetTypeREQUEST_LOBBY_LIST_ARG(String gameName)
         {
             this.XML = "<PACKAGE>";
@@ -183,7 +183,5 @@ namespace packages
             this.XML += "<arg1>" + gameName + "</arg1>";
             this.XML += "</PACKAGE>";
         }
-=======
->>>>>>> Stashed changes
     }
 }
