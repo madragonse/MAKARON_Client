@@ -1,4 +1,4 @@
-﻿using client_lib;
+using client_lib;
 using packages;
 using System;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace client_lib
         private float fieldHeight;
         private List<Package> outQueue;
         private int playerId=0;
-        private bool gameStarted = 0;
+        private bool gameStarted = false;
 
         public int mapSizeX;
         public int mapSizeY;
@@ -232,14 +232,14 @@ namespace client_lib
                 }
             }
             this.brush.Color = Color.Black;
-            this.field.X = this.player.posX * this.fieldWidth;
-            this.field.Y = this.player.posY * this.fieldHeight;
+            this.field.X = this.players[0].posX * this.fieldWidth;
+            this.field.Y = this.players[0].posY * this.fieldHeight;
             this.grafika.FillRectangle(this.brush, this.field);
         }
 
         public override string ToString()
         {
-            return "Player: " + this.player.ToString();
+            return "Player: " + this.players[0].ToString();
         }
     }
 }

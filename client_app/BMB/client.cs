@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using client_lib;
+using packages;
 
 namespace BMB
 {
@@ -144,7 +145,7 @@ namespace BMB
                     //TODO - 
 
                     //Serwer->recive()
-                    this.game.process();/*TODO*/
+                    //this.game.process();/*TODO*/
                     //Server->send(Game->getPackets())
                     sw.Stop();
                     this.game.update(this.input.buttons, sw.ElapsedMilliseconds);
