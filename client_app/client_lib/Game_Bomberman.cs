@@ -75,7 +75,7 @@ namespace client_lib
             this.field = new RectangleF(0, 0, (int)this.fieldWidth, (int)this.fieldHeight);
 
             this.map = new byte[mapSizeX, mapSizeY];
-
+            this.players = new List<Player_Bomberman>();
             this.players.Add(new Player_Bomberman(10f, 10f));
 
             //TEST

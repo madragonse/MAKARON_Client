@@ -107,7 +107,7 @@ namespace BMB
                 //TEST
                 /*playing = true;
                 this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);*/
-                choosenGame = 1;
+                //choosenGame = 1;
                 if (this.choosenGame != 0)
                 {
                     playing = true;
