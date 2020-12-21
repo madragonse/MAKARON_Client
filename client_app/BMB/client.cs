@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +24,7 @@ namespace BMB
     public partial class client : Form
     {
         private Thread mainLoopThread;
+        private Thread reciveThread;
         private Graphics window;
         private PointF cornerPoint;
         public delegate void update();
@@ -37,6 +39,8 @@ namespace BMB
         private TCP_Connector connector;
         private Communication_Package package;
         private List<String> packageArguments;
+        private Queue gamePackages;
+        private Queue wrapperGamePackages;
 
         private int choosenGame;
         ScreenSaver screenSaver;
@@ -63,6 +67,7 @@ namespace BMB
 
             this.connector = new TCP_Connector();
             this.package = new Communication_Package();
+            this.gamePackages = new Queue();
 
             this.choosenGame = 0;
 
@@ -410,13 +415,18 @@ namespace BMB
             {
                 this.panelGamesList.Visible = false;
                 //TODO SHOW LOBBY MENU
-                
 
                 if (chosenGame.Equals("BOMBERMAN"))
                 {
                     this.choosenGame = 1;
                 }
+
+                this.reciveThread = new Thread(recive);
+                this.reciveThread.IsBackground = true;
+                this.reciveThread.Start();
             }
+
+              
             if (packageArguments[0] == "JOIN_LOBBY_REFUSE")
             {
                 //TODO SHOW ERROR JOINING LOBBY
@@ -426,7 +436,19 @@ namespace BMB
         }
 
 
+        private void recive()
+        { 
+            this.wrapperGamePackages = Queue.Synchronized(this.gamePackages);
 
+            this.wrapperGamePackages.Enqueue(new Bomberman_Package());
+
+            while (true)
+            {
+                Package temPac = this.connector.ReceivePackage();
+                this.wrapperGamePackages.Enqueue(temPac);
+            }
+
+        }
 
 
        
