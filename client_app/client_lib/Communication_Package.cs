@@ -182,5 +182,12 @@ namespace packages
             this.XML += "<arg1>" + gameName + "</arg1>";
             this.XML += "</PACKAGE>";
         }
+
+        public void SetTypeREQUEST_LOBBY_LIST()
+        {
+            this.XML = "<PACKAGE>";
+            this.XML += "<type>REQUEST_LOBBY_LIST</type>";
+            this.XML += "</PACKAGE>";
+        }
     }
 }
