@@ -231,10 +231,17 @@ namespace client_lib
                     this.grafika.FillRectangle(this.brush, this.field);                    
                 }
             }
+
             this.brush.Color = Color.Black;
-            this.field.X = this.players[0].posX * this.fieldWidth;
-            this.field.Y = this.players[0].posY * this.fieldHeight;
-            this.grafika.FillRectangle(this.brush, this.field);
+            foreach (Player_Bomberman player in players)
+            {
+                this.field.X = player.posX * this.fieldWidth;
+                this.field.Y = player.posY * this.fieldHeight;
+                this.grafika.FillRectangle(this.brush, this.field);
+            }
+
+            
+            
         }
 
         public override string ToString()
