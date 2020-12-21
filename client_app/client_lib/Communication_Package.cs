@@ -175,7 +175,6 @@ namespace packages
             this.XML += "</PACKAGE>";
         }
 
-<<<<<<< Updated upstream
         public void SetTypeREQUEST_LOBBY_LIST_ARG(String gameName)
         {
             this.XML = "<PACKAGE>";
@@ -183,7 +182,6 @@ namespace packages
             this.XML += "<arg1>" + gameName + "</arg1>";
             this.XML += "</PACKAGE>";
         }
-=======
->>>>>>> Stashed changes
+
     }
 }
