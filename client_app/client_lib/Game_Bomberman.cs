@@ -1,5 +1,4 @@
-﻿using client_lib;
-using packages;
+using client_lib;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -34,7 +33,7 @@ namespace client_lib
         
         public byte[,] map;
 
-        private List<Player_Bomberman> players;
+        private Player_Bomberman player;
         
 
         public Game_Bomberman(NetworkStream stream, int width, int height, int mapSizeX, int mapSizeY) : base(stream, width, height)
@@ -75,7 +74,7 @@ namespace client_lib
 
             this.map = new byte[mapSizeX, mapSizeY];
 
-            this.players.Add(new Player_Bomberman(10f, 10f));
+            this.player = new Player_Bomberman(10f, 10f);
 
             //TEST
         }
@@ -85,7 +84,6 @@ namespace client_lib
         /// </summary>
         public override void update(Dictionary<string, bool> buttons, float deltatime)
         {
-            if (!this.gameStarted) return;
             Random rand = new Random();
             for (int i = 0; i < mapSizeY; i++)
             {
@@ -96,7 +94,7 @@ namespace client_lib
                 }
             }
 
-            players[0].update(deltatime/1000, buttons);
+            player.update(deltatime/1000, buttons);
 
 
 
@@ -124,64 +122,9 @@ namespace client_lib
         /// <summary>
         /// przetwarza pakiety z serwera
         /// </summary>
-        public override void process(List<Package> packages)
-        {
-            String packageType = "";
-            foreach (Package p in packages)
-            {
-                List<String> args = p.getArguments();
-                packageType = args[0];
-                if (packageType == "START")
-                {
-                    this.gameStarted = true;
-                }
-                else if (packageType == "MAP_ID")
-                {
-                    int mapId = Int32.Parse(args[1]);
-                    //this.changeMap(id)
-                }
-                else if (packageType == "PLAYER_POSITION")
-                {
-                    int id = Int32.Parse(args[1]);
-                    int x = Int32.Parse(args[2]);
-                    int y = Int32.Parse(args[3]);
-                    //this.updatePlayerPosition(id,x,y)
-                }
-                else if (packageType == "BOMB_POSITION")
-                {
-                    int id = Int32.Parse(args[1]);
-                    int x = Int32.Parse(args[2]);
-                    int y = Int32.Parse(args[3]);
-                    //this.setBomb(id,x,y)
-                }
-                else if (packageType == "DESTROY_WALL")
-                {
-                    int x = Int32.Parse(args[1]);
-                    int y = Int32.Parse(args[2]);
-                    //this.destroyWall(x,y)
-                }
-                else if (packageType == "DAMAGE_WALL")
-                {
-                    int x = Int32.Parse(args[1]);
-                    int y = Int32.Parse(args[2]);
-                    int hpLeft = Int32.Parse(args[3]);
-                    //this.damageWall(x,y,hpLeft)
-                }
-                else if (packageType == "DEAD")
-                {
-                    int id = Int32.Parse(args[1]);
-                    //this.killPlayer(id)
-                }
-            }
-           
-
-        }
-
-        public override List<Package> getPackages()
-        {
-            Bomberman_Package temp = new Bomberman_Package();
-            temp.SetTypePLAYER_POSITION(this.playerId,players[0].posX, players[0].posY);
-            return this.outQueue;
+        public override void process()
+        { 
+            
         }
 
         public override void scale(int width, int height)
