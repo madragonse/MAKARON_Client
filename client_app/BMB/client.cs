@@ -90,7 +90,7 @@ namespace BMB
         public void MainLoop()
         {
             panelGry.Paint += new PaintEventHandler(panel1_Paint);
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
 
             Stopwatch sw = Stopwatch.StartNew();
             bool playing = false;
@@ -295,7 +295,7 @@ namespace BMB
             if (packageArguments[0] == "LOGIN_CONFIRM")
             {
                 this.panelSetUp.Visible = false;
-                this.populateGameMenu();
+                populateLobbyMenu();
             }
             if (packageArguments[0] == "LOGIN_REFUSE")
             {
@@ -348,10 +348,10 @@ namespace BMB
         }
 
         //TO DO
-        private void populateGameMenu()
+        private void populateLobbyMenu()
         {
             //request list of available games
-            this.package.SetTypeREQUEST_GAME_LIST();
+            this.package.SetTypeREQUEST_LOBBY_LIST();
             this.connector.Send(this.package);
 
             //server sends list package with all the avaiable games
@@ -361,6 +361,27 @@ namespace BMB
             if (packageArguments[0] == "LIST")
             {
                 for(int i = 1; i < packageArguments.Count; i++)
+                {
+                    //DISPLAY THEM SOMEHOW
+                    this.listBoxGames.Items.Add(packageArguments[i]);
+                }
+            }
+        }
+
+        //Populate lobby 
+        private void populateLobbyMenu(String gameName)
+        {
+            //request list of available games
+            this.package.SetTypeREQUEST_LOBBY_LIST_ARG(gameName);
+            this.connector.Send(this.package);
+
+            //server sends list package with all the avaiable games
+            this.package = this.connector.ReceivePackage();
+            this.packageArguments = this.package.getArguments();
+            this.panelGamesList.Visible = true;
+            if (packageArguments[0] == "LIST")
+            {
+                for (int i = 1; i < packageArguments.Count; i++)
                 {
                     //DISPLAY THEM SOMEHOW
                     this.listBoxGames.Items.Add(packageArguments[i]);
@@ -390,24 +411,7 @@ namespace BMB
 
 
 
-        private void populateLobbyMenu(String game)
-        {
-            this.panelGamesList.Visible = false;
-            this.panelLobbysList.Visible = true;
-
-            this.package.SetTypeREQUEST_LOBBY_LIST(game);
-            this.connector.Send(this.package);
-
-            if (packageArguments[0] == "LIST")
-            {
-                for (int i = 1; i < packageArguments.Count; i++)
-                {
-                    this.listBoxLobbys.Items.Add(packageArguments[i]);
-
-                }
-            }
-
-        }
+       
 
         private void buttonLIChoose_Click(object sender, EventArgs e)
         {
