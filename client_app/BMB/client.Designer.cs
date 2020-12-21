@@ -34,10 +34,7 @@ namespace BMB
             this.panelGnome = new System.Windows.Forms.Panel();
             this.panelCover = new System.Windows.Forms.Panel();
             this.panelGamesList = new System.Windows.Forms.Panel();
-            this.panelLobbysList = new System.Windows.Forms.Panel();
-            this.labelLobbyList = new System.Windows.Forms.Label();
-            this.listBoxLobbys = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelGameList = new System.Windows.Forms.Label();
             this.listBoxGames = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panelSide = new System.Windows.Forms.Panel();
@@ -78,7 +75,6 @@ namespace BMB
             this.panelGry.SuspendLayout();
             this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
-            this.panelLobbysList.SuspendLayout();
             this.panelSide.SuspendLayout();
             this.panelSetUp.SuspendLayout();
             this.panelSignUp.SuspendLayout();
@@ -108,7 +104,7 @@ namespace BMB
             // 
             this.panelGnome.BackgroundImage = global::BMB.Properties.Resources.noggin;
             this.panelGnome.Controls.Add(this.panelCover);
-            this.panelGnome.Location = new System.Drawing.Point(167, 56);
+            this.panelGnome.Location = new System.Drawing.Point(146, 100);
             this.panelGnome.Name = "panelGnome";
             this.panelGnome.Size = new System.Drawing.Size(692, 972);
             this.panelGnome.TabIndex = 19;
@@ -116,7 +112,7 @@ namespace BMB
             // 
             // panelCover
             // 
-            this.panelCover.Location = new System.Drawing.Point(3, -14);
+            this.panelCover.Location = new System.Drawing.Point(3, 0);
             this.panelCover.Name = "panelCover";
             this.panelCover.Size = new System.Drawing.Size(733, 983);
             this.panelCover.TabIndex = 20;
@@ -125,58 +121,23 @@ namespace BMB
             // panelGamesList
             // 
             this.panelGamesList.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelGamesList.Controls.Add(this.panelLobbysList);
-            this.panelGamesList.Controls.Add(this.label1);
+            this.panelGamesList.Controls.Add(this.labelGameList);
             this.panelGamesList.Controls.Add(this.listBoxGames);
-            this.panelGamesList.Location = new System.Drawing.Point(273, 130);
+            this.panelGamesList.Location = new System.Drawing.Point(143, 130);
             this.panelGamesList.Name = "panelGamesList";
-            this.panelGamesList.Size = new System.Drawing.Size(401, 434);
+            this.panelGamesList.Size = new System.Drawing.Size(729, 815);
             this.panelGamesList.TabIndex = 2;
             this.panelGamesList.Visible = false;
             // 
-            // panelLobbysList
+            // labelGameList
             // 
-            this.panelLobbysList.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelLobbysList.Controls.Add(this.labelLobbyList);
-            this.panelLobbysList.Controls.Add(this.listBoxLobbys);
-            this.panelLobbysList.Location = new System.Drawing.Point(0, 0);
-            this.panelLobbysList.Name = "panelLobbysList";
-            this.panelLobbysList.Size = new System.Drawing.Size(401, 434);
-            this.panelLobbysList.TabIndex = 3;
-            this.panelLobbysList.Visible = false;
-            // 
-            // labelLobbyList
-            // 
-            this.labelLobbyList.AutoSize = true;
-            this.labelLobbyList.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelLobbyList.Location = new System.Drawing.Point(119, 23);
-            this.labelLobbyList.Name = "labelLobbyList";
-            this.labelLobbyList.Size = new System.Drawing.Size(154, 31);
-            this.labelLobbyList.TabIndex = 2;
-            this.labelLobbyList.Text = "LISTA LOBB";
-            // 
-            // listBoxLobbys
-            // 
-            this.listBoxLobbys.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.listBoxLobbys.FormattingEnabled = true;
-            this.listBoxLobbys.HorizontalScrollbar = true;
-            this.listBoxLobbys.IntegralHeight = false;
-            this.listBoxLobbys.ItemHeight = 30;
-            this.listBoxLobbys.Location = new System.Drawing.Point(22, 79);
-            this.listBoxLobbys.Name = "listBoxLobbys";
-            this.listBoxLobbys.Size = new System.Drawing.Size(353, 329);
-            this.listBoxLobbys.TabIndex = 1;
-            this.listBoxLobbys.SelectedIndexChanged += new System.EventHandler(this.listBoxLobbys_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(119, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 31);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "LISTA GIER";
+            this.labelGameList.AutoSize = true;
+            this.labelGameList.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelGameList.Location = new System.Drawing.Point(265, 27);
+            this.labelGameList.Name = "labelGameList";
+            this.labelGameList.Size = new System.Drawing.Size(154, 31);
+            this.labelGameList.TabIndex = 2;
+            this.labelGameList.Text = "LISTA LOBB";
             // 
             // listBoxGames
             // 
@@ -185,9 +146,9 @@ namespace BMB
             this.listBoxGames.HorizontalScrollbar = true;
             this.listBoxGames.IntegralHeight = false;
             this.listBoxGames.ItemHeight = 30;
-            this.listBoxGames.Location = new System.Drawing.Point(22, 79);
+            this.listBoxGames.Location = new System.Drawing.Point(38, 69);
             this.listBoxGames.Name = "listBoxGames";
-            this.listBoxGames.Size = new System.Drawing.Size(353, 329);
+            this.listBoxGames.Size = new System.Drawing.Size(627, 699);
             this.listBoxGames.TabIndex = 1;
             this.listBoxGames.SelectedIndexChanged += new System.EventHandler(this.listBoxGames_SelectedIndexChanged);
             // 
@@ -580,8 +541,6 @@ namespace BMB
             this.panelGnome.ResumeLayout(false);
             this.panelGamesList.ResumeLayout(false);
             this.panelGamesList.PerformLayout();
-            this.panelLobbysList.ResumeLayout(false);
-            this.panelLobbysList.PerformLayout();
             this.panelSide.ResumeLayout(false);
             this.panelSetUp.ResumeLayout(false);
             this.panelSetUp.PerformLayout();
@@ -605,7 +564,7 @@ namespace BMB
         private System.Windows.Forms.Panel panelSide;
         private System.Windows.Forms.ListBox listBoxGames;
         private System.Windows.Forms.Panel panelGamesList;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelGameList;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.Panel panelSetUp;
         private System.Windows.Forms.Panel panelSignUp;
@@ -639,9 +598,6 @@ namespace BMB
         private System.Windows.Forms.TextBox textBoxIPI1;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Label labelSUError;
-        private System.Windows.Forms.Panel panelLobbysList;
-        private System.Windows.Forms.Label labelLobbyList;
-        private System.Windows.Forms.ListBox listBoxLobbys;
         private System.Windows.Forms.Label labelTest;
         private System.Windows.Forms.Panel panelGnome;
         private System.Windows.Forms.Panel panelCover;

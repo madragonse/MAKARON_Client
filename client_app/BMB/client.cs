@@ -103,7 +103,7 @@ namespace BMB
                 //TEST
                 /*playing = true;
                 this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);*/
-                choosenGame = 1;
+                //choosenGame = 1;
                 if (this.choosenGame != 0)
                 {
                     playing = true;
@@ -393,21 +393,20 @@ namespace BMB
         {
 
             this.panelGamesList.Visible = true;
-            if (this.listBoxGames.SelectedItem.ToString().Equals("BOMBERMAN"))
+            String[] spl = this.listBoxGames.SelectedItem.ToString().Split(' ');
+
+            if(spl[1].Equals("Bomberman"))            
             {
                 this.choosenGame = 1;
-                this.populateLobbyMenu("BOMBERMAN");
+                
             }
 
-        }
-
-        private void listBoxLobbys_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.package.SetTypeJOIN_LOBBY(this.listBoxLobbys.SelectedItem.ToString());
+            this.package.SetTypeJOIN_LOBBY(spl[0]);
             this.connector.Send(this.package);
 
-
         }
+
+
 
 
 
