@@ -64,7 +64,7 @@ namespace BMB
             
             this.input = new Input();
             this.cornerPoint = new PointF(0, 0);
-
+            this.buttonReady.Visible = true;
             //this.window = CreateGraphics();
 
             this.connector = new TCP_Connector();
@@ -418,6 +418,7 @@ namespace BMB
             if (packageArguments[0] == "JOIN_LOBBY_CONFIRM")
             {
                 this.panelGamesList.Visible = false;
+                this.buttonReady.Visible = true;
                 //TODO SHOW LOBBY MENU
 
                 if (chosenGame.Equals("BOMBERMAN"))
@@ -542,7 +543,8 @@ namespace BMB
 
         private void buttonReady_Click(object sender, EventArgs e)
         {
-            //todo butt
+            this.cpackage.SetTypeLOBBY_READY();
+            this.connector.Send(this.cpackage);
         }
     }
 }

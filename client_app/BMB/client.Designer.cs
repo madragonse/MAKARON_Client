@@ -39,6 +39,7 @@ namespace BMB
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panelSide = new System.Windows.Forms.Panel();
             this.panelSetUp = new System.Windows.Forms.Panel();
+            this.buttonReady = new System.Windows.Forms.Button();
             this.labelTest = new System.Windows.Forms.Label();
             this.panelSignUp = new System.Windows.Forms.Panel();
             this.labelSUError = new System.Windows.Forms.Label();
@@ -72,7 +73,6 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.buttonReady = new System.Windows.Forms.Button();
             this.panelGry.SuspendLayout();
             this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
@@ -185,6 +185,16 @@ namespace BMB
             this.panelSetUp.Name = "panelSetUp";
             this.panelSetUp.Size = new System.Drawing.Size(456, 1055);
             this.panelSetUp.TabIndex = 0;
+            // 
+            // buttonReady
+            // 
+            this.buttonReady.Location = new System.Drawing.Point(28, 736);
+            this.buttonReady.Name = "buttonReady";
+            this.buttonReady.Size = new System.Drawing.Size(385, 59);
+            this.buttonReady.TabIndex = 19;
+            this.buttonReady.Text = "RERDY!";
+            this.buttonReady.UseVisualStyleBackColor = true;
+            this.buttonReady.Click += new System.EventHandler(this.buttonReady_Click);
             // 
             // labelTest
             // 
@@ -524,16 +534,6 @@ namespace BMB
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
-            // 
-            // buttonReady
-            // 
-            this.buttonReady.Location = new System.Drawing.Point(53, 925);
-            this.buttonReady.Name = "buttonReady";
-            this.buttonReady.Size = new System.Drawing.Size(349, 98);
-            this.buttonReady.TabIndex = 19;
-            this.buttonReady.Text = "RERDY!";
-            this.buttonReady.UseVisualStyleBackColor = true;
-            this.buttonReady.Click += new System.EventHandler(this.buttonReady_Click);
             // 
             // client
             // 

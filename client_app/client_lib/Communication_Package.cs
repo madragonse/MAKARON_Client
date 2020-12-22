@@ -189,5 +189,13 @@ namespace packages
             this.XML += "<type>REQUEST_LOBBY_LIST</type>";
             this.XML += "</PACKAGE>";
         }
+        public void SetTypeLOBBY_READY()
+        {
+            this.XML = "<PACKAGE>";
+            this.XML += "<type>LOBBY_READYT</type>";
+            this.XML += "</PACKAGE>";
+        }
+
+        
     }
 }
