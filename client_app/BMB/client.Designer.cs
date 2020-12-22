@@ -73,7 +73,6 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.panelReady = new System.Windows.Forms.Panel();
             this.panelGry.SuspendLayout();
             this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
@@ -84,7 +83,6 @@ namespace BMB
             this.panelLogin.SuspendLayout();
             this.panelConnect.SuspendLayout();
             this.panelConnected.SuspendLayout();
-            this.panelReady.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelGry
@@ -167,6 +165,7 @@ namespace BMB
             // panelSide
             // 
             this.panelSide.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelSide.Controls.Add(this.buttonReady);
             this.panelSide.Controls.Add(this.panelSetUp);
             this.panelSide.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelSide.Location = new System.Drawing.Point(980, 0);
@@ -176,21 +175,20 @@ namespace BMB
             // 
             // panelSetUp
             // 
-            this.panelSetUp.Controls.Add(this.panelReady);
+            this.panelSetUp.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelSetUp.Controls.Add(this.labelTest);
             this.panelSetUp.Controls.Add(this.panelSignUp);
             this.panelSetUp.Controls.Add(this.panelLOrSU);
             this.panelSetUp.Controls.Add(this.panelLogin);
             this.panelSetUp.Controls.Add(this.panelConnect);
-            this.panelSetUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSetUp.Location = new System.Drawing.Point(0, 0);
             this.panelSetUp.Name = "panelSetUp";
-            this.panelSetUp.Size = new System.Drawing.Size(456, 1055);
+            this.panelSetUp.Size = new System.Drawing.Size(456, 737);
             this.panelSetUp.TabIndex = 0;
             // 
             // buttonReady
             // 
-            this.buttonReady.Location = new System.Drawing.Point(6, 13);
+            this.buttonReady.Location = new System.Drawing.Point(36, 770);
             this.buttonReady.Name = "buttonReady";
             this.buttonReady.Size = new System.Drawing.Size(385, 59);
             this.buttonReady.TabIndex = 19;
@@ -537,14 +535,6 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // panelReady
-            // 
-            this.panelReady.Controls.Add(this.buttonReady);
-            this.panelReady.Location = new System.Drawing.Point(22, 739);
-            this.panelReady.Name = "panelReady";
-            this.panelReady.Size = new System.Drawing.Size(398, 95);
-            this.panelReady.TabIndex = 20;
-            // 
             // client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -575,7 +565,6 @@ namespace BMB
             this.panelConnect.PerformLayout();
             this.panelConnected.ResumeLayout(false);
             this.panelConnected.PerformLayout();
-            this.panelReady.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -625,7 +614,6 @@ namespace BMB
         private System.Windows.Forms.Panel panelGnome;
         private System.Windows.Forms.Panel panelCover;
         private System.Windows.Forms.Button buttonReady;
-        private System.Windows.Forms.Panel panelReady;
     }
 }
 
