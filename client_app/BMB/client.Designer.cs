@@ -73,6 +73,7 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panelReady = new System.Windows.Forms.Panel();
             this.panelGry.SuspendLayout();
             this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
@@ -83,6 +84,7 @@ namespace BMB
             this.panelLogin.SuspendLayout();
             this.panelConnect.SuspendLayout();
             this.panelConnected.SuspendLayout();
+            this.panelReady.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelGry
@@ -174,7 +176,7 @@ namespace BMB
             // 
             // panelSetUp
             // 
-            this.panelSetUp.Controls.Add(this.buttonReady);
+            this.panelSetUp.Controls.Add(this.panelReady);
             this.panelSetUp.Controls.Add(this.labelTest);
             this.panelSetUp.Controls.Add(this.panelSignUp);
             this.panelSetUp.Controls.Add(this.panelLOrSU);
@@ -188,7 +190,7 @@ namespace BMB
             // 
             // buttonReady
             // 
-            this.buttonReady.Location = new System.Drawing.Point(28, 736);
+            this.buttonReady.Location = new System.Drawing.Point(6, 13);
             this.buttonReady.Name = "buttonReady";
             this.buttonReady.Size = new System.Drawing.Size(385, 59);
             this.buttonReady.TabIndex = 19;
@@ -535,6 +537,14 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
+            // panelReady
+            // 
+            this.panelReady.Controls.Add(this.buttonReady);
+            this.panelReady.Location = new System.Drawing.Point(22, 739);
+            this.panelReady.Name = "panelReady";
+            this.panelReady.Size = new System.Drawing.Size(398, 95);
+            this.panelReady.TabIndex = 20;
+            // 
             // client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -565,6 +575,7 @@ namespace BMB
             this.panelConnect.PerformLayout();
             this.panelConnected.ResumeLayout(false);
             this.panelConnected.PerformLayout();
+            this.panelReady.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -614,6 +625,7 @@ namespace BMB
         private System.Windows.Forms.Panel panelGnome;
         private System.Windows.Forms.Panel panelCover;
         private System.Windows.Forms.Button buttonReady;
+        private System.Windows.Forms.Panel panelReady;
     }
 }
 
