@@ -94,12 +94,12 @@ namespace client_lib
             return Encoding.UTF8.GetString(Buffer, 0, messageLength); ;
         }
 
-        public Communication_Package ReceivePackage()
+        public Package ReceivePackage()
         {
             Array.Clear(Buffer, 0, Buffer.Length);
 
             Stream.Read(Buffer, 0, Buffer.Length);
-            Communication_Package package = new Communication_Package(Buffer);
+            Package package = new Package(Buffer);
             return package;
         }
 

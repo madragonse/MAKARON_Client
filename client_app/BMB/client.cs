@@ -36,10 +36,13 @@ namespace BMB
         private int serverPort;
         private IPAddress serverIP;
         private TCP_Connector connector;
-        private Communication_Package package;
+        private Communication_Package cpackage;
+        private Communication_Package pingPackage;
+        private Package package;
         private List<String> packageArguments;
         private Queue gamePackages;
         private Queue wrapperGamePackages;
+       
 
         private int choosenGame;
         ScreenSaver screenSaver;
@@ -65,7 +68,10 @@ namespace BMB
             //this.window = CreateGraphics();
 
             this.connector = new TCP_Connector();
-            this.package = new Communication_Package();
+            this.package = new Package();
+            this.cpackage = new Communication_Package();
+            this.pingPackage = new Communication_Package();
+            pingPackage.SetTypePING();
             this.gamePackages = new Queue();
 
             this.choosenGame = 0;
@@ -107,7 +113,7 @@ namespace BMB
                 //TEST
                 /*playing = true;
                 this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);*/
-                choosenGame = 1;
+                //choosenGame = 1;
                 if (this.choosenGame != 0)
                 {
                     playing = true;
@@ -274,8 +280,7 @@ namespace BMB
             {
                 while (true)
                 {
-                    this.package.SetTypePING();
-                    this.connector.Send(this.package);
+                    this.connector.Send(this.pingPackage);
                     Thread.Sleep(4500);
                 }
 
@@ -288,11 +293,11 @@ namespace BMB
             String login = this.textBoxLogin.Text;
             String password = ComputeSha256Hash(this.textBoxPassword.Text);
 
-            this.package.SetTypeLOGIN(login, password);
-            this.connector.Send(this.package);
+            this.cpackage.SetTypeLOGIN(login, password);
+            this.connector.Send(this.cpackage);
 
             //handle response 
-            this.package=this.connector.ReceivePackage();
+            this.package=  this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
 
             //if login successfull
@@ -330,11 +335,11 @@ namespace BMB
                 return;
             }
 
-            this.package.SetTypeSIGNUP(login, ComputeSha256Hash(password));
-            this.connector.Send(this.package);
+            this.cpackage.SetTypeSIGNUP(login, ComputeSha256Hash(password));
+            this.connector.Send(this.cpackage);
 
             //handle response 
-            this.package = this.connector.ReceivePackage();
+            this.package =  this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
 
             //if login successfull
@@ -355,11 +360,11 @@ namespace BMB
         private void populateLobbyMenu()
         {
             //request list of available games
-            this.package.SetTypeREQUEST_LOBBY_LIST();
-            this.connector.Send(this.package);
+            this.cpackage.SetTypeREQUEST_LOBBY_LIST();
+            this.connector.Send(this.cpackage);
 
             //server sends list package with all the avaiable games
-            this.package = this.connector.ReceivePackage();
+            this.package =  this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
             this.panelGamesList.Visible = true;
             if (packageArguments[0] == "LIST")
@@ -376,11 +381,11 @@ namespace BMB
         private void populateLobbyMenu(String gameName)
         {
             //request list of available games
-            this.package.SetTypeREQUEST_LOBBY_LIST_ARG(gameName);
-            this.connector.Send(this.package);
+            this.cpackage.SetTypeREQUEST_LOBBY_LIST_ARG(gameName);
+            this.connector.Send(this.cpackage);
 
             //server sends list package with all the avaiable games
-            this.package = this.connector.ReceivePackage();
+            this.package =  this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
             this.panelGamesList.Visible = true;
             if (packageArguments[0] == "LIST")
@@ -402,11 +407,11 @@ namespace BMB
             String chosenLobbyName = spl[1];
 
             //try to join chosen lobby
-            this.package.SetTypeJOIN_LOBBY(spl[1]);
-            this.connector.Send(this.package);
+            this.cpackage.SetTypeJOIN_LOBBY(spl[1]);
+            this.connector.Send(this.cpackage);
 
             //handle response 
-            this.package = this.connector.ReceivePackage();
+            this.package =  this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
 
             //if joined successfully

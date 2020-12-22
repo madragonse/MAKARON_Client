@@ -75,7 +75,7 @@ namespace client_lib
             this.field = new RectangleF(0, 0, (int)this.fieldWidth, (int)this.fieldHeight);
 
             this.map = new byte[mapSizeX, mapSizeY];
-
+            this.players = new List<Player_Bomberman>();
             this.players.Add(new Player_Bomberman(10f, 10f));
 
             //TEST
@@ -128,9 +128,14 @@ namespace client_lib
         public override void process(Queue q)
         {
             String packageType = "";
-            foreach (Package p in q)
+
+           
+            while (q.Count>0)
             {
+                Package p = (Package) q.Dequeue();
                 List<String> args = p.getArguments();
+                if (args.Count == 0) continue;
+
                 packageType = args[0];
                 if (packageType == "START")
                 {
