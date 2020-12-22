@@ -192,7 +192,7 @@ namespace packages
         public void SetTypeLOBBY_READY()
         {
             this.XML = "<PACKAGE>";
-            this.XML += "<type>LOBBY_READYT</type>";
+            this.XML += "<type>LOBBY_READY</type>";
             this.XML += "</PACKAGE>";
         }
 

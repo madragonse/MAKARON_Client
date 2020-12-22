@@ -131,7 +131,7 @@ namespace client_lib
 
             while(q.Count >0)
             {
-                Bomberman_Package p = (Bomberman_Package)q.Dequeue();
+                Package p = (Package) q.Dequeue();
                 List<String> args = p.getArguments();
                 if (args.Count == 0) continue;                    
                 packageType = args[0];
