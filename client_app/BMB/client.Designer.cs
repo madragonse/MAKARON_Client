@@ -72,6 +72,7 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.buttonReady = new System.Windows.Forms.Button();
             this.panelGry.SuspendLayout();
             this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
@@ -173,6 +174,7 @@ namespace BMB
             // 
             // panelSetUp
             // 
+            this.panelSetUp.Controls.Add(this.buttonReady);
             this.panelSetUp.Controls.Add(this.labelTest);
             this.panelSetUp.Controls.Add(this.panelSignUp);
             this.panelSetUp.Controls.Add(this.panelLOrSU);
@@ -523,6 +525,16 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
+            // buttonReady
+            // 
+            this.buttonReady.Location = new System.Drawing.Point(53, 925);
+            this.buttonReady.Name = "buttonReady";
+            this.buttonReady.Size = new System.Drawing.Size(349, 98);
+            this.buttonReady.TabIndex = 19;
+            this.buttonReady.Text = "RERDY!";
+            this.buttonReady.UseVisualStyleBackColor = true;
+            this.buttonReady.Click += new System.EventHandler(this.buttonReady_Click);
+            // 
             // client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -601,6 +613,7 @@ namespace BMB
         private System.Windows.Forms.Label labelTest;
         private System.Windows.Forms.Panel panelGnome;
         private System.Windows.Forms.Panel panelCover;
+        private System.Windows.Forms.Button buttonReady;
     }
 }
 

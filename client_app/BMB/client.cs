@@ -539,6 +539,11 @@ namespace BMB
         {
             
         }
+
+        private void buttonReady_Click(object sender, EventArgs e)
+        {
+            //todo butt
+        }
     }
 }
 
