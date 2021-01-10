@@ -151,47 +151,7 @@ namespace client_lib
             this.posX += this.speedX * deltaTime;
             this.posY += this.speedY * deltaTime;
 
-            /*float avX = this.speedX + this.accX * deltaTime / 2;
-            if (Math.Abs(avX) < Math.Abs(this.frictionX * deltaTime * deltaTime / 2))
-            {
-                avX = 0;
-            }
-            else if (avX > 0)
-            {
-                avX -= this.frictionX * deltaTime;
-            }
-            else
-            {
-                avX += this.frictionX * deltaTime;
-            }
-
-            float avY = this.speedY + this.accY * deltaTime / 2;
-            if (Math.Abs(avY) < Math.Abs(this.frictionY * deltaTime * deltaTime / 2))
-            {
-                avY = 0;
-            }
-            else if (avX > 0)
-            {
-                avY -= this.frictionY * deltaTime;
-            }
-            else
-            {
-                avY += this.frictionY * deltaTime;
-            }*/
-
-            /*this.posX += avX * deltaTime;
-            this.posY += avY * deltaTime;
-            this.speedX += this.accX * deltaTime;
-            this.speedY += this.accY * deltaTime;
-            this.speed = (float)Math.Pow(Math.Pow(this.speedX, 2) + Math.Pow(this.speedY, 2), 0.5);*/
-
-            /*if (this.speed > this.maxSpeed)
-            {
-                this.SetSpeed(this.maxSpeed, this.speedX, this.speedX);
-            }*/
-
-            /*this.posX += this.speedX * deltaTime;
-            this.posY += this.speedY * deltaTime;*/
+            
         }
 
 
@@ -234,7 +194,10 @@ namespace client_lib
             return "Gracz:\nDirection X/Y: "+ this.speedX + " / "+ this.speedY + "Acceleration X / Y: " + this.accX + " / " + this.accY + "\nPosition X/Y: "+this.posX+" / "+this.posY;
         }
 
-
+        public float GetAcceleration()
+        {
+            return (float)Math.Pow(Math.Pow(this.accX, 2) + Math.Pow(this.accY, 2), 0.5);
+        }
 
     }
 }

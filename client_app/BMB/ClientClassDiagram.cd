@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="&lt;&lt;extends&gt;&gt;">
+    <Position X="19.048" Y="7.569" Height="0.291" Width="1.02" />
+  </Comment>
+  <Comment CommentText="&lt;&lt;extends&gt;&gt;">
+    <Position X="16.443" Y="12.111" Height="0.291" Width="1.02" />
+  </Comment>
+  <Class Name="BMB.client">
+    <Position X="11.75" Y="8.25" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="BMB.client.update" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>client.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <AssociationLine Name="cpackage" Type="packages.Communication_Package" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.861" Y="8.25" />
+        <Point X="12.861" Y="2.125" />
+        <Point X="20" Y="2.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="pingPackage" Type="packages.Communication_Package" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.048" Y="8.25" />
+        <Point X="12.048" Y="1.391" />
+        <Point X="19.134" Y="1.391" />
+        <Point X="19.134" Y="1.306" />
+        <Point X="19.714" Y="1.306" />
+        <Point X="19.714" Y="1.375" />
+        <Point X="20" Y="1.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>DDA4QCEBgiIIjP4AABChoAYTIJg80DErkYQhDIQwRBU=</HashCode>
+      <FileName>client.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="game" />
+      <Field Name="package" />
+      <Field Name="screenSaver" />
+      <Field Name="connector" />
+      <Field Name="input" />
+      <Field Name="cpackage" />
+      <Field Name="pingPackage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BMB.Input">
+    <Position X="7.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Input.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMB.ScreenSaver">
+    <Position X="7.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAGIAAAgAAAAQAQAwAAAAKAAIAAAAAAgAgAAAAAAA=</HashCode>
+      <FileName>ScreenSaver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="packages.Bomberman_Package">
+    <Position X="17.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="packages.Communication_Package">
+    <Position X="20" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="packages.Package">
+    <Position X="18.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="client_lib.Game" Collapsed="true">
+    <Position X="16.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="client_lib.Game_Bomberman">
+    <Position X="16.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="client_lib.TCP_Connector">
+    <Position X="14" Y="10.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
