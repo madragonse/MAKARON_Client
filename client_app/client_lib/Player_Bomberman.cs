@@ -155,6 +155,11 @@ namespace client_lib
         }
 
 
+        public void SetPosition(float x, float y)
+        {
+            this.posX = x;
+            this.posY = y;
+        }
 
         public void SetSpeed(float xDir, float yDir)
         {

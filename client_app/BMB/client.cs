@@ -64,7 +64,7 @@ namespace BMB
             
             this.input = new Input();
             this.cornerPoint = new PointF(0, 0);
-            this.buttonReady.Visible = true;
+            this.buttonReady.Visible = false;
             //this.window = CreateGraphics();
 
             this.connector = new TCP_Connector();

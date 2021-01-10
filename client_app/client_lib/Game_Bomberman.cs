@@ -131,7 +131,8 @@ namespace client_lib
 
             while(q.Count >0)
             {
-                Bomberman_Package p = (Bomberman_Package)q.Dequeue();
+                
+                Package p = (Package) q.Dequeue();
                 List<String> args = p.getArguments();
                 if (args.Count == 0) continue;                    
                 packageType = args[0];
@@ -150,15 +151,15 @@ namespace client_lib
                     String name = args[2];
                     this.players.Add(new Player_Bomberman(id,name));
                 }
-                else if (packageType == "ASSIGN_ID")
+                else if (packageType == "ASSIGN_ID")//gracz dostaje swoje nowe id
                 {
                     players[0].id = Int32.Parse(args[1]);
                 }
                 else if (packageType == "PLAYER_POSITION")
                 {
                     int id = Int32.Parse(args[1]);
-                    int x = Int32.Parse(args[2]);
-                    int y = Int32.Parse(args[3]);
+                    float x = float.Parse(args[2]);
+                    float y = float.Parse(args[3]);
                     this.setPlayerPosition(id, x, y);
                 }
                 else if (packageType == "BOMB_POSITION")
@@ -186,6 +187,10 @@ namespace client_lib
                     int id = Int32.Parse(args[1]);
                     //this.killPlayer(id)
                 }
+                else
+                {
+                    Console.WriteLine("---ERROR--- GOT PACKAGE " + packageType);
+                }
             }
            
 
@@ -193,7 +198,7 @@ namespace client_lib
 
         void setPlayerPosition(int id, float x, float y)
         {
-            this.players.Find(player => player.id == id);
+            this.players.Find(player => player.id == id).SetPosition(x, y);
         }
 
         public override List<Package> getPackages()
