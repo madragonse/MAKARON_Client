@@ -38,8 +38,8 @@ namespace BMB
             this.listBoxGames = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panelSide = new System.Windows.Forms.Panel();
-            this.panelSetUp = new System.Windows.Forms.Panel();
             this.buttonReady = new System.Windows.Forms.Button();
+            this.panelSetUp = new System.Windows.Forms.Panel();
             this.labelTest = new System.Windows.Forms.Label();
             this.panelSignUp = new System.Windows.Forms.Panel();
             this.labelSUError = new System.Windows.Forms.Label();
@@ -73,6 +73,7 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Guest = new System.Windows.Forms.Button();
             this.panelGry.SuspendLayout();
             this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
@@ -173,6 +174,16 @@ namespace BMB
             this.panelSide.Size = new System.Drawing.Size(456, 1055);
             this.panelSide.TabIndex = 14;
             // 
+            // buttonReady
+            // 
+            this.buttonReady.Location = new System.Drawing.Point(36, 770);
+            this.buttonReady.Name = "buttonReady";
+            this.buttonReady.Size = new System.Drawing.Size(385, 59);
+            this.buttonReady.TabIndex = 19;
+            this.buttonReady.Text = "RERDY!";
+            this.buttonReady.UseVisualStyleBackColor = true;
+            this.buttonReady.Click += new System.EventHandler(this.buttonReady_Click);
+            // 
             // panelSetUp
             // 
             this.panelSetUp.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -185,16 +196,6 @@ namespace BMB
             this.panelSetUp.Name = "panelSetUp";
             this.panelSetUp.Size = new System.Drawing.Size(456, 737);
             this.panelSetUp.TabIndex = 0;
-            // 
-            // buttonReady
-            // 
-            this.buttonReady.Location = new System.Drawing.Point(36, 770);
-            this.buttonReady.Name = "buttonReady";
-            this.buttonReady.Size = new System.Drawing.Size(385, 59);
-            this.buttonReady.TabIndex = 19;
-            this.buttonReady.Text = "RERDY!";
-            this.buttonReady.UseVisualStyleBackColor = true;
-            this.buttonReady.Click += new System.EventHandler(this.buttonReady_Click);
             // 
             // labelTest
             // 
@@ -303,6 +304,7 @@ namespace BMB
             // 
             // panelLOrSU
             // 
+            this.panelLOrSU.Controls.Add(this.Guest);
             this.panelLOrSU.Controls.Add(this.buttonLIChoose);
             this.panelLOrSU.Controls.Add(this.buttonSUChoose);
             this.panelLOrSU.Dock = System.Windows.Forms.DockStyle.Top;
@@ -317,7 +319,7 @@ namespace BMB
             this.buttonLIChoose.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonLIChoose.Location = new System.Drawing.Point(3, 6);
             this.buttonLIChoose.Name = "buttonLIChoose";
-            this.buttonLIChoose.Size = new System.Drawing.Size(260, 59);
+            this.buttonLIChoose.Size = new System.Drawing.Size(145, 59);
             this.buttonLIChoose.TabIndex = 15;
             this.buttonLIChoose.Text = "LOGIN";
             this.buttonLIChoose.UseVisualStyleBackColor = true;
@@ -326,9 +328,9 @@ namespace BMB
             // buttonSUChoose
             // 
             this.buttonSUChoose.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonSUChoose.Location = new System.Drawing.Point(268, 6);
+            this.buttonSUChoose.Location = new System.Drawing.Point(154, 6);
             this.buttonSUChoose.Name = "buttonSUChoose";
-            this.buttonSUChoose.Size = new System.Drawing.Size(183, 59);
+            this.buttonSUChoose.Size = new System.Drawing.Size(139, 59);
             this.buttonSUChoose.TabIndex = 16;
             this.buttonSUChoose.Text = "SIGN UP";
             this.buttonSUChoose.UseVisualStyleBackColor = true;
@@ -535,6 +537,17 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
+            // Guest
+            // 
+            this.Guest.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Guest.Location = new System.Drawing.Point(306, 6);
+            this.Guest.Name = "Guest";
+            this.Guest.Size = new System.Drawing.Size(145, 59);
+            this.Guest.TabIndex = 17;
+            this.Guest.Text = "GUEST";
+            this.Guest.UseVisualStyleBackColor = true;
+            this.Guest.Click += new System.EventHandler(this.button1_Click);
+            // 
             // client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -614,6 +627,7 @@ namespace BMB
         private System.Windows.Forms.Panel panelGnome;
         private System.Windows.Forms.Panel panelCover;
         private System.Windows.Forms.Button buttonReady;
+        private System.Windows.Forms.Button Guest;
     }
 }
 

@@ -292,25 +292,7 @@ namespace BMB
         {
             String login = this.textBoxLogin.Text;
             String password = ComputeSha256Hash(this.textBoxPassword.Text);
-
-            this.cpackage.SetTypeLOGIN(login, password);
-            this.connector.Send(this.cpackage);
-
-            //handle response 
-            this.package=  this.connector.ReceivePackage();
-            this.packageArguments = this.package.getArguments();
-
-            //if login successfull
-            if (packageArguments[0] == "LOGIN_CONFIRM")
-            {
-                this.panelSetUp.Visible = false;
-                populateLobbyMenu();
-            }
-            if (packageArguments[0] == "LOGIN_REFUSE")
-            {
-                this.labelLoginError.Visible = true;
-                this.labelLoginError.Text = "Błąd logowania: " + this.packageArguments[2]; 
-            }
+            LogIn(login, password);
         }
 
         private void buttonSignUp_Click(object sender, EventArgs e)
@@ -326,7 +308,6 @@ namespace BMB
                 return;
             }
 
-            //TO DO DISPLAY why password is wrong
             String illegalPassword= checkForIllegalPassword(password);
             if (illegalPassword != "")
             {
@@ -345,8 +326,7 @@ namespace BMB
             //if login successfull
             if (packageArguments[0] == "SIGNUP_CONFIRM")
             {
-                //TODO launch sign in box
-                this.panelSetUp.Visible = false;
+                LogIn(login, ComputeSha256Hash(password));
             }
             if (packageArguments[0] == "SIGNUP_REFUSE")
             {
@@ -356,7 +336,6 @@ namespace BMB
 
         }
 
-        //TO DO
         private void populateLobbyMenu()
         {
             //request list of available games
@@ -545,6 +524,37 @@ namespace BMB
         {
             this.cpackage.SetTypeLOBBY_READY();
             this.connector.Send(this.cpackage);
+        }
+
+        private void LogIn(String login,String hashed_password)
+        {
+          
+            this.cpackage.SetTypeLOGIN(login, hashed_password);
+            this.connector.Send(this.cpackage);
+
+            //handle response 
+            this.package = this.connector.ReceivePackage();
+            this.packageArguments = this.package.getArguments();
+
+            //if login successfull
+            if (packageArguments[0] == "LOGIN_CONFIRM")
+            {
+                this.panelSetUp.Visible = false;
+                populateLobbyMenu();
+            }
+            if (packageArguments[0] == "LOGIN_REFUSE")
+            {
+                this.labelLoginError.Visible = true;
+                this.labelLoginError.Text = "Błąd logowania: " + this.packageArguments[2];
+            }
+
+        }
+
+
+        //guest logIN
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LogIn("Kret", "e2f0c2aafca651a80fe70ca7159ad93a2915e9a99cf34b1eebd0412aec2e3dac");
         }
     }
 }
