@@ -153,6 +153,8 @@ namespace BMB
                     
                     this.game.process(this.wrapperGamePackages);
                     List<Package> packagesToSend = this.game.getPackages();
+                    this.connector.Send(packagesToSend);
+
                     sw.Stop();
                     this.game.update(this.input.buttons, sw.ElapsedMilliseconds);
                     
@@ -197,7 +199,7 @@ namespace BMB
                 input.buttons["D"] = true;
             }
 
-            if (Keyboard.IsKeyDown(Key.Space))
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
             {
                 input.buttons["Space"] = true;
             }
@@ -237,7 +239,7 @@ namespace BMB
                 input.buttons["D"] = false;
             }
 
-            if (Keyboard.IsKeyUp(Key.Space))
+            if (Keyboard.IsKeyUp(Key.LeftAlt))
             {
                 input.buttons["Space"] = false;
             }

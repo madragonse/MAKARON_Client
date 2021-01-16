@@ -8,6 +8,12 @@ namespace packages
 {
     public class Bomberman_Package : Package
     {
+        public Package asPackage()
+        {
+            Package p = new Package(this.XML);
+            return p;
+        }
+
         /// <summary>
         /// Wysyłane przez serwer, ustala id mapy
         /// </summary>
