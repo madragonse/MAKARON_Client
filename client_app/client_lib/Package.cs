@@ -41,17 +41,23 @@ namespace packages
             if (XML != null)
             {
                 List<String> arguments = new List<String>();
-                //parse into datatable
-                DataTable dataTable = parseXMLIntoDataTable(XML);
-                foreach (DataRow dataRow in dataTable.Rows)
+
+                try
                 {
-                    foreach (var item in dataRow.ItemArray)
+                    //parse into datatable
+                    DataTable dataTable = parseXMLIntoDataTable(XML);
+                    foreach (DataRow dataRow in dataTable.Rows)
                     {
-                        arguments.Add((string)item);
+                        foreach (var item in dataRow.ItemArray)
+                        {
+                            arguments.Add((string)item);
+                        }
                     }
+                    //delete type from arguments list
+                    return arguments;
                 }
-                //delete type from arguments list
-                return arguments;
+                //if an invalid package is recevied, return empty argument list
+                catch(Exception) { return new List<String>(); }
             }
             else return new List<String>();
         }
