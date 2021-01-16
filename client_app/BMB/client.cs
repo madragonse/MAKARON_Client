@@ -391,6 +391,9 @@ namespace BMB
         {
 
             this.panelGamesList.Visible = true;
+            //catch null value error
+            if (this.listBoxGames.SelectedItem == null) { return; }
+
             String[] spl = this.listBoxGames.SelectedItem.ToString().Split('\n');
             String chosenGame = spl[2];
             String chosenLobbyName = spl[1];
