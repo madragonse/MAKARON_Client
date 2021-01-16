@@ -42,6 +42,7 @@ namespace client_lib
         {
             this.mapSizeX = mapSizeX;
             this.mapSizeY = mapSizeY;
+            this.outQueue = new List<Package>();
 
             this.fieldWidth = (float)this.width / (float)this.mapSizeX;
             this.fieldHeight = (float)this.height / (float)this.mapSizeY;
@@ -68,6 +69,7 @@ namespace client_lib
         {
             this.mapSizeX = mapSizeX;
             this.mapSizeY = mapSizeY;
+            this.outQueue = new List<Package>();
 
             this.fieldWidth = (float)this.width / (float)this.mapSizeX;
             this.fieldHeight = (float)this.height / (float)this.mapSizeY;
@@ -98,6 +100,17 @@ namespace client_lib
             }
 
             players[0].update(deltatime/1000, buttons);
+
+            if (buttons["Space"])
+            {
+                if(players[0].ready_to_place_bomb())
+                {
+                    //place bomb
+                    Bomberman_Package package = new Bomberman_Package();
+                    package.SetTypePLACE_BOMB((int)players[0].posX, (int)players[0].posY, 4000);
+                    this.outQueue.Add(package);
+                }
+            }
 
 
 
@@ -185,7 +198,7 @@ namespace client_lib
                 else if (packageType == "DEAD")
                 {
                     int id = Int32.Parse(args[1]);
-                    //this.killPlayer(id)
+                    this.killPlayer(id);
                 }
                 else
                 {
@@ -198,13 +211,21 @@ namespace client_lib
 
         void setPlayerPosition(int id, float x, float y)
         {
-            this.players.Find(player => player.id == id).SetPosition(x, y);
+            if (this.players.Find(player => player.id == id).alive == true)
+            { 
+                this.players.Find(player => player.id == id).SetPosition(x, y); 
+            }
+            else 
+            { 
+                this.players.Find(player => player.id == id).SetPosition(-10000, -10000); 
+            }
         }
 
         public override List<Package> getPackages()
         {
             Bomberman_Package temp = new Bomberman_Package();
             temp.SetTypePLAYER_POSITION(this.playerId,players[0].posX, players[0].posY);
+            this.outQueue.Add(temp);
             return this.outQueue;
         }
 
@@ -271,6 +292,11 @@ namespace client_lib
         public override string ToString()
         {
             return "Player: " + this.players[0].ToString();
+        }
+
+        public void killPlayer(int id)
+        {
+
         }
     }
 }

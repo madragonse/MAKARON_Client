@@ -197,6 +197,11 @@ namespace BMB
                 input.buttons["D"] = true;
             }
 
+            if (Keyboard.IsKeyDown(Key.Space))
+            {
+                input.buttons["Space"] = true;
+            }
+
             if (Keyboard.IsKeyDown(Key.G))
             {
                 this.audio.Play();
@@ -231,9 +236,14 @@ namespace BMB
             {
                 input.buttons["D"] = false;
             }
+
+            if (Keyboard.IsKeyUp(Key.Space))
+            {
+                input.buttons["Space"] = false;
+            }
             //TODO - dodać inne przyciski
 
-            
+
         }
 
         private void connectButton_Click(object sender, EventArgs e)

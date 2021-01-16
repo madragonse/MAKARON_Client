@@ -19,9 +19,7 @@ namespace BMB
             this.buttons.Add("S", false);
             this.buttons.Add("A", false);
             this.buttons.Add("D", false);
-
-
-
+            this.buttons.Add("Spacebar", false);
         }
 
         public Input(Input toCopy)
@@ -31,9 +29,5 @@ namespace BMB
                 this.buttons.Add(button.Key, button.Value);
             }
         }
-
-
-
-
     }
 }

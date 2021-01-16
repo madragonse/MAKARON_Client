@@ -10,17 +10,20 @@ namespace client_lib
     {
         public String name="testPlayer";
         public int id;
+        public Boolean alive = true;
         public float posX, posY;
         private float speedX, speedY;
         private float accX, accY;
         private float acceleration, speed, mass;
         private float maxSpeed, maxAcceleration, maxForce, frictionX, frictionY;
+        private DateTime last_bomb_placed;
 
         public Player_Bomberman(float posX, float posY)
         {
             this.posX = posX;
             this.posY = posY;
 
+            this.alive = true;
             this.speedX = 0;
             this.speedY = 0;
             this.accX = 0;
@@ -33,6 +36,7 @@ namespace client_lib
             this.maxForce = 100;
             this.frictionX = 16f;
             this.frictionY = 16f;
+            this.last_bomb_placed = DateTime.Now;
 
         }
 
@@ -40,6 +44,7 @@ namespace client_lib
         {
             this.id = id;
             this.name = name;
+            this.alive = true;
 
             this.speedX = 0;
             this.speedY = 0;
@@ -53,6 +58,7 @@ namespace client_lib
             this.maxForce = 100;
             this.frictionX = 16f;
             this.frictionY = 16f;
+            this.last_bomb_placed = DateTime.Now;
 
         }
 
@@ -204,5 +210,15 @@ namespace client_lib
             return (float)Math.Pow(Math.Pow(this.accX, 2) + Math.Pow(this.accY, 2), 0.5);
         }
 
+        public Boolean ready_to_place_bomb()
+        {
+            TimeSpan t = DateTime.Now - this.last_bomb_placed;
+            if (t.TotalMilliseconds >= 2000)
+            {
+                this.last_bomb_placed = DateTime.Now;
+                return true;
+            }
+            else return false;
+        }
     }
 }
