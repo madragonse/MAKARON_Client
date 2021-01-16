@@ -225,7 +225,7 @@ namespace client_lib
         {
             Bomberman_Package temp = new Bomberman_Package();
             temp.SetTypePLAYER_POSITION(this.playerId,players[0].posX, players[0].posY);
-            this.outQueue.Add(temp);
+            this.outQueue.Add(temp.asPackage());
             return this.outQueue;
         }
 

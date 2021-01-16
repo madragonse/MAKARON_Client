@@ -103,14 +103,21 @@ namespace client_lib
             return package;
         }
 
-        public void Send(Communication_Package package)
+        public void Send(Package package)
         {
             if (this.Stream != null)
             {
                 byte[] data = package.ToByteArray();
                 Stream.Write(data, 0, data.Length);
             }
-            
+        }
+
+        public void Send(List<Package> packages)
+        {
+            foreach(Package p in packages)
+            {
+                this.Send(p);
+            }    
         }
     }
 }
