@@ -117,7 +117,7 @@ namespace client_lib
             if (!this.gameStarted) return;
             
 
-            players[0].update(deltatime/1000, buttons);
+            players[0].update(deltatime/1000, buttons, collisionCollection);
 
             if (buttons["Space"])
             {

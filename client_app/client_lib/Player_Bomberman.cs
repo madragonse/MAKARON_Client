@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using Collision2d;
 
 namespace client_lib
 {
@@ -68,7 +70,7 @@ namespace client_lib
         /// </summary>
         /// <param name="deltaTime"></param>
         /// 
-        public void update(float deltaTime, Dictionary<string, bool> buttons)
+        public void update(float deltaTime, Dictionary<string, bool> buttons, Collision collisionSystem)
         {
             float xDir = 0, yDir = 0;
             if (buttons["W"])
@@ -91,7 +93,7 @@ namespace client_lib
                 xDir = 1;
             }
 
-            this.update(deltaTime);
+            this.update(deltaTime, collisionSystem);
 
 
             this.SetAcceleration(xDir*25, yDir*25);
@@ -102,8 +104,11 @@ namespace client_lib
         }
 
 
-        public void update(float deltaTime)
+        public void update(float deltaTime, Collision collisionSystem)
         {
+            Vector oldPosition = new Vector();
+            Vector newPosition = new Vector();
+
             float aaX = 0;
             if (this.speedX > 0)
             {
@@ -153,11 +158,26 @@ namespace client_lib
                 this.SetSpeed(this.maxSpeed*0.99f, this.speedX, this.speedY);
                 
             }
+            oldPosition.X = this.posX;
+            oldPosition.Y = this.posY;
+            newPosition.X = this.posX + this.speedX * deltaTime;
+            newPosition.Y = this.posY + this.speedY * deltaTime;
 
-            this.posX += this.speedX * deltaTime;
-            this.posY += this.speedY * deltaTime;
+            Vector[] rec = collisionSystem.checkCollisionAll(oldPosition, newPosition, new Vector(this.accX, this.accY), new Vector(this.speedX, this.speedY));
 
-            
+            this.posX = (float)rec[0].X;
+            this.posX = (float)rec[0].Y;
+            this.accX = (float)rec[1].X;
+            this.accY = (float)rec[1].Y;
+            this.speedX = (float)rec[2].X;
+            this.speedY = (float)rec[2].Y;
+
+            /*this.posX += this.speedX * deltaTime;
+            this.posY += this.speedY * deltaTime;*/
+
+
+
+
         }
 
 
