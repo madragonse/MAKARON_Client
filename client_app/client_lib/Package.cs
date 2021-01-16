@@ -41,7 +41,6 @@ namespace packages
             if (XML != null)
             {
                 List<String> arguments = new List<String>();
-
                 try
                 {
                     //parse into datatable
@@ -57,7 +56,7 @@ namespace packages
                     return arguments;
                 }
                 //if an invalid package is recevied, return empty argument list
-                catch(Exception) { return new List<String>(); }
+                catch(Exception) { return arguments; }
             }
             else return new List<String>();
         }
