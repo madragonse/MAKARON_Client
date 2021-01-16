@@ -56,7 +56,13 @@ namespace client_lib
             this.field = new RectangleF(0, 0, (int)this.fieldWidth, (int)this.fieldHeight);
 
             this.map = new byte[mapSizeX, mapSizeY];
+            this.InitializeCollisionAssets();
 
+
+        }
+
+        private void InitializeCollisionAssets()
+        {
             this.collisionCollection = new Collision();
 
             this.colisionParser = new CollisionParser();
@@ -83,11 +89,6 @@ namespace client_lib
                     collisionCollection.addGroup("blokX:" + j + "Y:" + i, this.colisionParser.ParseRectangle(temPosition, this.fieldWidth));
                 }
             }
-
-            
-
-
-
         }
 
         //TEST
@@ -106,6 +107,7 @@ namespace client_lib
             this.players = new List<Player_Bomberman>();
             this.players.Add(new Player_Bomberman(10f, 10f));
 
+            this.InitializeCollisionAssets();
             //TEST
         }
 
