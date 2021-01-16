@@ -263,7 +263,34 @@ namespace Collision2d
             return this.checkCollisionPosition(cross[0], cross[0] + d);
         }
 
+        public Vector[] checkCollisionAll(Vector moveA, Vector moveB, Vector acceleration, Vector speed)
+        {
+            Section move = new Section(moveA, moveB);
+            Vector[] cross = this.checkCollision(move);
+            if (cross[0].X == 0 && cross[0].Y == 0)
+            {
+                return new Vector[3];
+            }
 
+            Vector q = moveB - moveA;
+            Vector p = cross[2] - cross[1];
+            Vector r = moveB - cross[0];
+            Vector z = cross[2] - cross[0];
+            Vector d = new Vector();
+            double cosA = (Vector.Multiply(p, q)) / (p.Length * q.Length);
+
+            d = r.Length * cosA * (z / z.Length);
+
+            Vector[] ret = new Vector[3];
+
+            ret[0] = this.checkCollisionPosition(cross[0], cross[0] + d);
+
+            ret[1] = acceleration.Length * cosA * (z / z.Length);
+
+            ret[2] = speed.Length * cosA * (z / z.Length);
+
+            return ret;
+        }
 
 
 
