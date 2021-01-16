@@ -26,7 +26,7 @@ namespace BMB
         private Thread reciveThread;
         private Graphics window;
         private PointF cornerPoint;
-        public delegate void update();
+        public delegate void update(String arg);
         public update updateFormDelegate;
 
         private Game game;
@@ -42,7 +42,7 @@ namespace BMB
         private List<String> packageArguments;
         private Queue gamePackages;
         private Queue wrapperGamePackages;
-       
+        
 
         private int choosenGame;
         ScreenSaver screenSaver;
@@ -54,8 +54,6 @@ namespace BMB
         public client()
         {
             InitializeComponent();
-            /*this.Width = 1100;
-            this.Height = 850;*/
 
         }
 
@@ -91,10 +89,7 @@ namespace BMB
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            /*panelGry.Width = 750;
-            panelGry.Height = 750;*/
             this.window = panelGry.CreateGraphics();
-
         }
 
         public void MainLoop()
@@ -110,6 +105,7 @@ namespace BMB
 
             while (true)
             {
+                //this.Invoke(this.updateFormDelegate, "test test !!!");
                 //TEST
                 /*playing = true;
                 this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);*/
@@ -157,21 +153,23 @@ namespace BMB
 
                     sw.Stop();
                     this.game.update(this.input.buttons, sw.ElapsedMilliseconds);
-                    
+                 
                     sw.Restart();
                     sw.Start();
-                    this.window.DrawImage(this.game.bitmap, cornerPoint);
-                    this.Invoke(this.updateFormDelegate);
 
+                    this.window.DrawImage(this.game.bitmap, cornerPoint);
+                    this.Invoke(this.updateFormDelegate, "test test !!!");
+
+                    Thread.Sleep(100);
                 }
             }
         }
 
-        public void updateForm()
+        public void updateForm(String arg)
         {
             sww.Stop();
-            this.labelTest.Text = "FPS: " + (float)(1000.0 / sww.ElapsedMilliseconds);
-
+            //this.labelTest.Text = "FPS: " + (float)(1000.0 / sww.ElapsedMilliseconds);
+            this.labelTest.Text = arg;
             sww.Restart();
             sww.Start();
         }

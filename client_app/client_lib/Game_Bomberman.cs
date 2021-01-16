@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Sockets;
+using Collision2d;
+using System.Windows;
 
 namespace client_lib
 {
@@ -36,6 +38,9 @@ namespace client_lib
         public byte[,] map;
 
         private List<Player_Bomberman> players;
+
+        private Collision collisionCollection;
+        private CollisionParser colisionParser;
         
 
         public Game_Bomberman(NetworkStream stream, int width, int height, int mapSizeX, int mapSizeY) : base(stream, width, height)
@@ -52,15 +57,36 @@ namespace client_lib
 
             this.map = new byte[mapSizeX, mapSizeY];
 
+            this.collisionCollection = new Collision();
+
+            this.colisionParser = new CollisionParser();
             //TEST
 
-            for (int i = 0; i < mapSizeY; i++)
+            /*for (int i = 0; i < mapSizeY; i++)
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
                     this.map[j, i] = 0;
                 }
+            }*/
+            Vector temPosition = new Vector();
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                temPosition.Y = i * this.fieldHeight;
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    if ((i + j) % 2 == 0) map[j, i] = 2;
+                    else map[j, i] = 1;
+
+                    temPosition.X = j * this.fieldWidth;
+
+                    collisionCollection.addGroup("blokX:" + j + "Y:" + i, this.colisionParser.ParseRectangle(temPosition, this.fieldWidth));
+                }
             }
+
+            
+
+
 
         }
 
@@ -89,15 +115,7 @@ namespace client_lib
         public override void update(Dictionary<string, bool> buttons, float deltatime)
         {
             if (!this.gameStarted) return;
-            Random rand = new Random();
-            for (int i = 0; i < mapSizeY; i++)
-            {
-                for (int j = 0; j < mapSizeX; j++)
-                {
-                    if ((i + j)%2 == 0) map[j, i] = 2;
-                    else map[j, i] = 1;
-                }
-            }
+            
 
             players[0].update(deltatime/1000, buttons);
 
@@ -259,6 +277,8 @@ namespace client_lib
 
                     switch(map[j,i])
                     {
+
+
                         case 0:
                             this.brush.Color = Color.Yellow;
                             break;
