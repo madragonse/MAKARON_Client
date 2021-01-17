@@ -81,12 +81,16 @@ namespace client_lib
                 temPosition.Y = i * this.fieldHeight;
                 for (int j = 0; j < mapSizeX; j++)
                 {
-                    if ((i + j) % 2 == 0) map[j, i] = 2;
+                    if ((i + j) % 2 == 0)
+                    {
+                        map[j, i] = 2;
+                        collisionCollection.addGroup("blokX:" + j + "Y:" + i, this.colisionParser.ParseRectangle(temPosition, this.fieldWidth));
+                    }
                     else map[j, i] = 1;
 
                     temPosition.X = j * this.fieldWidth;
 
-                    collisionCollection.addGroup("blokX:" + j + "Y:" + i, this.colisionParser.ParseRectangle(temPosition, this.fieldWidth));
+                    
                 }
             }
         }
