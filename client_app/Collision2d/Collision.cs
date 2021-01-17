@@ -111,7 +111,7 @@ namespace Collision2d
                 if ((Math.Abs(rap.X) > Math.Abs(ra.X)) || (Math.Abs(rap.Y) > Math.Abs(ra.Y)) || (Math.Abs(rbp.X) > Math.Abs(rb.X)) || (Math.Abs(rbp.Y) > Math.Abs(rb.Y)))
                 {
                     //Console.Out.WriteLine("Nie przecina się");
-                    return new Vector();
+                    return new Vector(0, 0);
                 }
                 else
                 {
@@ -214,6 +214,7 @@ namespace Collision2d
 
             return ret;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -265,6 +266,18 @@ namespace Collision2d
 
         public Vector[] checkCollisionAll(Vector moveA, Vector moveB, Vector acceleration, Vector speed)
         {
+            Vector[] ret = new Vector[3];
+
+            if (moveA == moveB)
+            {
+                ret[0] = moveB;
+
+                ret[1] = acceleration;
+
+                ret[2] = speed;
+
+                return ret;
+            }
             Section move = new Section(moveA, moveB);
             Vector[] cross = this.checkCollision(move);
             if (cross[0].X == 0 && cross[0].Y == 0)
@@ -281,7 +294,7 @@ namespace Collision2d
 
             d = r.Length * cosA * (z / z.Length);
 
-            Vector[] ret = new Vector[3];
+            
 
             ret[0] = this.checkCollisionPosition(cross[0], cross[0] + d);
 
