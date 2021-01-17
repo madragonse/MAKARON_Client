@@ -101,7 +101,7 @@ namespace BMB
             bool playing = false;
             
 
-            screenSaver = new ScreenSaver(this.panelGry.Width, this.panelGry.Height, 25, 25);
+            screenSaver = new ScreenSaver(this.panelGry.Width, this.panelGry.Height, 15, 15);
 
             while (true)
             {
@@ -118,7 +118,7 @@ namespace BMB
                     {
                         case 1:
                             //TODO stream do gry
-                            this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 25, 25);
+                            this.game = new Game_Bomberman(this.panelGry.Width - 1, this.panelGry.Height - 1, 15, 15);
                             break;
 
                         default:
