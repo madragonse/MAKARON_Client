@@ -68,31 +68,57 @@ namespace client_lib
             this.colisionParser = new CollisionParser();
             //TEST
 
-            /*for (int i = 0; i < mapSizeY; i++)
+            for (int i = 0; i < mapSizeY; i++)
             {
                 for (int j = 0; j < mapSizeX; j++)
                 {
                     this.map[j, i] = 0;
                 }
-            }*/
+            }
             Vector temPosition = new Vector();
+
             for (int i = 0; i < mapSizeY; i++)
             {
-                temPosition.Y = i * this.fieldHeight;
-                for (int j = 0; j < mapSizeX; j++)
-                {
-                    if ((i + j) % 2 == 0)
-                    {
-                        map[j, i] = 2;
-                        collisionCollection.addGroup("blokX:" + j + "Y:" + i, this.colisionParser.ParseRectangle(temPosition, this.fieldWidth));
-                    }
-                    else map[j, i] = 1;
+                this.map[0, i] = 1;
+                this.map[i, 0] = 1;
+                this.map[mapSizeX-1, i] = 1;
+                this.map[i, mapSizeY-1] = 1;
 
-                    temPosition.X = j * this.fieldWidth;
+            }
+
+            for (int i = 2; i < mapSizeY-2; i++)
+            {
+                temPosition.Y = i;
+                for (int j = 2; j < mapSizeX-2; j++)
+                {
+                    temPosition.X = j ;
+
+                    if ((i % 2 == 0) && (j % 2 == 0))
+                    {
+                        this.map[i, j] = 2;
+                    }
 
                     
+
                 }
             }
+
+
+            for (int i = 0; i < mapSizeY; i++)
+            {
+                temPosition.Y = i;
+                for (int j = 0; j < mapSizeX; j++)
+                {
+                    temPosition.X = j;
+                    
+                    if (map[j, i] == 2)
+                        collisionCollection.addGroup("blokX:" + j + "Y:" + i, this.colisionParser.ParseRectangle(temPosition, 1));
+
+                }
+            }
+
+
+
         }
 
         //TEST
@@ -289,10 +315,10 @@ namespace client_lib
                             this.brush.Color = Color.Yellow;
                             break;
                         case 1:
-                            this.brush.Color = Color.White;
+                            this.brush.Color = Color.Black;
                             break;
                         case 2:
-                            this.brush.Color = Color.Red;
+                            this.brush.Color = Color.Green;
                             break;
                         default:
                             this.brush.Color = Color.Yellow;
