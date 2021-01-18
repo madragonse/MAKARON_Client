@@ -65,6 +65,8 @@ namespace client_lib
             this.map = new byte[mapSizeX, mapSizeY];
             this.InitializeCollisionAssets();
 
+            this.bombs = new List<Bomberman_Bomb>();
+            this.blow_Ups = new List<Blow_Up>();
 
         }
 
@@ -363,7 +365,7 @@ namespace client_lib
 
 
                         case 0:
-                            this.brush.Color = Color.Yellow;
+                            this.brush.Color = Color.Blue;
                             break;
                         case 1:
                             this.brush.Color = Color.Black;
@@ -372,7 +374,7 @@ namespace client_lib
                             this.brush.Color = Color.Green;
                             break;
                         default:
-                            this.brush.Color = Color.Yellow;
+                            this.brush.Color = Color.Blue;
                             break;
                     }
 
@@ -395,11 +397,23 @@ namespace client_lib
                     new PointF((float)(this.colSects[i, 1].X * this.fieldWidth), (float)(this.colSects[i, 1].Y * this.fieldWidth)));
             }
 
+            this.brush.Color = Color.Yellow;
+            foreach (Blow_Up blow in this.blow_Ups)
+            {
+                this.grafika.FillEllipse(this.brush, blow.x * this.fieldWidth, blow.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
+            }
+
+            this.brush.Color = Color.Black;
+            foreach (Bomberman_Bomb bomb in this.bombs)
+            {
+                this.grafika.FillEllipse(this.brush, (bomb.x + 0.2f) * this.fieldWidth, (bomb.y + 0.2f) * this.fieldWidth, this.fieldWidth*0.6f, this.fieldWidth * 0.6f);
+            }
 
 
-            
 
-            
+
+
+
 
             //this.grafika.DrawLine(this.pen, new PointF(0, 0), new PointF(100, 100));
 
