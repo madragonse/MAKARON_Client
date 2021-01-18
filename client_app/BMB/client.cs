@@ -353,15 +353,20 @@ namespace BMB
             this.connector.Send(this.cpackage);
 
             //server sends list package with all the avaiable games
-            this.package =  this.connector.ReceivePackage();
+            this.package = this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
             this.panelGamesList.Visible = true;
             if (packageArguments[0] == "LIST")
             {
-                for(int i = 1; i < packageArguments.Count; i++)
+                //add first separator
+                for (int i = 1; i < packageArguments.Count; i++)
                 {
-                    //DISPLAY THEM SOMEHOW
-                    this.listBoxGames.Items.Add(packageArguments[i]);
+                    String[] spl = packageArguments[i].Split('\n');
+                    //add each row as seperate item in listbox
+                    foreach (String s in spl)
+                    {
+                        this.listBoxGames.Items.Add(s);
+                    }
                 }
             }
         }
@@ -374,15 +379,21 @@ namespace BMB
             this.connector.Send(this.cpackage);
 
             //server sends list package with all the avaiable games
-            this.package =  this.connector.ReceivePackage();
+            this.package = this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
             this.panelGamesList.Visible = true;
             if (packageArguments[0] == "LIST")
             {
+                //add first separator
+                this.listBoxGames.Items.Add("");
                 for (int i = 1; i < packageArguments.Count; i++)
                 {
-                    //DISPLAY THEM SOMEHOW
-                    this.listBoxGames.Items.Add(packageArguments[i]);
+                    String[] spl = packageArguments[i].Split('\n');
+                    //add each row as seperate item in listbox
+                    foreach (String s in spl)
+                    {
+                        this.listBoxGames.Items.Add(s);
+                    }
                 }
             }
         }
@@ -391,19 +402,21 @@ namespace BMB
         {
 
             this.panelGamesList.Visible = true;
-            //catch null value error
-            if (this.listBoxGames.SelectedItem == null) { return; }
+            //catch null value error or separators clicked
+            if (this.listBoxGames.SelectedItem == null || this.listBoxGames.SelectedIndex % 5 == 0) { return; }
 
-            String[] spl = this.listBoxGames.SelectedItem.ToString().Split('\n');
-            String chosenGame = spl[2];
-            String chosenLobbyName = spl[1];
+
+            int firstLobbyItemIndex = 1 + (5 * (this.listBoxGames.SelectedIndex / 5));
+            String chosenLobbyName = this.listBoxGames.Items[firstLobbyItemIndex].ToString();
+            String chosenGame = this.listBoxGames.Items[firstLobbyItemIndex + 1].ToString();
+
 
             //try to join chosen lobby
-            this.cpackage.SetTypeJOIN_LOBBY(spl[1]);
+            this.cpackage.SetTypeJOIN_LOBBY(chosenLobbyName);
             this.connector.Send(this.cpackage);
 
             //handle response 
-            this.package =  this.connector.ReceivePackage();
+            this.package = this.connector.ReceivePackage();
             this.packageArguments = this.package.getArguments();
 
             //if joined successfully
@@ -423,7 +436,7 @@ namespace BMB
                 this.reciveThread.Start();
             }
 
-              
+
             if (packageArguments[0] == "JOIN_LOBBY_REFUSE")
             {
                 //TODO SHOW ERROR JOINING LOBBY
