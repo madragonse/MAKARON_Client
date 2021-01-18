@@ -11,8 +11,6 @@ namespace client_lib
         public int id;
         public float x;
         public float y;
-        public int range;
-        public DateTime detonationTime;
 
         public Bomberman_Bomb(int id,int x, int y)
         {

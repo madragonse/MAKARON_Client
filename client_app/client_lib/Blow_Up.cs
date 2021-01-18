@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace client_lib
 {
@@ -26,16 +27,16 @@ namespace client_lib
         {
             this.affected_fields = new List<Tuple<float, float>>();
 
-            for(int i = (int)(this.x - this.range); i< this.x + this.range; i++)
+            for(int i = (int)(this.x - this.range); i <= (this.x + this.range); i++)
             {
                 if (i < 1 || i > 13) continue;
-                this.affected_fields.Add(new Tuple<float,float>(i+0.5f,this.y + 0.5f));
+                this.affected_fields.Add(new Tuple<float,float>(i,this.y));
             }
-            for(int i = (int)(this.y - this.range); i < this.y+this.range;i++)
+            for(int i = (int)(this.y - this.range); i <= (this.y+this.range);i++)
             {
                 if (i < 1 || i > 13) continue;
                 if (i == this.y) continue;
-                this.affected_fields.Add(new Tuple<float, float>(this.x + 0.5f, i + 0.5f));
+                this.affected_fields.Add(new Tuple<float, float>(this.x, i));
             }
         }
 
