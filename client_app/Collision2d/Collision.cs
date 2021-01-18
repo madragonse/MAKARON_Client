@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -322,7 +322,11 @@ namespace Collision2d
 
             Vector q = moveB - moveA;
             Vector p = cross[2] - cross[1];
-            Vector r = moveB - cross[0];
+            Vector normq = q;
+            normq.Normalize();
+            normq = normq / 10;
+            cross[0] = cross[0] - normq;
+            Vector r = (moveB) - cross[0] ;
             Vector z = cross[2] - cross[0];
             Vector d = new Vector();
             double cosA = (Vector.Multiply(p, q)) / (p.Length * q.Length);

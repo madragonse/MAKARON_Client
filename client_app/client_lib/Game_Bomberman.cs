@@ -116,7 +116,7 @@ namespace client_lib
                 {
                     temPosition.X = j;
                     
-                    if (map[j, i] == 2)
+                    if (map[j, i] == 2 || map[j, i] == 1)
                         collisionCollection.addGroup("blokX:" + j + "Y:" + i, this.colisionParser.ParseRectangle(temPosition, 1));
 
                 }
