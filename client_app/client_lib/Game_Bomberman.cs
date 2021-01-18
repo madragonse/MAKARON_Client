@@ -55,6 +55,8 @@ namespace client_lib
             this.mapSizeX = mapSizeX;
             this.mapSizeY = mapSizeY;
             this.outQueue = new List<Package>();
+            this.blow_Ups = new List<Blow_Up>();
+            this.bombs = new List<Bomberman_Bomb>();
 
             this.fieldWidth = (float)this.width / (float)this.mapSizeX;
             this.fieldHeight = (float)this.height / (float)this.mapSizeY;
@@ -138,6 +140,8 @@ namespace client_lib
             this.mapSizeX = mapSizeX;
             this.mapSizeY = mapSizeY;
             this.outQueue = new List<Package>();
+            this.blow_Ups = new List<Blow_Up>();
+            this.bombs = new List<Bomberman_Bomb>();
 
             this.fieldWidth = (float)this.width / (float)this.mapSizeX;
             this.fieldHeight = (float)this.height / (float)this.mapSizeY;
@@ -203,7 +207,16 @@ namespace client_lib
         {
             String packageType = "";
 
-            while(q.Count >0)
+            for (int i = 0; i < this.blow_Ups.Count; i++)
+            {
+                if (blow_Ups[i].ready_to_die())
+                {
+                    this.blow_Ups.RemoveAt(i);
+                    break;
+                }
+            }
+
+            while (q.Count >0)
             {
                 
                 Package p = (Package) q.Dequeue();
@@ -272,15 +285,6 @@ namespace client_lib
                 else
                 {
                     Console.WriteLine("---ERROR--- GOT PACKAGE " + packageType);
-                }
-
-                for(int i =0;i<this.blow_Ups.Count;i++)
-                {
-                    if(blow_Ups[i].ready_to_die())
-                    {
-                        this.blow_Ups.RemoveAt(i);
-                        break;
-                    }
                 }
             }
            
