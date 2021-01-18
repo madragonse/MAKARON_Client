@@ -31,7 +31,7 @@ namespace client_lib
         private float fieldWidth;
         private float fieldHeight;
         private List<Package> outQueue;
-        private int playerId=0;
+        private int playerId;
         private bool gameStarted = false;
 
         public int mapSizeX;
@@ -127,16 +127,13 @@ namespace client_lib
 
                 }
             }
-
             this.colSects = this.collisionCollection.giveMeSections();
-
-
-
         }
 
         //TEST
         public Game_Bomberman(int width, int height, int mapSizeX, int mapSizeY) : base(width, height)
         {
+            this.playerId = -1;
             this.mapSizeX = mapSizeX;
             this.mapSizeY = mapSizeY;
             this.outQueue = new List<Package>();
@@ -151,6 +148,8 @@ namespace client_lib
             this.map = new byte[mapSizeX, mapSizeY];
             this.players = new List<Player_Bomberman>();
             this.players.Add(new Player_Bomberman(1.5f, 1.5f));
+            this.players[0].id = this.playerId;
+            
 
             this.InitializeCollisionAssets();
             //TEST
@@ -241,6 +240,7 @@ namespace client_lib
                 else if (packageType == "ASSIGN_ID")//gracz dostaje swoje nowe id
                 {
                     players[0].id = Int32.Parse(args[1]);
+                    this.playerId = Int32.Parse(args[1]);
                 }
                 else if (packageType == "PLAYER_POSITION")
                 {
@@ -263,6 +263,13 @@ namespace client_lib
                     int y = Int32.Parse(args[3]);
                     int range = Int32.Parse(args[4]);
                     this.detonate(id,x,y,range);
+                }
+                else if (packageType == "PLAYER_INFO")
+                {
+                    int id = Int32.Parse(args[1]);
+                    String name = args[2];
+                    this.players.Add(new Player_Bomberman(id,name));
+                    Debug.WriteLine("players: " + this.players.Count.ToString());
                 }
                 /*else if (packageType == "DESTROY_WALL")
                 {
@@ -308,12 +315,12 @@ namespace client_lib
             if (p == null) { return; }
 
             if (p.alive == true)
-            { 
-                this.players.Find(player => player.id == id).SetPosition(x, y); 
+            {
+                p.SetPosition(x, y); 
             }
             else 
-            { 
-                this.players.Find(player => player.id == id).SetPosition(-10000, -10000); 
+            {
+                p.SetPosition(-10000, -10000); 
             }
         }
 
@@ -405,8 +412,13 @@ namespace client_lib
             this.brush.Color = Color.Yellow;
             foreach (Blow_Up blow in this.blow_Ups)
             {
+                List<Tuple<float, float>> coords = blow.GetTuples();
+                foreach(Tuple<float,float> coord in coords)
+                {
+                    this.grafika.FillEllipse(this.brush, coord.Item1 * this.fieldWidth, coord.Item2 * this.fieldWidth, this.fieldWidth, this.fieldWidth);
+                }
                 //this.grafika.FillEllipse(this.brush, blow.x * this.fieldWidth, blow.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
-                this.grafika.FillEllipse(this.brush, blow.x * this.fieldWidth, blow.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
+                //this.grafika.FillEllipse(this.brush, blow.x * this.fieldWidth, blow.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
             }
 
             this.brush.Color = Color.Black;
@@ -415,13 +427,6 @@ namespace client_lib
                 this.grafika.FillEllipse(this.brush, (bomb.x + 0.2f) * this.fieldWidth, (bomb.y + 0.2f) * this.fieldWidth, this.fieldWidth*0.6f, this.fieldWidth * 0.6f);
                 //this.grafika.FillEllipse(this.brush, bomb.x * this.fieldWidth, bomb.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
             }
-
-
-
-
-
-
-
             //this.grafika.DrawLine(this.pen, new PointF(0, 0), new PointF(100, 100));
 
         }
@@ -433,7 +438,14 @@ namespace client_lib
 
         public void killPlayer(int id)
         {
-
+            foreach(Player_Bomberman p in this.players)
+            {
+                if (p.id == id)
+                { 
+                    p.SetPosition(10000, 10000);
+                    p.alive = false;
+                }
+            }
         }
     }
 }
