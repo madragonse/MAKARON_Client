@@ -51,6 +51,7 @@ namespace BMB
             this.labelPasswordInSU = new System.Windows.Forms.Label();
             this.textBoxPasswordInSU = new System.Windows.Forms.TextBox();
             this.panelLOrSU = new System.Windows.Forms.Panel();
+            this.Guest = new System.Windows.Forms.Button();
             this.buttonLIChoose = new System.Windows.Forms.Button();
             this.buttonSUChoose = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
@@ -73,7 +74,7 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.Guest = new System.Windows.Forms.Button();
+            this.refreshLobbyListButton = new System.Windows.Forms.Button();
             this.panelGry.SuspendLayout();
             this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
@@ -92,7 +93,6 @@ namespace BMB
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelGry.BackColor = System.Drawing.SystemColors.Info;
-            this.panelGry.Controls.Add(this.panelGnome);
             this.panelGry.Controls.Add(this.panelGamesList);
             this.panelGry.Location = new System.Drawing.Point(0, 3);
             this.panelGry.Margin = new System.Windows.Forms.Padding(0);
@@ -106,7 +106,7 @@ namespace BMB
             // 
             this.panelGnome.BackgroundImage = global::BMB.Properties.Resources.noggin;
             this.panelGnome.Controls.Add(this.panelCover);
-            this.panelGnome.Location = new System.Drawing.Point(146, 100);
+            this.panelGnome.Location = new System.Drawing.Point(0, 13);
             this.panelGnome.Name = "panelGnome";
             this.panelGnome.Size = new System.Drawing.Size(692, 972);
             this.panelGnome.TabIndex = 19;
@@ -114,7 +114,7 @@ namespace BMB
             // 
             // panelCover
             // 
-            this.panelCover.Location = new System.Drawing.Point(3, 0);
+            this.panelCover.Location = new System.Drawing.Point(0, 3);
             this.panelCover.Name = "panelCover";
             this.panelCover.Size = new System.Drawing.Size(733, 983);
             this.panelCover.TabIndex = 20;
@@ -123,6 +123,8 @@ namespace BMB
             // panelGamesList
             // 
             this.panelGamesList.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelGamesList.Controls.Add(this.refreshLobbyListButton);
+            this.panelGamesList.Controls.Add(this.panelGnome);
             this.panelGamesList.Controls.Add(this.labelGameList);
             this.panelGamesList.Controls.Add(this.listBoxGames);
             this.panelGamesList.Location = new System.Drawing.Point(143, 130);
@@ -313,6 +315,17 @@ namespace BMB
             this.panelLOrSU.Size = new System.Drawing.Size(456, 76);
             this.panelLOrSU.TabIndex = 17;
             this.panelLOrSU.Visible = false;
+            // 
+            // Guest
+            // 
+            this.Guest.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Guest.Location = new System.Drawing.Point(306, 6);
+            this.Guest.Name = "Guest";
+            this.Guest.Size = new System.Drawing.Size(145, 59);
+            this.Guest.TabIndex = 17;
+            this.Guest.Text = "GUEST";
+            this.Guest.UseVisualStyleBackColor = true;
+            this.Guest.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonLIChoose
             // 
@@ -537,16 +550,15 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // Guest
+            // refreshLobbyListButton
             // 
-            this.Guest.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Guest.Location = new System.Drawing.Point(306, 6);
-            this.Guest.Name = "Guest";
-            this.Guest.Size = new System.Drawing.Size(145, 59);
-            this.Guest.TabIndex = 17;
-            this.Guest.Text = "GUEST";
-            this.Guest.UseVisualStyleBackColor = true;
-            this.Guest.Click += new System.EventHandler(this.button1_Click);
+            this.refreshLobbyListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.refreshLobbyListButton.Location = new System.Drawing.Point(619, 13);
+            this.refreshLobbyListButton.Name = "refreshLobbyListButton";
+            this.refreshLobbyListButton.Size = new System.Drawing.Size(45, 45);
+            this.refreshLobbyListButton.TabIndex = 20;
+            this.refreshLobbyListButton.UseVisualStyleBackColor = true;
+            this.refreshLobbyListButton.Click += new System.EventHandler(this.refreshLobbyListButton_Click);
             // 
             // client
             // 
@@ -628,6 +640,7 @@ namespace BMB
         private System.Windows.Forms.Panel panelCover;
         private System.Windows.Forms.Button buttonReady;
         private System.Windows.Forms.Button Guest;
+        private System.Windows.Forms.Button refreshLobbyListButton;
     }
 }
 

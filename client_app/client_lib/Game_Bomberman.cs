@@ -266,7 +266,10 @@ namespace client_lib
 
         void setPlayerPosition(int id, float x, float y)
         {
-            if (this.players.Find(player => player.id == id).alive == true)
+            Player_Bomberman p = this.players.Find(player => player.id == id);
+            if (p == null) { return; }
+
+            if (p.alive == true)
             { 
                 this.players.Find(player => player.id == id).SetPosition(x, y); 
             }
