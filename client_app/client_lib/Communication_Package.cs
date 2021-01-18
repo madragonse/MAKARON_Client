@@ -196,6 +196,13 @@ namespace packages
             this.XML += "</PACKAGE>";
         }
 
-        
+        public void SetTypeLOGIN_AS_GUEST()
+        {
+            this.XML = "<PACKAGE>";
+            this.XML += "<type>LOGIN_AS_GUEST</type>";
+            this.XML += "</PACKAGE>";
+        }
+
+
     }
 }

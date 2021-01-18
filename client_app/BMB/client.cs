@@ -400,7 +400,6 @@ namespace BMB
 
         private void listBoxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             this.panelGamesList.Visible = true;
             //catch null value error or separators clicked
             if (this.listBoxGames.SelectedItem == null || this.listBoxGames.SelectedIndex % 5 == 0) { return; }
@@ -554,8 +553,11 @@ namespace BMB
 
         private void LogIn(String login,String hashed_password)
         {
-          
+
+
             this.cpackage.SetTypeLOGIN(login, hashed_password);
+            //login as guest
+            if (login == "" && hashed_password == ""){  this.cpackage.SetTypeLOGIN_AS_GUEST();}
             this.connector.Send(this.cpackage);
 
             //handle response 
@@ -580,7 +582,7 @@ namespace BMB
         //guest logIN
         private void button1_Click(object sender, EventArgs e)
         {
-            LogIn("Kret", "e2f0c2aafca651a80fe70ca7159ad93a2915e9a99cf34b1eebd0412aec2e3dac");
+            LogIn("", "");
         }
     }
 }
