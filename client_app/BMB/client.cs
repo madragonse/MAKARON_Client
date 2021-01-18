@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Net;
@@ -63,6 +64,12 @@ namespace BMB
             this.input = new Input();
             this.cornerPoint = new PointF(0, 0);
             this.buttonReady.Visible = false;
+
+            // Add image to refresh button
+            String currPath =System.IO.Directory.GetCurrentDirectory();
+            currPath= Directory.GetParent(currPath).Parent.Parent.FullName;
+            this.refreshLobbyListButton.Image= Image.FromFile(currPath+"\\refresh_icon.png");
+            this.refreshLobbyListButton.ImageAlign = ContentAlignment.MiddleCenter;
             //this.window = CreateGraphics();
 
             this.connector = new TCP_Connector();
@@ -358,7 +365,7 @@ namespace BMB
             this.panelGamesList.Visible = true;
             if (packageArguments[0] == "LIST")
             {
-                //add first separator
+                this.listBoxGames.Items.Clear();
                 for (int i = 1; i < packageArguments.Count; i++)
                 {
                     String[] spl = packageArguments[i].Split('\n');
@@ -384,8 +391,7 @@ namespace BMB
             this.panelGamesList.Visible = true;
             if (packageArguments[0] == "LIST")
             {
-                //add first separator
-                this.listBoxGames.Items.Add("");
+                this.listBoxGames.Items.Clear();
                 for (int i = 1; i < packageArguments.Count; i++)
                 {
                     String[] spl = packageArguments[i].Split('\n');
@@ -583,6 +589,11 @@ namespace BMB
         private void button1_Click(object sender, EventArgs e)
         {
             LogIn("", "");
+        }
+
+        private void refreshLobbyListButton_Click(object sender, EventArgs e)
+        {
+            populateLobbyMenu();
         }
     }
 }
