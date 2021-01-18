@@ -163,17 +163,17 @@ namespace client_lib
             newPosition.X = this.posX + this.speedX * deltaTime;
             newPosition.Y = this.posY + this.speedY * deltaTime;
 
-            Vector[] rec = collisionSystem.checkCollisionAll(oldPosition, newPosition, new Vector(this.accX, this.accY), new Vector(this.speedX, this.speedY));
+            /*Vector[] rec = collisionSystem.checkCollisionAll(oldPosition, newPosition, new Vector(this.accX, this.accY), new Vector(this.speedX, this.speedY));
 
             this.posX = (float)rec[0].X;
             this.posX = (float)rec[0].Y;
             this.accX = (float)rec[1].X;
             this.accY = (float)rec[1].Y;
             this.speedX = (float)rec[2].X;
-            this.speedY = (float)rec[2].Y;
+            this.speedY = (float)rec[2].Y;*/
 
-            /*this.posX += this.speedX * deltaTime;
-            this.posY += this.speedY * deltaTime;*/
+            this.posX += this.speedX * deltaTime;
+            this.posY += this.speedY * deltaTime;
 
 
 

@@ -41,6 +41,9 @@ namespace client_lib
 
         private Collision collisionCollection;
         private CollisionParser colisionParser;
+
+        //tests
+        public Vector[,] colSects;
         
 
         public Game_Bomberman(NetworkStream stream, int width, int height, int mapSizeX, int mapSizeY) : base(stream, width, height)
@@ -116,6 +119,8 @@ namespace client_lib
 
                 }
             }
+
+            this.colSects = this.collisionCollection.giveMeSections();
 
 
 
@@ -336,9 +341,20 @@ namespace client_lib
                 this.field.Y = player.posY * this.fieldHeight;
                 this.grafika.FillRectangle(this.brush, this.field);
             }
+            this.pen.Color = Color.White;
+            this.pen.Width = 3;
+            for (int i = 0; i < this.colSects.Length/2; i++)
+            {
+                this.grafika.DrawLine(this.pen, new PointF((float)(this.colSects[i, 0].X*this.fieldWidth), (float)(this.colSects[i, 0].Y * this.fieldWidth)), 
+                    new PointF((float)(this.colSects[i, 1].X * this.fieldWidth), (float)(this.colSects[i, 1].Y * this.fieldWidth)));
+            }
 
             
+
             
+
+            //this.grafika.DrawLine(this.pen, new PointF(0, 0), new PointF(100, 100));
+
         }
 
         public override string ToString()

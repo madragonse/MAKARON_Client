@@ -261,7 +261,8 @@ namespace Collision2d
 
             d = r.Length * cosA * (z / z.Length);
 
-            return this.checkCollisionPosition(cross[0], cross[0] + d);
+            //return this.checkCollisionPosition(cross[0], cross[0] + d);
+            return cross[0];
         }
 
         public Vector[] checkCollisionAll(Vector moveA, Vector moveB, Vector acceleration, Vector speed)
@@ -305,7 +306,24 @@ namespace Collision2d
             return ret;
         }
 
+        public Vector[,] giveMeSections()
+        {
+            Vector[,] ret = new Vector[this.groups.Count*4, 2];
 
+            int c = 0;
+            foreach (Group group in this.groups)
+            {
+                foreach (Section section in group.sections)
+                {
+                    ret[c, 0] = section.a;
+                    ret[c, 1] = section.b;
+                    c++;
+
+                }
+                
+            }
+            return ret;
+        }
 
 
     }
