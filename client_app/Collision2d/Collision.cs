@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Diagnostics;
 
 namespace Collision2d
 {
@@ -107,7 +108,7 @@ namespace Collision2d
 
                 Vector rap = inte - a.a;
                 Vector rbp = inte - b.a;
-
+                
                 if ((Math.Abs(rap.X) > Math.Abs(ra.X)) || (Math.Abs(rap.Y) > Math.Abs(ra.Y)) || (Math.Abs(rbp.X) > Math.Abs(rb.X)) || (Math.Abs(rbp.Y) > Math.Abs(rb.Y)))
                 {
                     //Console.Out.WriteLine("Nie przecina się");
@@ -116,6 +117,7 @@ namespace Collision2d
                 else
                 {
                     //Console.Out.WriteLine("Przecina się");
+                    Debug.WriteLine("Cross: \n"+ a.a.X + " " + a.a.Y + "  " + a.b.X + " " +a.b.Y+"\n" + b.a.X + " " + b.a.Y + "  " + b.b.X + " " + b.b.Y);
                     return inte;
                 }
             }
@@ -271,6 +273,7 @@ namespace Collision2d
 
             if (moveA == moveB)
             {
+                //Debug.WriteLine("No move");
                 ret[0] = moveB;
 
                 ret[1] = acceleration;
