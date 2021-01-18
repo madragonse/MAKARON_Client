@@ -547,10 +547,10 @@ namespace BMB
             //this.labelTest.Text = this.Height + " " + this.Width;
 
             if (this.screenSaver != null)
-                this.screenSaver.scale((int)(this.Height*1.175), (int)(this.Height * 1.175));
+                this.screenSaver.scale((int)(this.Height*1.1), (int)(this.Height * 1.1));
 
             if (this.game != null)
-                this.game.scale((int)(this.Height * 1.175), (int)(this.Height * 1.175));
+                this.game.scale((int)(this.Height * 1.1), (int)(this.Height * 1.1));
 
 
         }
