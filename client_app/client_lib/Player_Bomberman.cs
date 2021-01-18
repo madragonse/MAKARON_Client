@@ -153,7 +153,7 @@ namespace client_lib
             }
 
             this.speed = (float)Math.Pow(Math.Pow(this.speedX, 2) + Math.Pow(this.speedY, 2), 0.5); 
-
+            
             if (this.speed > this.maxSpeed)
             {
                 this.SetSpeed(this.maxSpeed*0.99f, this.speedX, this.speedY);
@@ -185,10 +185,6 @@ namespace client_lib
 
             /*this.posX += this.speedX * deltaTime;
             this.posY += this.speedY * deltaTime;*/
-
-
-
-
         }
 
 

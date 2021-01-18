@@ -71,8 +71,8 @@ namespace BMB
             // Add image to refresh button
             String currPath =System.IO.Directory.GetCurrentDirectory();
             currPath= Directory.GetParent(currPath).Parent.Parent.FullName;
-            this.refreshLobbyListButton.Image= Image.FromFile(currPath+"\\refresh_icon.png");
-            this.refreshLobbyListButton.ImageAlign = ContentAlignment.MiddleCenter;
+            //this.refreshLobbyListButton.Image= Image.FromFile(currPath+"\\refresh_icon.png");
+            //this.refreshLobbyListButton.ImageAlign = ContentAlignment.MiddleCenter;
             //this.window = CreateGraphics();
             this.addLobbyButton.TextAlign = ContentAlignment.MiddleCenter;
 
@@ -163,7 +163,6 @@ namespace BMB
                 {
                     //TODO - 
 
-                    
                     this.game.process(this.wrapperGamePackages);
                     List<Package> packagesToSend = this.game.getPackages();
                     this.connector.Send(packagesToSend);
@@ -177,7 +176,7 @@ namespace BMB
                     this.window.DrawImage(this.game.bitmap, cornerPoint);
                     this.Invoke(this.updateFormDelegate, "test test !!!");
 
-                    //Thread.Sleep(20);
+                    Thread.Sleep(15);
                 }
             }
         }

@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using packages;
+using System.Diagnostics;
 
 namespace client_lib
 {
@@ -107,6 +108,7 @@ namespace client_lib
         {
             if (this.Stream != null)
             {
+                //Debug.WriteLine(package.toString());
                 byte[] data = package.ToByteArray();
                 Stream.Write(data, 0, data.Length);
             }

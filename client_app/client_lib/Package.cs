@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace packages
 {
@@ -16,6 +17,7 @@ namespace packages
         public Package(String s)
         {
             this.XML = s;
+            //Debug.WriteLine("-----" + this.XML);
         }
 
         public Package(byte[] data)

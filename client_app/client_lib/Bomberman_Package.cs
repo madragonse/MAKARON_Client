@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace packages
 {
@@ -10,6 +11,7 @@ namespace packages
     {
         public Package asPackage()
         {
+            //Debug.WriteLine("---" + this.XML);
             Package p = new Package(this.XML);
             return p;
         }

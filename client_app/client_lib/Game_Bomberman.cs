@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Net.Sockets;
 using Collision2d;
 using System.Windows;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace client_lib
 {
@@ -281,10 +283,21 @@ namespace client_lib
 
         public override List<Package> getPackages()
         {
+            List<Package> package_list = new List<Package>();
+            foreach (Package p in this.outQueue)
+            {
+                package_list.Add(p);
+            }
+            this.outQueue = new List<Package>();
+
+
             Bomberman_Package temp = new Bomberman_Package();
             temp.SetTypePLAYER_POSITION(this.playerId,players[0].posX, players[0].posY);
-            this.outQueue.Add(temp.asPackage());
-            return this.outQueue;
+
+            //Debug.WriteLine(players[0].posX.ToString() + " " + players[0].posY.ToString());
+
+            package_list.Add(temp.asPackage());
+            return package_list;
         }
 
         public override void scale(int width, int height)
