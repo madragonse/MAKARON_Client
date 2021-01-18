@@ -31,9 +31,18 @@ namespace BMB
         {
             this.components = new System.ComponentModel.Container();
             this.panelGry = new System.Windows.Forms.Panel();
+            this.panelGamesList = new System.Windows.Forms.Panel();
+            this.addLobbyPanel = new System.Windows.Forms.Panel();
+            this.createLobbyButton = new System.Windows.Forms.Button();
+            this.availableGamesBox = new System.Windows.Forms.ListBox();
+            this.labelGameType = new System.Windows.Forms.Label();
+            this.labelLobbyName = new System.Windows.Forms.Label();
+            this.labelAddLobby = new System.Windows.Forms.Label();
+            this.newLobbyNameText = new System.Windows.Forms.TextBox();
+            this.addLobbyButton = new System.Windows.Forms.Button();
+            this.refreshLobbyListButton = new System.Windows.Forms.Button();
             this.panelGnome = new System.Windows.Forms.Panel();
             this.panelCover = new System.Windows.Forms.Panel();
-            this.panelGamesList = new System.Windows.Forms.Panel();
             this.labelGameList = new System.Windows.Forms.Label();
             this.listBoxGames = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -42,6 +51,7 @@ namespace BMB
             this.panelSetUp = new System.Windows.Forms.Panel();
             this.labelTest = new System.Windows.Forms.Label();
             this.panelSignUp = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.labelSUError = new System.Windows.Forms.Label();
             this.labelPasswordAInSU = new System.Windows.Forms.Label();
             this.textBoxPasswordAInSU = new System.Windows.Forms.TextBox();
@@ -74,10 +84,10 @@ namespace BMB
             this.textBoxIPI1 = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.refreshLobbyListButton = new System.Windows.Forms.Button();
             this.panelGry.SuspendLayout();
-            this.panelGnome.SuspendLayout();
             this.panelGamesList.SuspendLayout();
+            this.addLobbyPanel.SuspendLayout();
+            this.panelGnome.SuspendLayout();
             this.panelSide.SuspendLayout();
             this.panelSetUp.SuspendLayout();
             this.panelSignUp.SuspendLayout();
@@ -102,27 +112,10 @@ namespace BMB
             this.panelGry.Paint += new System.Windows.Forms.PaintEventHandler(this.panelGry_Paint);
             this.panelGry.Resize += new System.EventHandler(this.panelGry_Resize);
             // 
-            // panelGnome
-            // 
-            this.panelGnome.BackgroundImage = global::BMB.Properties.Resources.noggin;
-            this.panelGnome.Controls.Add(this.panelCover);
-            this.panelGnome.Location = new System.Drawing.Point(0, 13);
-            this.panelGnome.Name = "panelGnome";
-            this.panelGnome.Size = new System.Drawing.Size(692, 972);
-            this.panelGnome.TabIndex = 19;
-            this.panelGnome.Visible = false;
-            // 
-            // panelCover
-            // 
-            this.panelCover.Location = new System.Drawing.Point(0, 3);
-            this.panelCover.Name = "panelCover";
-            this.panelCover.Size = new System.Drawing.Size(733, 983);
-            this.panelCover.TabIndex = 20;
-            this.panelCover.Visible = false;
-            // 
             // panelGamesList
             // 
             this.panelGamesList.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelGamesList.Controls.Add(this.addLobbyButton);
             this.panelGamesList.Controls.Add(this.refreshLobbyListButton);
             this.panelGamesList.Controls.Add(this.panelGnome);
             this.panelGamesList.Controls.Add(this.labelGameList);
@@ -132,6 +125,121 @@ namespace BMB
             this.panelGamesList.Size = new System.Drawing.Size(729, 815);
             this.panelGamesList.TabIndex = 2;
             this.panelGamesList.Visible = false;
+            // 
+            // addLobbyPanel
+            // 
+            this.addLobbyPanel.Controls.Add(this.label2);
+            this.addLobbyPanel.Controls.Add(this.createLobbyButton);
+            this.addLobbyPanel.Controls.Add(this.availableGamesBox);
+            this.addLobbyPanel.Controls.Add(this.labelGameType);
+            this.addLobbyPanel.Controls.Add(this.labelLobbyName);
+            this.addLobbyPanel.Controls.Add(this.labelAddLobby);
+            this.addLobbyPanel.Controls.Add(this.newLobbyNameText);
+            this.addLobbyPanel.Location = new System.Drawing.Point(980, 202);
+            this.addLobbyPanel.Name = "addLobbyPanel";
+            this.addLobbyPanel.Size = new System.Drawing.Size(453, 450);
+            this.addLobbyPanel.TabIndex = 1;
+            // 
+            // createLobbyButton
+            // 
+            this.createLobbyButton.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.createLobbyButton.Location = new System.Drawing.Point(21, 319);
+            this.createLobbyButton.Name = "createLobbyButton";
+            this.createLobbyButton.Size = new System.Drawing.Size(407, 60);
+            this.createLobbyButton.TabIndex = 25;
+            this.createLobbyButton.Text = "STWÓRZ LOBBY";
+            this.createLobbyButton.UseVisualStyleBackColor = true;
+            this.createLobbyButton.Click += new System.EventHandler(this.createLobbyButton_Click);
+            // 
+            // availableGamesBox
+            // 
+            this.availableGamesBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.availableGamesBox.FormattingEnabled = true;
+            this.availableGamesBox.ItemHeight = 25;
+            this.availableGamesBox.Location = new System.Drawing.Point(21, 206);
+            this.availableGamesBox.Name = "availableGamesBox";
+            this.availableGamesBox.ScrollAlwaysVisible = true;
+            this.availableGamesBox.Size = new System.Drawing.Size(407, 79);
+            this.availableGamesBox.TabIndex = 24;
+            // 
+            // labelGameType
+            // 
+            this.labelGameType.AutoSize = true;
+            this.labelGameType.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelGameType.Location = new System.Drawing.Point(15, 172);
+            this.labelGameType.Name = "labelGameType";
+            this.labelGameType.Size = new System.Drawing.Size(60, 31);
+            this.labelGameType.TabIndex = 23;
+            this.labelGameType.Text = "Gra:";
+            // 
+            // labelLobbyName
+            // 
+            this.labelLobbyName.AutoSize = true;
+            this.labelLobbyName.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLobbyName.Location = new System.Drawing.Point(15, 74);
+            this.labelLobbyName.Name = "labelLobbyName";
+            this.labelLobbyName.Size = new System.Drawing.Size(168, 31);
+            this.labelLobbyName.TabIndex = 17;
+            this.labelLobbyName.Text = "Nazwa lobby:";
+            this.labelLobbyName.Click += new System.EventHandler(this.labelLobbyName_Click);
+            // 
+            // labelAddLobby
+            // 
+            this.labelAddLobby.AutoSize = true;
+            this.labelAddLobby.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelAddLobby.Location = new System.Drawing.Point(139, 18);
+            this.labelAddLobby.Name = "labelAddLobby";
+            this.labelAddLobby.Size = new System.Drawing.Size(189, 31);
+            this.labelAddLobby.TabIndex = 22;
+            this.labelAddLobby.Text = "DODAJ LOBBY";
+            // 
+            // newLobbyNameText
+            // 
+            this.newLobbyNameText.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.newLobbyNameText.Location = new System.Drawing.Point(21, 108);
+            this.newLobbyNameText.MinimumSize = new System.Drawing.Size(4, 40);
+            this.newLobbyNameText.Name = "newLobbyNameText";
+            this.newLobbyNameText.Size = new System.Drawing.Size(407, 38);
+            this.newLobbyNameText.TabIndex = 0;
+            // 
+            // addLobbyButton
+            // 
+            this.addLobbyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.addLobbyButton.Location = new System.Drawing.Point(670, 13);
+            this.addLobbyButton.Name = "addLobbyButton";
+            this.addLobbyButton.Size = new System.Drawing.Size(45, 45);
+            this.addLobbyButton.TabIndex = 21;
+            this.addLobbyButton.Text = "+";
+            this.addLobbyButton.UseVisualStyleBackColor = true;
+            this.addLobbyButton.Click += new System.EventHandler(this.addLobbyButton_Click);
+            // 
+            // refreshLobbyListButton
+            // 
+            this.refreshLobbyListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.refreshLobbyListButton.Location = new System.Drawing.Point(619, 13);
+            this.refreshLobbyListButton.Name = "refreshLobbyListButton";
+            this.refreshLobbyListButton.Size = new System.Drawing.Size(45, 45);
+            this.refreshLobbyListButton.TabIndex = 20;
+            this.refreshLobbyListButton.UseVisualStyleBackColor = true;
+            this.refreshLobbyListButton.Click += new System.EventHandler(this.refreshLobbyListButton_Click);
+            // 
+            // panelGnome
+            // 
+            this.panelGnome.BackgroundImage = global::BMB.Properties.Resources.noggin;
+            this.panelGnome.Controls.Add(this.panelCover);
+            this.panelGnome.Location = new System.Drawing.Point(171, 317);
+            this.panelGnome.Name = "panelGnome";
+            this.panelGnome.Size = new System.Drawing.Size(692, 972);
+            this.panelGnome.TabIndex = 19;
+            this.panelGnome.Visible = false;
+            // 
+            // panelCover
+            // 
+            this.panelCover.Location = new System.Drawing.Point(101, 215);
+            this.panelCover.Name = "panelCover";
+            this.panelCover.Size = new System.Drawing.Size(733, 983);
+            this.panelCover.TabIndex = 20;
+            this.panelCover.Visible = false;
             // 
             // labelGameList
             // 
@@ -224,6 +332,19 @@ namespace BMB
             this.panelSignUp.Size = new System.Drawing.Size(453, 377);
             this.panelSignUp.TabIndex = 15;
             this.panelSignUp.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(17, 393);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 23);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Coś nie tak: ";
+            this.label2.Visible = false;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // labelSUError
             // 
@@ -550,21 +671,12 @@ namespace BMB
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // refreshLobbyListButton
-            // 
-            this.refreshLobbyListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.refreshLobbyListButton.Location = new System.Drawing.Point(619, 13);
-            this.refreshLobbyListButton.Name = "refreshLobbyListButton";
-            this.refreshLobbyListButton.Size = new System.Drawing.Size(45, 45);
-            this.refreshLobbyListButton.TabIndex = 20;
-            this.refreshLobbyListButton.UseVisualStyleBackColor = true;
-            this.refreshLobbyListButton.Click += new System.EventHandler(this.refreshLobbyListButton_Click);
-            // 
             // client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1436, 1055);
+            this.Controls.Add(this.addLobbyPanel);
             this.Controls.Add(this.panelSide);
             this.Controls.Add(this.panelGry);
             this.KeyPreview = true;
@@ -575,9 +687,11 @@ namespace BMB
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BMB_KeyUp);
             this.panelGry.ResumeLayout(false);
-            this.panelGnome.ResumeLayout(false);
             this.panelGamesList.ResumeLayout(false);
             this.panelGamesList.PerformLayout();
+            this.addLobbyPanel.ResumeLayout(false);
+            this.addLobbyPanel.PerformLayout();
+            this.panelGnome.ResumeLayout(false);
             this.panelSide.ResumeLayout(false);
             this.panelSetUp.ResumeLayout(false);
             this.panelSetUp.PerformLayout();
@@ -641,6 +755,15 @@ namespace BMB
         private System.Windows.Forms.Button buttonReady;
         private System.Windows.Forms.Button Guest;
         private System.Windows.Forms.Button refreshLobbyListButton;
+        private System.Windows.Forms.Button addLobbyButton;
+        private System.Windows.Forms.Panel addLobbyPanel;
+        private System.Windows.Forms.Label labelLobbyName;
+        private System.Windows.Forms.Label labelAddLobby;
+        private System.Windows.Forms.TextBox newLobbyNameText;
+        private System.Windows.Forms.ListBox availableGamesBox;
+        private System.Windows.Forms.Label labelGameType;
+        private System.Windows.Forms.Button createLobbyButton;
+        private System.Windows.Forms.Label label2;
     }
 }
 

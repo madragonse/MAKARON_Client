@@ -147,7 +147,7 @@ namespace packages
         public void SetTypeCREATE_LOBBY(String gameType, String lobbyName)
         {
             this.XML = "<PACKAGE>";
-            this.XML += "<type>CREATE_GAME</type>";
+            this.XML += "<type>CREATE_LOBBY</type>";
             this.XML += "<arg1>" + gameType + "</arg1>";
             this.XML += "<arg2>" + lobbyName + "</arg2>";
             this.XML += "</PACKAGE>";

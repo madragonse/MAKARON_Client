@@ -23,6 +23,9 @@ namespace BMB
 {
     public partial class client : Form
     {
+        String[] availableGames = { "BOMBERMAN" };
+
+
         private Thread mainLoopThread;
         private Thread reciveThread;
         private Graphics window;
@@ -71,6 +74,13 @@ namespace BMB
             this.refreshLobbyListButton.Image= Image.FromFile(currPath+"\\refresh_icon.png");
             this.refreshLobbyListButton.ImageAlign = ContentAlignment.MiddleCenter;
             //this.window = CreateGraphics();
+            this.addLobbyButton.TextAlign = ContentAlignment.MiddleCenter;
+
+            //hide add lobby panel
+            this.addLobbyPanel.Visible = false;
+            this.label2.Visible = false;
+            populateGameList();
+            this.availableGamesBox.SelectedIndex = 0;
 
             this.connector = new TCP_Connector();
             this.package = new Package();
@@ -594,6 +604,70 @@ namespace BMB
         private void refreshLobbyListButton_Click(object sender, EventArgs e)
         {
             populateLobbyMenu();
+        }
+
+        private void addLobbyButton_Click(object sender, EventArgs e)
+        {
+            this.addLobbyPanel.Visible = true;
+        }
+
+        private void populateGameList()
+        {
+            foreach(String g in availableGames)
+            {
+                this.availableGamesBox.Items.Add(g);
+            }
+            
+        }
+
+        private void labelLobbyName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createLobbyButton_Click(object sender, EventArgs e)
+        {
+            String gameType = this.availableGamesBox.SelectedItem.ToString();
+            String lobbyName= this.newLobbyNameText.Text;
+
+            if (lobbyName == "") {
+                this.label2.Visible = true;
+                this.label2.Text = "Błąd:Lobby musi mieć nazwę!";
+                return;
+            }
+
+            this.cpackage.SetTypeCREATE_LOBBY(gameType, lobbyName);
+            this.connector.Send(this.cpackage);
+
+            
+            while (true)
+            {
+                //handle response 
+                this.package = this.connector.ReceivePackage();
+                this.packageArguments = this.package.getArguments();
+
+                if (packageArguments.Count == 0) { continue; }
+                //if login successfull
+                if (packageArguments[0] == "CREATE_LOBBY_CONFIRM")
+                {
+                    this.addLobbyPanel.Visible = false;
+                    populateLobbyMenu();
+                    break;
+                }
+                if (packageArguments[0] == "CREATE_LOBBY_REFUSE")
+                {
+                    this.label2.Visible = true;
+                    this.label2.Text = "Błąd: " + this.packageArguments[1];
+                    break;
+                }
+            }
+           
+            
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
