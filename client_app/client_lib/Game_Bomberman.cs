@@ -135,7 +135,7 @@ namespace client_lib
 
             this.map = new byte[mapSizeX, mapSizeY];
             this.players = new List<Player_Bomberman>();
-            this.players.Add(new Player_Bomberman(10f, 10f));
+            this.players.Add(new Player_Bomberman(1.5f, 1.5f));
 
             this.InitializeCollisionAssets();
             //TEST

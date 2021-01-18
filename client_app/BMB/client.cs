@@ -168,8 +168,8 @@ namespace BMB
         public void updateForm(String arg)
         {
             sww.Stop();
-            //this.labelTest.Text = "FPS: " + (float)(1000.0 / sww.ElapsedMilliseconds);
-            this.labelTest.Text = arg;
+            this.labelTest.Text = "FPS: " + (float)(1000.0 / sww.ElapsedMilliseconds);
+            //this.labelTest.Text = arg;
             sww.Restart();
             sww.Start();
         }
