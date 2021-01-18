@@ -40,6 +40,8 @@ namespace client_lib
         public byte[,] map;
 
         private List<Player_Bomberman> players;
+        private List<Bomberman_Bomb> bombs;
+        private List<Blow_Up> blow_Ups;
 
         private Collision collisionCollection;
         private CollisionParser colisionParser;
@@ -237,9 +239,17 @@ namespace client_lib
                     int id = Int32.Parse(args[1]);
                     int x = Int32.Parse(args[2]);
                     int y = Int32.Parse(args[3]);
-                    //this.setBomb(id,x,y)
+                    this.setBomb(id, x, y);
                 }
-                else if (packageType == "DESTROY_WALL")
+                else if (packageType == "BOMB_EXPLOSION")
+                {
+                    int id = Int32.Parse(args[1]);
+                    int x = Int32.Parse(args[2]);
+                    int y = Int32.Parse(args[3]);
+                    int range = Int32.Parse(args[4]);
+                    this.detonate(id,x,y,range);
+                }
+                /*else if (packageType == "DESTROY_WALL")
                 {
                     int x = Int32.Parse(args[1]);
                     int y = Int32.Parse(args[2]);
@@ -251,7 +261,7 @@ namespace client_lib
                     int y = Int32.Parse(args[2]);
                     int hpLeft = Int32.Parse(args[3]);
                     //this.damageWall(x,y,hpLeft)
-                }
+                }*/
                 else if (packageType == "DEAD")
                 {
                     int id = Int32.Parse(args[1]);
@@ -264,6 +274,17 @@ namespace client_lib
             }
            
 
+        }
+
+        void setBomb(int id, int x, int y)
+        {
+            this.bombs.Add(new Bomberman_Bomb(id, x, y));
+        }
+
+        void detonate(int bomb_id,int x, int y, int range)
+        {
+            this.bombs.RemoveAll(i => i.id == bomb_id);
+            this.blow_Ups.Add(new Blow_Up((float)x, (float)y, (float)range));
         }
 
         void setPlayerPosition(int id, float x, float y)
