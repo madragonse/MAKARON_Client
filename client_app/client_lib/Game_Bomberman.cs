@@ -389,9 +389,10 @@ namespace client_lib
             this.brush.Color = Color.Black;
             foreach (Player_Bomberman player in players)
             {
-                this.field.X = player.posX * this.fieldWidth;
+                this.grafika.FillRectangle(this.brush, (player.posX - 0.3f) * this.fieldWidth, (player.posY - 0.3f) * this.fieldWidth, this.fieldWidth * 0.6f, this.fieldWidth * 0.6f);
+                /*this.field.X = player.posX * this.fieldWidth;
                 this.field.Y = player.posY * this.fieldHeight;
-                this.grafika.FillRectangle(this.brush, this.field);
+                this.grafika.FillRectangle(this.brush, this.field);*/
             }
             this.pen.Color = Color.White;
             this.pen.Width = 3;
@@ -404,6 +405,7 @@ namespace client_lib
             this.brush.Color = Color.Yellow;
             foreach (Blow_Up blow in this.blow_Ups)
             {
+                //this.grafika.FillEllipse(this.brush, blow.x * this.fieldWidth, blow.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
                 this.grafika.FillEllipse(this.brush, blow.x * this.fieldWidth, blow.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
             }
 
@@ -411,6 +413,7 @@ namespace client_lib
             foreach (Bomberman_Bomb bomb in this.bombs)
             {
                 this.grafika.FillEllipse(this.brush, (bomb.x + 0.2f) * this.fieldWidth, (bomb.y + 0.2f) * this.fieldWidth, this.fieldWidth*0.6f, this.fieldWidth * 0.6f);
+                //this.grafika.FillEllipse(this.brush, bomb.x * this.fieldWidth, bomb.y * this.fieldWidth, this.fieldWidth, this.fieldWidth);
             }
 
 

@@ -17,8 +17,8 @@ namespace client_lib
         public Bomberman_Bomb(int id,int x, int y)
         {
             this.id = id;
-            this.x = x + 0.5f;
-            this.y = y + 0.5f;
+            this.x = x;
+            this.y = y;
         }
     }
 }
