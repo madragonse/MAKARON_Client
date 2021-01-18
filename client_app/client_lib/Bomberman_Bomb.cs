@@ -9,16 +9,16 @@ namespace client_lib
     class Bomberman_Bomb
     {
         public int id;
-        public int x;
-        public int y;
+        public float x;
+        public float y;
         public int range;
         public DateTime detonationTime;
 
         public Bomberman_Bomb(int id,int x, int y)
         {
             this.id = id;
-            this.x = x;
-            this.y = y;
+            this.x = x + 0.5f;
+            this.y = y + 0.5f;
         }
     }
 }

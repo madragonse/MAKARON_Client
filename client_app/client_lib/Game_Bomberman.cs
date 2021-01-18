@@ -271,6 +271,15 @@ namespace client_lib
                 {
                     Console.WriteLine("---ERROR--- GOT PACKAGE " + packageType);
                 }
+
+                for(int i =0;i<this.blow_Ups.Count;i++)
+                {
+                    if(blow_Ups[i].ready_to_die())
+                    {
+                        this.blow_Ups.RemoveAt(i);
+                        break;
+                    }
+                }
             }
            
 
