@@ -108,7 +108,7 @@ namespace Collision2d
             /// <returns>Returns Vector(0, 0) if do not intersects</returns>
             public Vector intersection(Section a, Section b)
             {
-                Debug.WriteLine("Section a: " + a.a.X + " " + a.a.Y + " " + a.b.X + " " + a.b.Y + "\nSection b: " + b.a.X + " " + b.a.Y + " " + b.b.X + " " + b.b.Y);
+                //Debug.WriteLine("Section a: " + a.a.X + " " + a.a.Y + " " + a.b.X + " " + a.b.Y + "\nSection b: " + b.a.X + " " + b.a.Y + " " + b.b.X + " " + b.b.Y);
                 double[] pa = a.toLine();
                 double[] pb = b.toLine();
 
@@ -317,20 +317,24 @@ namespace Collision2d
                 return new Vector[3];
             }
 
-            Debug.WriteLine("All move: " + move.a.X + " " + move.a.Y + " " + move.b.X + " " + move.b.Y + " ");
+            //Debug.WriteLine("All move: " + move.a.X + " " + move.a.Y + " " + move.b.X + " " + move.b.Y + " ");
             
 
             Vector q = moveB - moveA;
             Vector p = cross[2] - cross[1];
-            Vector r = moveB - cross[0];
+            Vector normq = q;
+            normq.Normalize();
+            normq = normq / 10;
+            cross[0] = cross[0] - normq;
+            Vector r = (moveB) - cross[0] ;
             Vector z = cross[2] - cross[0];
             Vector d = new Vector();
             double cosA = (Vector.Multiply(p, q)) / (p.Length * q.Length);
 
             d = r.Length * cosA * (z / z.Length);
 
-            Debug.WriteLine("q: " + q.X + " " + q.Y + "\np: " + p.X + " " + p.Y + "\nr: " + r.X + " " +r.Y 
-                +"\nz: " + z.X + " " + z.Y + "\nd: " + d.X + " " + d.Y);
+            //Debug.WriteLine("q: " + q.X + " " + q.Y + "\np: " + p.X + " " + p.Y + "\nr: " + r.X + " " +r.Y 
+            //    +"\nz: " + z.X + " " + z.Y + "\nd: " + d.X + " " + d.Y);
 
             ret[0] = cross[0]+d; /*this.checkCollisionPosition(cross[0], cross[0] + d);*/
 
