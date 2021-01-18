@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Collision2d;
+using System.Diagnostics;
 
 namespace client_lib
 {
@@ -160,20 +161,30 @@ namespace client_lib
             }
             oldPosition.X = this.posX;
             oldPosition.Y = this.posY;
-            newPosition.X = this.posX + this.speedX * deltaTime;
-            newPosition.Y = this.posY + this.speedY * deltaTime;
+            newPosition.X = oldPosition.X + (double)(this.speedX * deltaTime);
+            newPosition.Y = oldPosition.Y + (double)(this.speedY * deltaTime);
 
-            /*Vector[] rec = collisionSystem.checkCollisionAll(oldPosition, newPosition, new Vector(this.accX, this.accY), new Vector(this.speedX, this.speedY));
+            //Debug.WriteLine("Param: " + this.speedX + " " + this.speedY + "  " + deltaTime);
+            //Debug.WriteLine("Source: " + oldPosition.X + " " + oldPosition.Y + "  " + newPosition.X + "  " + newPosition.Y);
+            Vector[] rec = collisionSystem.checkCollisionAll(oldPosition, newPosition, new Vector(this.accX, this.accY), new Vector(this.speedX, this.speedY));
+            //Debug.WriteLine("Returns: " + rec[0].X + " " + rec[0].Y);
+            if (!(rec[0].X == 0 && rec[0].Y == 0))
+            {
+                this.posX = (float)rec[0].X;
+                this.posY = (float)rec[0].Y;
+                this.accX = (float)rec[1].X;
+                this.accY = (float)rec[1].Y;
+                this.speedX = (float)rec[2].X;
+                this.speedY = (float)rec[2].Y;
+            }
+            else
+            {
+                this.posX += this.speedX * deltaTime;
+                this.posY += this.speedY * deltaTime;
+            }
 
-            this.posX = (float)rec[0].X;
-            this.posX = (float)rec[0].Y;
-            this.accX = (float)rec[1].X;
-            this.accY = (float)rec[1].Y;
-            this.speedX = (float)rec[2].X;
-            this.speedY = (float)rec[2].Y;*/
-
-            this.posX += this.speedX * deltaTime;
-            this.posY += this.speedY * deltaTime;
+            /*this.posX += this.speedX * deltaTime;
+            this.posY += this.speedY * deltaTime;*/
 
 
 

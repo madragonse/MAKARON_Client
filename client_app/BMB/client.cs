@@ -160,7 +160,7 @@ namespace BMB
                     this.window.DrawImage(this.game.bitmap, cornerPoint);
                     this.Invoke(this.updateFormDelegate, "test test !!!");
 
-                    Thread.Sleep(20);
+                    //Thread.Sleep(20);
                 }
             }
         }

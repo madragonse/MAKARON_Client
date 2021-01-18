@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace Collision2d
 {
-    
+
 
     public class Collision
     {
@@ -54,7 +54,7 @@ namespace Collision2d
                 this.name = name;
 
                 this.sections = new List<Section>();
-                for (int i = 0; i < lines.Length/2; i++)
+                for (int i = 0; i < lines.Length / 2; i++)
                 {
                     this.sections.Add(new Section(lines[i, 0], lines[i, 1]));
                 }
@@ -67,9 +67,9 @@ namespace Collision2d
 
                 this.sections = new List<Section>();
                 this.sections.Add(new Section(points[points.Length - 1], points[0]));
-                for (int i = 0; i < points.Length-1; i++)
+                for (int i = 0; i < points.Length - 1; i++)
                 {
-                    this.sections.Add(new Section(points[i], points[i+1]));
+                    this.sections.Add(new Section(points[i], points[i + 1]));
                 }
 
             }
@@ -78,7 +78,15 @@ namespace Collision2d
             {
                 Vector ret = new Vector();
 
-                double mul = a[0] / b[0] * -1;
+                double W = (a[0] * b[1]) - (b[0] * a[1]);
+                double Wx = (-1 * a[2] * b[1]) - (-1 * b[2] * a[1]);
+                double Wy = (a[0] * -1 * b[2]) - (b[0] * -1 * a[2]);
+                ret.X = Wx / W;
+                ret.Y = Wy / W;
+
+                //Debug.WriteLine("BEFOREpp: " + ret.X + " " + ret.Y + "\na: " + a[0] + " " + a[1] + " " + a[2] + "\nb: " + b[0] + " " + b[1] + " " + b[2]);
+
+                /*double mul = a[0] / b[0] * -1;
 
                 b[0] *= mul; b[1] *= mul; b[2] *= mul;
 
@@ -87,6 +95,8 @@ namespace Collision2d
                 ret.Y = a[2] / a[1] * -1;
 
                 ret.X = ((b[1] * ret.Y) + b[2]) / b[0] * -1;
+                */
+                //Debug.WriteLine("pp: " + ret.X + " " + ret.Y + "\na: " + a[0] + " " + a[1] + " " + a[2] + "\nb: " + b[0] + " " + b[1] + " " + b[2]);
 
                 return ret;
             }
@@ -98,18 +108,34 @@ namespace Collision2d
             /// <returns>Returns Vector(0, 0) if do not intersects</returns>
             public Vector intersection(Section a, Section b)
             {
+                Debug.WriteLine("Section a: " + a.a.X + " " + a.a.Y + " " + a.b.X + " " + a.b.Y + "\nSection b: " + b.a.X + " " + b.a.Y + " " + b.b.X + " " + b.b.Y);
                 double[] pa = a.toLine();
                 double[] pb = b.toLine();
 
-                Vector inte = this.linesIntersection(pa, pb);
+                if (((pa[0] * b.a.X + pa[1] * b.a.Y + pa[2]) * (pa[0] * b.b.X + pa[1] * b.b.Y + pa[2])) < 0 && ((pb[0] * a.a.X + pb[1] * a.a.Y + pb[2]) * (pb[0] * a.b.X + pb[1] * a.b.Y + pb[2]) < 0))
+                {
+                    Vector inte = this.linesIntersection(pa, pb);
+                    return inte;
+                }
+                else
+                {
+                    return new Vector(0, 0);
+                }
 
-                Vector ra = a.toRatio();
+
+                
+                /*if (inte.X == 0 && inte.Y == 0)
+                {
+                    //Console.Out.WriteLine("Nie przecina się");
+                    return new Vector(0, 0);
+                }*/
+                /*Vector ra = a.toRatio();
                 Vector rb = b.toRatio();
 
                 Vector rap = inte - a.a;
-                Vector rbp = inte - b.a;
-                
-                if ((Math.Abs(rap.X) > Math.Abs(ra.X)) || (Math.Abs(rap.Y) > Math.Abs(ra.Y)) || (Math.Abs(rbp.X) > Math.Abs(rb.X)) || (Math.Abs(rbp.Y) > Math.Abs(rb.Y)))
+                Vector rbp = inte - b.a;*/
+
+                /*if ((Math.Abs(rap.X) > Math.Abs(ra.X)) || (Math.Abs(rap.Y) > Math.Abs(ra.Y)) || (Math.Abs(rbp.X) > Math.Abs(rb.X)) || (Math.Abs(rbp.Y) > Math.Abs(rb.Y)))
                 {
                     //Console.Out.WriteLine("Nie przecina się");
                     return new Vector(0, 0);
@@ -117,9 +143,10 @@ namespace Collision2d
                 else
                 {
                     //Console.Out.WriteLine("Przecina się");
-                    Debug.WriteLine("Cross: \n"+ a.a.X + " " + a.a.Y + "  " + a.b.X + " " +a.b.Y+"\n" + b.a.X + " " + b.a.Y + "  " + b.b.X + " " + b.b.Y);
+                    Debug.WriteLine("Cross: \n" + a.a.X + " " + a.a.Y + "  " + a.b.X + " " + a.b.Y + "\n" + b.a.X + " " + b.a.Y + "  " + b.b.X + " " + b.b.Y);
+                    //Console.WriteLine("Cross: \n" + a.a.X + " " + a.a.Y + "  " + a.b.X + " " + a.b.Y + "\n" + b.a.X + " " + b.a.Y + "  " + b.b.X + " " + b.b.Y);
                     return inte;
-                }
+                }*/
             }
 
             /// <summary>
@@ -180,11 +207,11 @@ namespace Collision2d
             {
                 if (this.groups[i].name == name)
                 {
-                    for (int j = 0; j < lines.Length/2; j++)
+                    for (int j = 0; j < lines.Length / 2; j++)
                     {
                         this.groups[i].sections.Add(new Section(lines[i, 0], lines[i, 1]));
                     }
-                    
+
                     return true;
                 }
             }
@@ -204,7 +231,7 @@ namespace Collision2d
             ret[1] = new Vector();
             ret[2] = new Vector();
 
-            foreach(Group group in this.groups)
+            foreach (Group group in this.groups)
             {
                 ret = group.checkCollision(check);
                 if (ret[0].X != 0 && ret[0].Y != 0)
@@ -223,7 +250,7 @@ namespace Collision2d
         /// <param name="check"></param>
         /// <param name="name">Return in this name of group with collision</param>
         /// <returns>Returns Vector(0, 0) if fails in searching</returns>
-        public Vector[] checkCollision(Section check, String name)
+        /*public Vector[] checkCollision(Section check, String name)
         {
             Vector[] ret = new Vector[3];
             ret[0] = new Vector();
@@ -242,10 +269,10 @@ namespace Collision2d
             }
 
             return ret;
-        }
+        }*/
 
 
-        public Vector checkCollisionPosition(Vector moveA, Vector moveB)
+        /*public Vector checkCollisionPosition(Vector moveA, Vector moveB)
         {
             Section move = new Section(moveA, moveB);
             Vector[] cross = this.checkCollision(move);
@@ -265,7 +292,7 @@ namespace Collision2d
 
             //return this.checkCollisionPosition(cross[0], cross[0] + d);
             return cross[0];
-        }
+        }*/
 
         public Vector[] checkCollisionAll(Vector moveA, Vector moveB, Vector acceleration, Vector speed)
         {
@@ -283,11 +310,15 @@ namespace Collision2d
                 return ret;
             }
             Section move = new Section(moveA, moveB);
+            
             Vector[] cross = this.checkCollision(move);
             if (cross[0].X == 0 && cross[0].Y == 0)
             {
                 return new Vector[3];
             }
+
+            Debug.WriteLine("All move: " + move.a.X + " " + move.a.Y + " " + move.b.X + " " + move.b.Y + " ");
+            
 
             Vector q = moveB - moveA;
             Vector p = cross[2] - cross[1];
@@ -298,9 +329,10 @@ namespace Collision2d
 
             d = r.Length * cosA * (z / z.Length);
 
-            
+            Debug.WriteLine("q: " + q.X + " " + q.Y + "\np: " + p.X + " " + p.Y + "\nr: " + r.X + " " +r.Y 
+                +"\nz: " + z.X + " " + z.Y + "\nd: " + d.X + " " + d.Y);
 
-            ret[0] = this.checkCollisionPosition(cross[0], cross[0] + d);
+            ret[0] = cross[0]+d; /*this.checkCollisionPosition(cross[0], cross[0] + d);*/
 
             ret[1] = acceleration.Length * cosA * (z / z.Length);
 
@@ -311,7 +343,7 @@ namespace Collision2d
 
         public Vector[,] giveMeSections()
         {
-            Vector[,] ret = new Vector[this.groups.Count*4, 2];
+            Vector[,] ret = new Vector[this.groups.Count * 4, 2];
 
             int c = 0;
             foreach (Group group in this.groups)
@@ -323,7 +355,7 @@ namespace Collision2d
                     c++;
 
                 }
-                
+
             }
             return ret;
         }
