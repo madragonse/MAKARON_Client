@@ -394,12 +394,18 @@ namespace client_lib
             }
 
             this.brush.Color = Color.Black;
+            int c = 0;
             foreach (Player_Bomberman player in players)
             {
+                if (c == 1)
+                {
+                    this.brush.Color = Color.Red;
+                }
                 this.grafika.FillRectangle(this.brush, (player.posX - 0.3f) * this.fieldWidth, (player.posY - 0.3f) * this.fieldWidth, this.fieldWidth * 0.6f, this.fieldWidth * 0.6f);
                 /*this.field.X = player.posX * this.fieldWidth;
                 this.field.Y = player.posY * this.fieldHeight;
                 this.grafika.FillRectangle(this.brush, this.field);*/
+                c++;
             }
             this.pen.Color = Color.White;
             this.pen.Width = 3;

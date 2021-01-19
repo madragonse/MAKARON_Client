@@ -4,19 +4,19 @@
     <Position X="7.748" Y="3.115" Height="0.291" Width="1.02" />
   </Comment>
   <Comment CommentText="&lt;&lt;extends&gt;&gt;">
-    <Position X="4.193" Y="4.361" Height="0.291" Width="1.02" />
+    <Position X="4.693" Y="4.361" Height="0.291" Width="1.02" />
   </Comment>
   <Class Name="packages.Bomberman_Package">
     <Position X="6.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAgAAAAAAEABQAAAAAAAAiAABCACAAAAAAAAAAA=</HashCode>
+      <HashCode>gAAAAAgAAAAAAEABQAAAAAAAAiAABCACAAAAAAQAAAA=</HashCode>
       <FileName>Bomberman_Package.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="packages.Communication_Package">
     <Position X="8.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACQQAAAAgCEAkAAAASAAMARAAAIAAAJSABIAAgAAggA=</HashCode>
+      <HashCode>ACQQAAAAgCEAkAAAAWAAMARAAAIAAAJSABIAAgAAggA=</HashCode>
       <FileName>Communication_Package.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -28,23 +28,23 @@
     </TypeIdentifier>
   </Class>
   <Class Name="client_lib.Game">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAgAAAAQAQAgAAAIKAAAAAAAICAAAAAAEAAA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="client_lib.Game_Bomberman">
-    <Position X="4" Y="5" Width="1.5" />
+    <Position X="4.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BACAEAAAKAAAAAAEAEQAAAICAAIAAAAIIAAgBQAEAAA=</HashCode>
+      <HashCode>BACAEAAEqAACIAgEgEQAQAICAoIAAAAIIAAgBQAEAAA=</HashCode>
       <FileName>Game_Bomberman.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="client_lib.Player_Bomberman">
     <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAJAAAAAAAAAAQEAAAAABAAAQAEAQQAYEAAwAAEAgA=</HashCode>
+      <HashCode>AIAJgAAAAAAQAAQEAAAAABAABQAEAwQAYEAAwAQEAgA=</HashCode>
       <FileName>Player_Bomberman.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -55,12 +55,5 @@
       <FileName>TCP_Connector.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="client_lib.client">
-    <Position X="6.5" Y="8.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>client.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
