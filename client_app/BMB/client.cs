@@ -571,8 +571,11 @@ namespace BMB
 
 
             this.cpackage.SetTypeLOGIN(login, hashed_password);
-            //login as guest
-            if (login == "" && hashed_password == ""){  this.cpackage.SetTypeLOGIN_AS_GUEST();}
+            //login with empty values
+            if (login == "" || hashed_password == ""){
+                this.labelLoginError.Visible = true;
+                this.labelLoginError.Text = "Błąd: Musisz wypełnić oba pola!";
+                return; }
             this.connector.Send(this.cpackage);
 
             //handle response 
@@ -593,11 +596,33 @@ namespace BMB
 
         }
 
+        private void LogInGuest()
+        {
+
+            this.cpackage.SetTypeLOGIN_AS_GUEST(); 
+            this.connector.Send(this.cpackage);
+
+            //handle response 
+            this.package = this.connector.ReceivePackage();
+            this.packageArguments = this.package.getArguments();
+
+            //if login successfull
+            if (packageArguments[0] == "LOGIN_CONFIRM")
+            {
+                this.panelSetUp.Visible = false;
+                populateLobbyMenu();
+            }
+            if (packageArguments[0] == "LOGIN_REFUSE")
+            {
+                this.labelLoginError.Visible = true;
+                this.labelLoginError.Text = "Błąd logowania: " + this.packageArguments[2];
+            }
+        }
 
         //guest logIN
         private void button1_Click(object sender, EventArgs e)
         {
-            LogIn("", "");
+            LogInGuest();
         }
 
         private void refreshLobbyListButton_Click(object sender, EventArgs e)
